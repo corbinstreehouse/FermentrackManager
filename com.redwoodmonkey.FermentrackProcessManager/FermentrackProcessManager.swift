@@ -8,7 +8,7 @@
 
 import Foundation
 
-class FermentrackManager {
+class FermentrackProcessManager {
     var lastError: String?
     
     private var fermentrackHomeURL: URL!

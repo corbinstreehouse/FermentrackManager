@@ -14,7 +14,7 @@ UserDefaults.standard.register(defaults: [defaultFermentrackBasePathKeyName : "/
 let fermentrackHomePath = UserDefaults.standard.string(forKey: defaultFermentrackBasePathKeyName)!
 let fermentrackHomeURL = URL(fileURLWithPath: fermentrackHomePath)
 
-let fermentrackManager = FermentrackManager(fermentrackHomeURL)
+let fermentrackManager = FermentrackProcessManager(fermentrackHomeURL)
 
 while (true) {
     fermentrackManager.run()
