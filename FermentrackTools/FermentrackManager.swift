@@ -24,6 +24,9 @@ class FermentrackManager {
             // If it exists, that is okay, ignore errors
         }
         setup()
+        if isWebServerAlive() {
+            // Maybe kill the server to force a reload?
+        }
     }
     
     private func makeRedisProcess() -> Process {
@@ -246,11 +249,6 @@ class FermentrackManager {
     
     func run() {
         lastError = nil
-        
-        // If we aren't setup, don't do anything
-        if (fermentrackHomeURL == nil) {
-            return
-        }
         
         if (!isRedisAlive()) {
             killLastRedis()
