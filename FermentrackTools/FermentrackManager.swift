@@ -192,8 +192,7 @@ class FermentrackManager {
         do {
             let process = makeAndSetupPythonProcess()
             process.executableURL = self.fermentrackHomeURL.appendingPathComponent("venv/bin/python3")
-            process.arguments = ["manage.py", "runmodwsgi",  "--server-root=" + apacheServerRootURL.path]
-            //  --user www-data --group www-data
+            process.arguments = ["manage.py", "runmodwsgi",  "--server-root=" + apacheServerRootURL.path, "--user", "_www", "--group", "_www"]
             try process.run()
             process.waitUntilExit()
             // todo: loook for the following info:
