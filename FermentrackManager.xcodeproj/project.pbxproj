@@ -7,9 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9D6AC1FE236507DA00965419 /* redis.conf in Resources */ = {isa = PBXBuildFile; fileRef = 9D6AC1FC236507DA00965419 /* redis.conf */; };
-		9D6AC1FF236507E400965419 /* redis-server in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9D6AC1FB236507DA00965419 /* redis-server */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		9D8EA42623653D680027F7CA /* redis-cli in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9D8EA42523653D5F0027F7CA /* redis-cli */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		9D8EA46523678D110027F7CA /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6AC1942364F52100965419 /* main.swift */; };
 		9D8EA46623678D110027F7CA /* FermentrackProcessManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8EA42D23672A820027F7CA /* FermentrackProcessManager.swift */; };
 		9D8EA46723678D110027F7CA /* CustomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8EA42F23672CF60027F7CA /* CustomError.swift */; };
@@ -19,17 +16,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		9D6AC1F9236507B200965419 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 6;
-			files = (
-				9D8EA42623653D680027F7CA /* redis-cli in CopyFiles */,
-				9D6AC1FF236507E400965419 /* redis-server in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		9D8EA46B23678DCE0027F7CA /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -45,8 +31,6 @@
 
 /* Begin PBXFileReference section */
 		9D6AC1942364F52100965419 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		9D6AC1F12365075C00965419 /* FermentrackManager.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FermentrackManager.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		9D6AC1F32365075C00965419 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9D6AC1FB236507DA00965419 /* redis-server */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = "redis-server"; sourceTree = "<group>"; };
 		9D6AC1FC236507DA00965419 /* redis.conf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = redis.conf; sourceTree = "<group>"; };
 		9D8EA42523653D5F0027F7CA /* redis-cli */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = "redis-cli"; sourceTree = "<group>"; };
@@ -57,13 +41,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		9D6AC1EE2365075C00965419 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		9D8EA45623678C050027F7CA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -77,8 +54,6 @@
 		9D6AC1882364F52100965419 = {
 			isa = PBXGroup;
 			children = (
-				9D6AC1F22365075C00965419 /* FermentrackManager */,
-				9D6AC1FA236507DA00965419 /* redis */,
 				9D8EA45A23678C050027F7CA /* com.redwoodmonkey.FermentrackProcessManager */,
 				9D6AC1922364F52100965419 /* Products */,
 			);
@@ -87,18 +62,9 @@
 		9D6AC1922364F52100965419 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9D6AC1F12365075C00965419 /* FermentrackManager.bundle */,
 				9D8EA45923678C050027F7CA /* com.redwoodmonkey.FermentrackProcessManager.xpc */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		9D6AC1F22365075C00965419 /* FermentrackManager */ = {
-			isa = PBXGroup;
-			children = (
-				9D6AC1F32365075C00965419 /* Info.plist */,
-			);
-			path = FermentrackManager;
 			sourceTree = "<group>";
 		};
 		9D6AC1FA236507DA00965419 /* redis */ = {
@@ -114,6 +80,7 @@
 		9D8EA45A23678C050027F7CA /* com.redwoodmonkey.FermentrackProcessManager */ = {
 			isa = PBXGroup;
 			children = (
+				9D6AC1FA236507DA00965419 /* redis */,
 				9D6AC1942364F52100965419 /* main.swift */,
 				9D8EA42D23672A820027F7CA /* FermentrackProcessManager.swift */,
 				9D8EA42F23672CF60027F7CA /* CustomError.swift */,
@@ -125,24 +92,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		9D6AC1F02365075C00965419 /* FermentrackManager */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 9D6AC1F42365075C00965419 /* Build configuration list for PBXNativeTarget "FermentrackManager" */;
-			buildPhases = (
-				9D6AC1ED2365075C00965419 /* Sources */,
-				9D6AC1EE2365075C00965419 /* Frameworks */,
-				9D6AC1EF2365075C00965419 /* Resources */,
-				9D6AC1F9236507B200965419 /* CopyFiles */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = FermentrackManager;
-			productName = FermentrackManager;
-			productReference = 9D6AC1F12365075C00965419 /* FermentrackManager.bundle */;
-			productType = "com.apple.product-type.bundle";
-		};
 		9D8EA45823678C050027F7CA /* com.redwoodmonkey.FermentrackProcessManager */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9D8EA46223678C050027F7CA /* Build configuration list for PBXNativeTarget "com.redwoodmonkey.FermentrackProcessManager" */;
@@ -171,9 +120,6 @@
 				LastUpgradeCheck = 1100;
 				ORGANIZATIONNAME = "Corbin Dunn";
 				TargetAttributes = {
-					9D6AC1F02365075C00965419 = {
-						CreatedOnToolsVersion = 11.0;
-					};
 					9D8EA45823678C050027F7CA = {
 						CreatedOnToolsVersion = 11.0;
 					};
@@ -192,21 +138,12 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				9D6AC1F02365075C00965419 /* FermentrackManager */,
 				9D8EA45823678C050027F7CA /* com.redwoodmonkey.FermentrackProcessManager */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		9D6AC1EF2365075C00965419 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9D6AC1FE236507DA00965419 /* redis.conf in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		9D8EA45723678C050027F7CA /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -218,13 +155,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		9D6AC1ED2365075C00965419 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		9D8EA45523678C050027F7CA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -351,36 +281,6 @@
 			};
 			name = Release;
 		};
-		9D6AC1F52365075C00965419 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "-";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = FermentrackManager/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = com.redwoodmonkey.FermentrackManager;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				WRAPPER_EXTENSION = bundle;
-			};
-			name = Debug;
-		};
-		9D6AC1F62365075C00965419 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "-";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = FermentrackManager/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = com.redwoodmonkey.FermentrackManager;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				WRAPPER_EXTENSION = bundle;
-			};
-			name = Release;
-		};
 		9D8EA46323678C050027F7CA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -415,15 +315,6 @@
 			buildConfigurations = (
 				9D6AC1962364F52100965419 /* Debug */,
 				9D6AC1972364F52100965419 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		9D6AC1F42365075C00965419 /* Build configuration list for PBXNativeTarget "FermentrackManager" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				9D6AC1F52365075C00965419 /* Debug */,
-				9D6AC1F62365075C00965419 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
