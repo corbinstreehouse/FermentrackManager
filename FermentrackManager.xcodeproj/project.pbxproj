@@ -12,6 +12,8 @@
 		9D6AC1FF236507E400965419 /* redis-server in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9D6AC1FB236507DA00965419 /* redis-server */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		9D6AC201236507EF00965419 /* FermentrackTools in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9D6AC1912364F52100965419 /* FermentrackTools */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		9D8EA42623653D680027F7CA /* redis-cli in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9D8EA42523653D5F0027F7CA /* redis-cli */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		9D8EA42E23672A820027F7CA /* FermentrackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8EA42D23672A820027F7CA /* FermentrackManager.swift */; };
+		9D8EA43023672CF60027F7CA /* CustomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8EA42F23672CF60027F7CA /* CustomError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +58,8 @@
 		9D6AC1FB236507DA00965419 /* redis-server */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = "redis-server"; sourceTree = "<group>"; };
 		9D6AC1FC236507DA00965419 /* redis.conf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = redis.conf; sourceTree = "<group>"; };
 		9D8EA42523653D5F0027F7CA /* redis-cli */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = "redis-cli"; sourceTree = "<group>"; };
+		9D8EA42D23672A820027F7CA /* FermentrackManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FermentrackManager.swift; sourceTree = "<group>"; };
+		9D8EA42F23672CF60027F7CA /* CustomError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +103,8 @@
 			isa = PBXGroup;
 			children = (
 				9D6AC1942364F52100965419 /* main.swift */,
+				9D8EA42D23672A820027F7CA /* FermentrackManager.swift */,
+				9D8EA42F23672CF60027F7CA /* CustomError.swift */,
 			);
 			path = FermentrackTools;
 			sourceTree = "<group>";
@@ -213,7 +219,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D8EA42E23672A820027F7CA /* FermentrackManager.swift in Sources */,
 				9D6AC1952364F52100965419 /* main.swift in Sources */,
+				9D8EA43023672CF60027F7CA /* CustomError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
