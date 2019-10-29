@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9D6943B72367927D00AC09D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6943B62367927D00AC09D9 /* AppDelegate.swift */; };
+		9D6943B92367927D00AC09D9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6943B82367927D00AC09D9 /* ViewController.swift */; };
+		9D6943BB2367927E00AC09D9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D6943BA2367927E00AC09D9 /* Assets.xcassets */; };
+		9D6943BE2367927E00AC09D9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D6943BC2367927E00AC09D9 /* Main.storyboard */; };
 		9D8EA46523678D110027F7CA /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6AC1942364F52100965419 /* main.swift */; };
 		9D8EA46623678D110027F7CA /* FermentrackProcessManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8EA42D23672A820027F7CA /* FermentrackProcessManager.swift */; };
 		9D8EA46723678D110027F7CA /* CustomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8EA42F23672CF60027F7CA /* CustomError.swift */; };
@@ -30,6 +34,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		9D6943B42367927D00AC09D9 /* FermentrackManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FermentrackManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9D6943B62367927D00AC09D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		9D6943B82367927D00AC09D9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		9D6943BA2367927E00AC09D9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		9D6943BD2367927E00AC09D9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		9D6943BF2367927E00AC09D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9D6943C02367927E00AC09D9 /* FermentrackManager.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FermentrackManager.entitlements; sourceTree = "<group>"; };
 		9D6AC1942364F52100965419 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		9D6AC1FB236507DA00965419 /* redis-server */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = "redis-server"; sourceTree = "<group>"; };
 		9D6AC1FC236507DA00965419 /* redis.conf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = redis.conf; sourceTree = "<group>"; };
@@ -38,9 +49,17 @@
 		9D8EA42F23672CF60027F7CA /* CustomError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomError.swift; sourceTree = "<group>"; };
 		9D8EA45923678C050027F7CA /* com.redwoodmonkey.FermentrackProcessManager.xpc */ = {isa = PBXFileReference; explicitFileType = "wrapper.xpc-service"; includeInIndex = 0; path = com.redwoodmonkey.FermentrackProcessManager.xpc; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D8EA46123678C050027F7CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9D8EA46F23678FFD0027F7CA /* com.redwoodmonkey.FermentrackProcessManager.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = com.redwoodmonkey.FermentrackProcessManager.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		9D6943B12367927D00AC09D9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9D8EA45623678C050027F7CA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -51,10 +70,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9D6943B52367927D00AC09D9 /* FermentrackManager */ = {
+			isa = PBXGroup;
+			children = (
+				9D6943B62367927D00AC09D9 /* AppDelegate.swift */,
+				9D6943B82367927D00AC09D9 /* ViewController.swift */,
+				9D6943BA2367927E00AC09D9 /* Assets.xcassets */,
+				9D6943BC2367927E00AC09D9 /* Main.storyboard */,
+				9D6943BF2367927E00AC09D9 /* Info.plist */,
+				9D6943C02367927E00AC09D9 /* FermentrackManager.entitlements */,
+			);
+			path = FermentrackManager;
+			sourceTree = "<group>";
+		};
 		9D6AC1882364F52100965419 = {
 			isa = PBXGroup;
 			children = (
 				9D8EA45A23678C050027F7CA /* com.redwoodmonkey.FermentrackProcessManager */,
+				9D6943B52367927D00AC09D9 /* FermentrackManager */,
 				9D6AC1922364F52100965419 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -63,6 +96,7 @@
 			isa = PBXGroup;
 			children = (
 				9D8EA45923678C050027F7CA /* com.redwoodmonkey.FermentrackProcessManager.xpc */,
+				9D6943B42367927D00AC09D9 /* FermentrackManager.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -85,6 +119,7 @@
 				9D8EA42D23672A820027F7CA /* FermentrackProcessManager.swift */,
 				9D8EA42F23672CF60027F7CA /* CustomError.swift */,
 				9D8EA46123678C050027F7CA /* Info.plist */,
+				9D8EA46F23678FFD0027F7CA /* com.redwoodmonkey.FermentrackProcessManager.plist */,
 			);
 			path = com.redwoodmonkey.FermentrackProcessManager;
 			sourceTree = "<group>";
@@ -92,6 +127,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		9D6943B32367927D00AC09D9 /* FermentrackManager */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9D6943C32367927E00AC09D9 /* Build configuration list for PBXNativeTarget "FermentrackManager" */;
+			buildPhases = (
+				9D6943B02367927D00AC09D9 /* Sources */,
+				9D6943B12367927D00AC09D9 /* Frameworks */,
+				9D6943B22367927D00AC09D9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FermentrackManager;
+			productName = FermentrackManager;
+			productReference = 9D6943B42367927D00AC09D9 /* FermentrackManager.app */;
+			productType = "com.apple.product-type.application";
+		};
 		9D8EA45823678C050027F7CA /* com.redwoodmonkey.FermentrackProcessManager */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9D8EA46223678C050027F7CA /* Build configuration list for PBXNativeTarget "com.redwoodmonkey.FermentrackProcessManager" */;
@@ -120,6 +172,9 @@
 				LastUpgradeCheck = 1100;
 				ORGANIZATIONNAME = "Corbin Dunn";
 				TargetAttributes = {
+					9D6943B32367927D00AC09D9 = {
+						CreatedOnToolsVersion = 11.0;
+					};
 					9D8EA45823678C050027F7CA = {
 						CreatedOnToolsVersion = 11.0;
 					};
@@ -139,11 +194,21 @@
 			projectRoot = "";
 			targets = (
 				9D8EA45823678C050027F7CA /* com.redwoodmonkey.FermentrackProcessManager */,
+				9D6943B32367927D00AC09D9 /* FermentrackManager */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		9D6943B22367927D00AC09D9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9D6943BB2367927E00AC09D9 /* Assets.xcassets in Resources */,
+				9D6943BE2367927E00AC09D9 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9D8EA45723678C050027F7CA /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -155,6 +220,15 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		9D6943B02367927D00AC09D9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9D6943B92367927D00AC09D9 /* ViewController.swift in Sources */,
+				9D6943B72367927D00AC09D9 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9D8EA45523678C050027F7CA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -167,7 +241,54 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXVariantGroup section */
+		9D6943BC2367927E00AC09D9 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9D6943BD2367927E00AC09D9 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
+		9D6943C12367927E00AC09D9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = FermentrackManager/FermentrackManager.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = FermentrackManager/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.redwoodmonkey.FermentrackManager;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		9D6943C22367927E00AC09D9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = FermentrackManager/FermentrackManager.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = FermentrackManager/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.redwoodmonkey.FermentrackManager;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 		9D6AC1962364F52100965419 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -310,6 +431,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		9D6943C32367927E00AC09D9 /* Build configuration list for PBXNativeTarget "FermentrackManager" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9D6943C12367927E00AC09D9 /* Debug */,
+				9D6943C22367927E00AC09D9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		9D6AC18C2364F52100965419 /* Build configuration list for PBXProject "FermentrackManager" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

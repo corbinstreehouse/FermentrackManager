@@ -18,6 +18,6 @@ let fermentrackManager = FermentrackProcessManager(fermentrackHomeURL)
 
 while (true) {
     fermentrackManager.run()
-    Thread.sleep(forTimeInterval: 1.0)
+    Thread.sleep(forTimeInterval: 10.0)
 }
 

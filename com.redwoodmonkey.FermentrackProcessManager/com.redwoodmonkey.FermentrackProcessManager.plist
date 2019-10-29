@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>KeepAlive</key>
+	<true/>
+	<key>Label</key>
+	<string>com.redwoodmonkey.FermentrackProcessManager</string>
+	<key>ProcessType</key>
+	<string>Background</string>
+	<key>Program</key>
+	<string>/Users/corbin/Library/Developer/Xcode/DerivedData/FermentrackManager-dosydjigduddyegnblvbapjsgxeq/Build/Products/Debug/com.redwoodmonkey.FermentrackProcessManager.xpc/Contents/MacOS/com.redwoodmonkey.FermentrackProcessManager</string>
+	<key>RunAtLoad</key>
+	<true/>
+	<key>WaitForDebugger</key>
+	<false/>
+</dict>
+</plist>

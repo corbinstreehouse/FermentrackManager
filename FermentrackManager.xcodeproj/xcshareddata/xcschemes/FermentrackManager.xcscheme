@@ -14,8 +14,8 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "9D6AC1F02365075C00965419"
-               BuildableName = "FermentrackManager.bundle"
+               BlueprintIdentifier = "9D6943B32367927D00AC09D9"
+               BuildableName = "FermentrackManager.app"
                BlueprintName = "FermentrackManager"
                ReferencedContainer = "container:FermentrackManager.xcodeproj">
             </BuildableReference>
@@ -54,8 +54,8 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "9D6AC1F02365075C00965419"
-            BuildableName = "FermentrackManager.bundle"
+            BlueprintIdentifier = "9D6943B32367927D00AC09D9"
+            BuildableName = "FermentrackManager.app"
             BlueprintName = "FermentrackManager"
             ReferencedContainer = "container:FermentrackManager.xcodeproj">
          </BuildableReference>
