@@ -88,7 +88,7 @@ class WelcomeViewController: NSViewController {
     
     private var xcodeStatus: CheckStatus = .notChecked {
         didSet {
-            (xcodeStatusMsg, xcodeStatusColor) = statusMsgAndColor(forStatus: pythonStatus)
+            (xcodeStatusMsg, xcodeStatusColor) = statusMsgAndColor(forStatus: xcodeStatus)
         }
     }
 
@@ -99,11 +99,21 @@ class WelcomeViewController: NSViewController {
     
     private func checkPythonStatus() {
         if pythonStatus == .notChecked {
-            if checkIfInstalled(processName: "python3") {
+            // Just try running python3; I need a specific location. I could get it from which
+            let pythonProcess = Process()
+            pythonProcess.executableURL = URL(fileURLWithPath: "/usr/local/python3")
+            pythonProcess.arguments = ["--version"]
+            do {
+                try pythonProcess.run()
                 pythonStatus = .installed
-            } else {
+            } catch {
                 pythonStatus = .notInstalled
             }
+//            if checkIfInstalled(processName: "python3") {
+//                pythonStatus = .installed
+//            } else {
+//                pythonStatus = .notInstalled
+//            }
         }
     }
     
@@ -117,7 +127,7 @@ class WelcomeViewController: NSViewController {
         }
 
     }
-        
+    
     func checkIfInstalled(processName: String) -> Bool {
         let process = Process()
         process.executableURL = URL(fileURLWithPath: "/usr/bin/which")
@@ -128,4 +138,9 @@ class WelcomeViewController: NSViewController {
         
     }
     
+    @IBAction func beginInstall(_ button: NSButton) {
+        let mvc = self.parent as! MainViewController
+        mvc.loadContentViewController(identifier: InstallViewController.installViewControllerID)
+    }
+
 }

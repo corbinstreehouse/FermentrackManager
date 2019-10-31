@@ -68,10 +68,18 @@ class MainViewController: NSViewController {
         self.loadManageViewController()
     }
         
-    private func loadContentViewController(identifier: NSStoryboard.SceneIdentifier) {
+    public func loadContentViewController(identifier: NSStoryboard.SceneIdentifier) {
         let viewController = NSStoryboard.main!.instantiateController(withIdentifier: identifier) as! NSViewController
         let oldChildViewController = self.children.first!
         self.addChild(viewController)
+        
+        // stupid work arounds for autolayout issues
+        viewController.view.frame = oldChildViewController.view.frame
+        viewController.view.layoutSubtreeIfNeeded()
+        
+        viewController.view.translatesAutoresizingMaskIntoConstraints = true
+        viewController.view.autoresizingMask = [.width, .height]
+        
         self.transition(from: oldChildViewController, to: viewController, options: []) {
             oldChildViewController.removeFromParent()
 //            viewController.view.layer?.backgroundColor = NSColor.red.cgColor

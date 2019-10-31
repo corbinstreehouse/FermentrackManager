@@ -685,7 +685,7 @@
             <objects>
                 <windowController id="B8D-0N-5wS" customClass="MainWindowController" customModule="FermentrackManager" customModuleProvider="target" sceneMemberID="viewController">
                     <window key="window" title="Fermentation Manager" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="FermentationManagerWindow" animationBehavior="default" tabbingMode="disallowed" titlebarAppearsTransparent="YES" titleVisibility="hidden" id="IQv-IB-iLA">
-                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" fullSizeContentView="YES"/>
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" fullSizeContentView="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="817" height="495"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
@@ -709,28 +709,40 @@
                         <rect key="frame" x="0.0" y="0.0" width="767" height="482"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dgo-Jn-Nl9">
-                                <rect key="frame" x="294" y="318" width="184" height="184"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Dgo-Jn-Nl9">
+                                <rect key="frame" x="292" y="318" width="184" height="184"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="184" id="1pk-Qe-SLx"/>
+                                    <constraint firstAttribute="width" constant="184" id="5ha-vp-9Xn"/>
+                                </constraints>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="fermentrack_logo" id="7PW-4Q-Ezq"/>
                             </imageView>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KvD-NQ-4P7">
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KvD-NQ-4P7">
                                 <rect key="frame" x="304" y="334" width="160" height="19"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="www.fermentrack.com" id="Iqw-LC-Grf">
                                     <font key="font" metaFont="systemLight" size="15"/>
                                     <color key="textColor" name="linkColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <containerView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xw4-Fa-9Tg">
+                            <containerView translatesAutoresizingMaskIntoConstraints="NO" id="xw4-Fa-9Tg">
                                 <rect key="frame" x="0.0" y="0.0" width="767" height="328"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <connections>
                                     <segue destination="SOB-vU-NIk" kind="embed" id="RHE-ge-yes"/>
                                 </connections>
                             </containerView>
                         </subviews>
+                        <constraints>
+                            <constraint firstItem="KvD-NQ-4P7" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="129" id="CFf-9M-vwY"/>
+                            <constraint firstAttribute="bottom" secondItem="xw4-Fa-9Tg" secondAttribute="bottom" id="GH9-8I-rPJ"/>
+                            <constraint firstItem="Dgo-Jn-Nl9" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="Of1-5L-y4J"/>
+                            <constraint firstItem="Dgo-Jn-Nl9" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="-20" id="Opl-UE-2ee"/>
+                            <constraint firstItem="xw4-Fa-9Tg" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="Phr-rg-C3d"/>
+                            <constraint firstItem="xw4-Fa-9Tg" firstAttribute="top" secondItem="KvD-NQ-4P7" secondAttribute="bottom" constant="6" id="XjD-c2-bh7"/>
+                            <constraint firstItem="Dgo-Jn-Nl9" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="aZb-Fg-gpV"/>
+                            <constraint firstItem="KvD-NQ-4P7" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="gmK-dt-l0T"/>
+                            <constraint firstAttribute="trailing" secondItem="xw4-Fa-9Tg" secondAttribute="trailing" id="y1m-IO-quv"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="containerView" destination="xw4-Fa-9Tg" id="UBp-lB-agZ"/>
@@ -772,22 +784,23 @@
         <scene sceneID="4JS-0t-KTt">
             <objects>
                 <viewController storyboardIdentifier="WelcomeViewController" id="hxQ-qd-pcC" customClass="WelcomeViewController" customModule="FermentrackManager" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="86g-rO-A1q">
+                    <view key="view" translatesAutoresizingMaskIntoConstraints="NO" id="86g-rO-A1q">
                         <rect key="frame" x="0.0" y="0.0" width="725" height="307"/>
-                        <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="bhy-5l-N7b">
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bhy-5l-N7b">
                                 <rect key="frame" x="303" y="191" width="119" height="19"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Installation Steps" id="CZE-Pg-Dk5">
                                     <font key="font" metaFont="systemLight" size="15"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="4pr-uE-M9C">
-                                <rect key="frame" x="137" y="218" width="471" height="48"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4pr-uE-M9C">
+                                <rect key="frame" x="127" y="218" width="471" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="467" id="JXm-iV-LDp"/>
+                                    <constraint firstAttribute="height" constant="48" id="hHf-2D-Jq7"/>
+                                </constraints>
                                 <textFieldCell key="cell" selectable="YES" id="KaB-cQ-PpU">
                                     <font key="font" metaFont="system"/>
                                     <string key="title">Fermentrack is a web-based fermentation tracking and temperature control software. Fermentrack Manager can automatically install Fermentrack and monitor the web process.</string>
@@ -796,7 +809,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nYe-BJ-1Gr">
-                                <rect key="frame" x="151" y="150" width="471" height="16"/>
+                                <rect key="frame" x="141" y="150" width="471" height="16"/>
                                 <textFieldCell key="cell" selectable="YES" title="Fermentrack is built with Python, and the runtime must be manually installed." id="s6K-tm-19q">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
@@ -804,7 +817,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KBl-nm-CXn">
-                                <rect key="frame" x="151" y="133" width="100" height="16"/>
+                                <rect key="frame" x="141" y="133" width="100" height="16"/>
                                 <textFieldCell key="cell" selectable="YES" title="Download from:" id="tTK-bV-QwT">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
@@ -812,7 +825,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="AvA-Qt-8bt">
-                                <rect key="frame" x="252" y="133" width="277" height="16"/>
+                                <rect key="frame" x="242" y="133" width="277" height="16"/>
                                 <textFieldCell key="cell" selectable="YES" title="https://www.python.org/downloads/mac-osx/" id="ye1-qh-XJ6">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="linkColor" catalog="System" colorSpace="catalog"/>
@@ -820,7 +833,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="CzW-aA-1vb">
-                                <rect key="frame" x="151" y="81" width="100" height="16"/>
+                                <rect key="frame" x="141" y="81" width="100" height="16"/>
                                 <textFieldCell key="cell" selectable="YES" title="Download from:" id="fY3-9M-AKT">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
@@ -828,7 +841,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nBU-58-t1p">
-                                <rect key="frame" x="254" y="81" width="318" height="16"/>
+                                <rect key="frame" x="244" y="81" width="318" height="16"/>
                                 <textFieldCell key="cell" selectable="YES" title="https://apps.apple.com/us/app/xcode/id497799835" id="Stb-0a-Qta">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="linkColor" catalog="System" colorSpace="catalog"/>
@@ -836,7 +849,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="het-zv-YeM">
-                                <rect key="frame" x="137" y="172" width="82" height="16"/>
+                                <rect key="frame" x="127" y="172" width="82" height="16"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="1. Python 3.x" id="dbr-72-37S">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -844,7 +857,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3L9-Ww-k9O">
-                                <rect key="frame" x="225" y="172" width="73" height="16"/>
+                                <rect key="frame" x="215" y="172" width="73" height="16"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Checking..." id="wfC-aC-Cm1">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="tertiaryLabelColor" catalog="System" colorSpace="catalog"/>
@@ -856,7 +869,7 @@
                                 </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="h7e-CF-V5Z">
-                                <rect key="frame" x="201" y="101" width="73" height="16"/>
+                                <rect key="frame" x="191" y="101" width="73" height="16"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Checking..." id="fS7-uQ-xTe">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="tertiaryLabelColor" catalog="System" colorSpace="catalog"/>
@@ -868,7 +881,7 @@
                                 </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Bgz-Qc-Y9l">
-                                <rect key="frame" x="137" y="101" width="58" height="16"/>
+                                <rect key="frame" x="127" y="101" width="58" height="16"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="2. Xcode" id="YYz-E7-1hB">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -882,6 +895,7 @@
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
+                                    <action selector="beginInstall:" target="hxQ-qd-pcC" id="JsO-PN-OAQ"/>
                                     <binding destination="hxQ-qd-pcC" name="enabled" keyPath="self.installButtonEnabled" id="3Tp-aD-zck"/>
                                 </connections>
                             </button>
@@ -896,23 +910,29 @@
                         </subviews>
                         <constraints>
                             <constraint firstItem="3L9-Ww-k9O" firstAttribute="leading" secondItem="het-zv-YeM" secondAttribute="trailing" constant="10" id="4kB-PI-vEL"/>
+                            <constraint firstItem="4pr-uE-M9C" firstAttribute="centerX" secondItem="86g-rO-A1q" secondAttribute="centerX" id="4oA-wc-JE9"/>
                             <constraint firstItem="AvA-Qt-8bt" firstAttribute="firstBaseline" secondItem="KBl-nm-CXn" secondAttribute="firstBaseline" id="5wo-cJ-jNf"/>
-                            <constraint firstAttribute="bottom" secondItem="ooa-7d-e4Q" secondAttribute="bottom" constant="29" id="84n-5s-64r"/>
                             <constraint firstItem="nBU-58-t1p" firstAttribute="firstBaseline" secondItem="CzW-aA-1vb" secondAttribute="firstBaseline" id="FpP-bZ-axz"/>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="725" id="GjW-gk-4z5"/>
                             <constraint firstItem="h7e-CF-V5Z" firstAttribute="leading" secondItem="Bgz-Qc-Y9l" secondAttribute="trailing" constant="10" id="K8l-Ek-t9t"/>
+                            <constraint firstItem="Evt-LZ-Nyh" firstAttribute="top" secondItem="86g-rO-A1q" secondAttribute="top" constant="10" id="Kku-P1-kqi"/>
                             <constraint firstItem="KBl-nm-CXn" firstAttribute="top" secondItem="nYe-BJ-1Gr" secondAttribute="bottom" constant="1" id="Lhk-II-ILM"/>
+                            <constraint firstItem="bhy-5l-N7b" firstAttribute="centerX" secondItem="86g-rO-A1q" secondAttribute="centerX" id="Mbo-De-JEC"/>
                             <constraint firstItem="Bgz-Qc-Y9l" firstAttribute="top" secondItem="KBl-nm-CXn" secondAttribute="bottom" constant="16" id="No2-ds-NRh"/>
                             <constraint firstItem="nBU-58-t1p" firstAttribute="leading" secondItem="CzW-aA-1vb" secondAttribute="trailing" constant="7" id="Pae-qF-qvY"/>
                             <constraint firstItem="het-zv-YeM" firstAttribute="top" secondItem="4pr-uE-M9C" secondAttribute="bottom" constant="30" id="QJU-ve-zob"/>
                             <constraint firstItem="KBl-nm-CXn" firstAttribute="leading" secondItem="nYe-BJ-1Gr" secondAttribute="leading" id="R49-fJ-KYs"/>
                             <constraint firstItem="Bgz-Qc-Y9l" firstAttribute="leading" secondItem="het-zv-YeM" secondAttribute="leading" id="U4q-w7-gh9"/>
                             <constraint firstItem="het-zv-YeM" firstAttribute="leading" secondItem="4pr-uE-M9C" secondAttribute="leading" id="UXo-qR-YmH"/>
-                            <constraint firstItem="Evt-LZ-Nyh" firstAttribute="centerX" secondItem="86g-rO-A1q" secondAttribute="centerX" id="ZGU-8E-erg"/>
-                            <constraint firstItem="ooa-7d-e4Q" firstAttribute="centerX" secondItem="86g-rO-A1q" secondAttribute="centerX" id="ZKR-Y0-hlx"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="307" id="Uc5-yc-EnM"/>
+                            <constraint firstItem="bhy-5l-N7b" firstAttribute="top" secondItem="4pr-uE-M9C" secondAttribute="bottom" constant="8" id="XhD-1x-G1O"/>
+                            <constraint firstItem="4pr-uE-M9C" firstAttribute="top" secondItem="Evt-LZ-Nyh" secondAttribute="bottom" constant="12" id="bFW-xQ-esU"/>
+                            <constraint firstItem="Evt-LZ-Nyh" firstAttribute="centerX" secondItem="86g-rO-A1q" secondAttribute="centerX" id="cec-tw-pdd"/>
                             <constraint firstItem="AvA-Qt-8bt" firstAttribute="leading" secondItem="KBl-nm-CXn" secondAttribute="trailing" constant="5" id="e9t-Qb-Amw"/>
                             <constraint firstItem="h7e-CF-V5Z" firstAttribute="firstBaseline" secondItem="Bgz-Qc-Y9l" secondAttribute="firstBaseline" id="gys-RA-2Zm"/>
                             <constraint firstItem="nYe-BJ-1Gr" firstAttribute="leading" secondItem="het-zv-YeM" secondAttribute="leading" constant="14" id="hfI-fo-Kjv"/>
-                            <constraint firstItem="Evt-LZ-Nyh" firstAttribute="top" secondItem="86g-rO-A1q" secondAttribute="top" constant="10" id="m1M-ru-xXE"/>
+                            <constraint firstItem="ooa-7d-e4Q" firstAttribute="top" secondItem="nBU-58-t1p" secondAttribute="bottom" constant="31" id="i6k-Yq-fP8"/>
+                            <constraint firstItem="ooa-7d-e4Q" firstAttribute="centerX" secondItem="86g-rO-A1q" secondAttribute="centerX" id="kY8-fp-T12"/>
                             <constraint firstItem="nYe-BJ-1Gr" firstAttribute="top" secondItem="het-zv-YeM" secondAttribute="bottom" constant="6" id="p4k-kc-89n"/>
                             <constraint firstItem="CzW-aA-1vb" firstAttribute="top" secondItem="h7e-CF-V5Z" secondAttribute="bottom" constant="4" id="sTq-D8-bVW"/>
                             <constraint firstItem="3L9-Ww-k9O" firstAttribute="firstBaseline" secondItem="het-zv-YeM" secondAttribute="firstBaseline" id="suh-id-ozO"/>
@@ -1017,6 +1037,60 @@
                 <customObject id="T8v-nV-np3" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1028" y="1143"/>
+        </scene>
+        <!--Install View Controller-->
+        <scene sceneID="KIf-tv-BuD">
+            <objects>
+                <viewController storyboardIdentifier="InstallviewController" id="6Wx-lR-lzF" customClass="InstallViewController" customModule="FermentrackManager" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="dtZ-Xb-8FG">
+                        <rect key="frame" x="0.0" y="0.0" width="725" height="307"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <scrollView appearanceType="aqua" fixedFrame="YES" borderType="line" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sGj-ti-eN4">
+                                <rect key="frame" x="-1" y="-1" width="727" height="274"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <clipView key="contentView" ambiguous="YES" drawsBackground="NO" copiesOnScroll="NO" id="pQa-yO-lvY">
+                                    <rect key="frame" x="1" y="1" width="725" height="272"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <textView ambiguous="YES" verticallyResizable="YES" usesFontPanel="YES" usesInspectorBar="YES" findStyle="bar" allowsDocumentBackgroundColorChange="YES" usesRuler="YES" spellingCorrection="YES" smartInsertDelete="YES" id="FjP-04-1C3">
+                                            <rect key="frame" x="0.0" y="0.0" width="725" height="272"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <size key="minSize" width="725" height="272"/>
+                                            <size key="maxSize" width="750" height="10000000"/>
+                                            <color key="insertionPointColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                        </textView>
+                                    </subviews>
+                                </clipView>
+                                <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="9lJ-zx-uwl">
+                                    <rect key="frame" x="-100" y="-100" width="240" height="16"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                                <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="UO0-1N-d8T">
+                                    <rect key="frame" x="710" y="1" width="16" height="272"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                            </scrollView>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j1k-XF-Fg2">
+                                <rect key="frame" x="226" y="282" width="242" height="19"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Installing...." id="aby-U3-7Lw">
+                                    <font key="font" metaFont="systemLight" size="15"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                    </view>
+                    <connections>
+                        <outlet property="statusTextView" destination="FjP-04-1C3" id="Gp3-Bd-yvf"/>
+                    </connections>
+                </viewController>
+                <customObject id="UXc-bq-3Y4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="289.5" y="1994.5"/>
         </scene>
     </scenes>
     <resources>
