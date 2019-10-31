@@ -9,7 +9,8 @@
 import Cocoa
 
 class WelcomeViewController: NSViewController {
-
+    public static let storyboardSceneID: NSStoryboard.SceneIdentifier = "WelcomeViewController"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
@@ -108,7 +109,7 @@ class WelcomeViewController: NSViewController {
     
     private func checkXcodeStatus() {
         if xcodeStatus == .notChecked {
-            if checkIfInstalled(processName: "xcode-select") {
+            if checkIfInstalled(processName: "xcodebuild") {
                 xcodeStatus = .installed
             } else {
                 xcodeStatus = .notInstalled

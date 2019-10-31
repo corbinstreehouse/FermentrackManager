@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "9D6943B32367927D00AC09D9"
-               BuildableName = "FermentrackManager.app"
-               BlueprintName = "FermentrackManager"
+               BlueprintIdentifier = "9D8EA45823678C050027F7CA"
+               BuildableName = "com.redwoodmonkey.FermentrackProcessManager.xpc"
+               BlueprintName = "com.redwoodmonkey.FermentrackProcessManager"
                ReferencedContainer = "container:FermentrackManager.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -34,28 +34,17 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      launchStyle = "0"
+      launchStyle = "1"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "9D6943B32367927D00AC09D9"
-            BuildableName = "FermentrackManager.app"
-            BlueprintName = "FermentrackManager"
-            ReferencedContainer = "container:FermentrackManager.xcodeproj">
-         </BuildableReference>
-      </BuildableProductRunnable>
-      <CommandLineArguments>
-         <CommandLineArgument
-            argument = "-NSConstraintBasedLayoutVisualizeMutuallyExclusiveConstraints YES"
-            isEnabled = "YES">
-         </CommandLineArgument>
-      </CommandLineArguments>
+      <PathRunnable
+         runnableDebuggingMode = "0"
+         BundleIdentifier = "com.redwoodmonkey.FermentrackProcessManager"
+         FilePath = "/Users/corbin/Library/Developer/Xcode/DerivedData/FermentrackManager-dosydjigduddyegnblvbapjsgxeq/Build/Products/Debug/com.redwoodmonkey.FermentrackProcessManager.xpc">
+      </PathRunnable>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -63,16 +52,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "9D6943B32367927D00AC09D9"
-            BuildableName = "FermentrackManager.app"
-            BlueprintName = "FermentrackManager"
+            BlueprintIdentifier = "9D8EA45823678C050027F7CA"
+            BuildableName = "com.redwoodmonkey.FermentrackProcessManager.xpc"
+            BlueprintName = "com.redwoodmonkey.FermentrackProcessManager"
             ReferencedContainer = "container:FermentrackManager.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

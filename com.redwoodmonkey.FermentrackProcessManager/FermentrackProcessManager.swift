@@ -11,11 +11,25 @@ import Foundation
 class FermentrackProcessManager {
     var lastError: String?
     
-    private var fermentrackHomeURL: URL!
-    private let apacheServerRootURL: URL!
+    // fermentrackHomeURL will be set by another thread via the XPC service; we serialize this on the queue to avoid any race conditions via a public method
+    private var fermentrackHomeURL: URL? {
+        didSet {
+            // Save the value
+            UserDefaults.standard.set(fermentrackHomeURL, forKey: fermentrackHomeURLKey)
+        }
+    }
+
     
-    init(_ fermentrackHomeURL: URL) {
-        self.fermentrackHomeURL = fermentrackHomeURL
+    private let apacheServerRootURL: URL!
+    private let fermentrackHomeURLKey = "FermentrackBasePath"
+    // Explictly NOT concurrent queue so we can serialize access to work
+    private var processManagerQueue = DispatchQueue(label: "com.redwoodmonkey.ProcessManager", attributes: [], autoreleaseFrequency:.inherit, target: nil)
+
+
+    init() {
+        // Use the previous fermentrack home location; it might not exist yet
+        fermentrackHomeURL = UserDefaults.standard.url(forKey: fermentrackHomeURLKey)
+        
         apacheServerRootURL = FileManager.default.temporaryDirectory.appendingPathComponent("fermentrack_apache", isDirectory: true)
         // Ensure the directory exists
         do {
@@ -23,10 +37,29 @@ class FermentrackProcessManager {
         } catch {
             // If it exists, that is okay, ignore errors
         }
-        setup()
-        if isWebServerAlive() {
-            // Maybe kill the server to force a reload?
+        
+        // The first pass will synchronously start stuff up, if we are properly setup
+        attemptSetup()
+        doAsyncProcessWork()
+    }
+    
+    private func doAsyncProcessWork() {
+        // Do the work and then async check again one second later
+        doProcessWork()
+        processManagerQueue.asyncAfter(deadline: .now() + 1) {
+            self.doAsyncProcessWork()
         }
+    }
+    
+    public func setFermentrackHomeURL(url: URL) {
+        processManagerQueue.async(flags: .barrier) {
+            self.fermentrackHomeURL = url
+            self.attemptSetup()
+        }
+    }
+    
+    public func getFermentrackHomeURL() -> URL? {
+        return self.fermentrackHomeURL
     }
     
     private func makeRedisProcess() -> Process {
@@ -106,7 +139,7 @@ class FermentrackProcessManager {
         // python3 -m circus.circusctl --json --timeout 1 quit
         do {
             let process = makeAndSetupPythonProcess()
-            process.executableURL = fermentrackHomeURL.appendingPathComponent("venv/bin/python3")
+            process.executableURL = fermentrackHomeURL!.appendingPathComponent("venv/bin/python3")
             process.arguments = ["-m", "circus.circusctl", "--json", "--timeout", "1", "quit"]
             try process.run()
             process.waitUntilExit()
@@ -117,7 +150,7 @@ class FermentrackProcessManager {
     }
 
     private func makeAndSetupPythonProcess() -> Process {
-        let virtualEnvURL = fermentrackHomeURL.appendingPathComponent("venv")
+        let virtualEnvURL = fermentrackHomeURL!.appendingPathComponent("venv")
         
         // The python environment setup for circus/python
         var environmentPath = virtualEnvURL.appendingPathComponent("bin").path
@@ -127,13 +160,13 @@ class FermentrackProcessManager {
         }
 
         // The "fermentrack" sub directory should be our PYTHONPATH
-        let fermentrackURL = fermentrackHomeURL.appendingPathComponent("fermentrack")
+        let fermentrackURL = fermentrackHomeURL!.appendingPathComponent("fermentrack")
         
         let process = Process()
         process.currentDirectoryURL = fermentrackURL
         process.environment = ["PYTHONPATH": fermentrackURL.path,
                                 "VIRTUAL_ENV": virtualEnvURL.path,
-                                "HOME": fermentrackHomeURL.path,
+                                "HOME": fermentrackHomeURL!.path,
                                 "PATH": environmentPath,
                                 "PWD": fermentrackURL.path,
                                 "LC_ALL": "en_US.UTF-8",
@@ -154,12 +187,12 @@ class FermentrackProcessManager {
         
         circusIniFileIsUpdated = true
         
-        let circusIniFileTemplatePath = fermentrackHomeURL.appendingPathComponent("fermentrack/circus.ini")
+        let circusIniFileTemplatePath = fermentrackHomeURL!.appendingPathComponent("fermentrack/circus.ini")
         let circusIniFileURL = self.circusIniFileURL
         let circusIniFile = try String(contentsOf: circusIniFileTemplatePath)
         
         // Totally not the best way to do this, but the easiest
-        let pythonPath = fermentrackHomeURL.appendingPathComponent("fermentrack").path
+        let pythonPath = fermentrackHomeURL!.appendingPathComponent("fermentrack").path
         let pythonPathIniFileLine = "PYTHONPATH = " + pythonPath
         let updatedCircusIniFile = circusIniFile.replacingOccurrences(of: "PYTHONPATH = /home/fermentrack/fermentrack", with: pythonPathIniFileLine)
         try updatedCircusIniFile.write(to: circusIniFileURL, atomically: true, encoding: .ascii)
@@ -173,7 +206,7 @@ class FermentrackProcessManager {
         
         do {
             let process = makeAndSetupPythonProcess()
-            process.executableURL = fermentrackHomeURL.appendingPathComponent("venv/bin/circusd")
+            process.executableURL = fermentrackHomeURL!.appendingPathComponent("venv/bin/circusd")
             process.arguments = [self.circusIniFileURL.path]
             try process.run()
             circusProcess = process;
@@ -191,7 +224,7 @@ class FermentrackProcessManager {
     private func setupWebServer() {
         do {
             let process = makeAndSetupPythonProcess()
-            process.executableURL = self.fermentrackHomeURL.appendingPathComponent("venv/bin/python3")
+            process.executableURL = self.fermentrackHomeURL!.appendingPathComponent("venv/bin/python3")
             process.arguments = ["manage.py", "runmodwsgi",  "--server-root=" + apacheServerRootURL.path, "--user", "_www", "--group", "_www"]
             try process.run()
             process.waitUntilExit()
@@ -230,23 +263,40 @@ class FermentrackProcessManager {
           }
     }
     
-    private func startWebServer() {
+    public var isWebServerRunning: Bool {
+        get {
+            return self.isWebServerAlive()
+        }
+    }
+    
+    public func startWebServer() {
         runApacheCtl(withCommand: "start")
     }
 
-    private func stopWebServer() {
+    public func stopWebServer() {
         runApacheCtl(withCommand: "stop")
     }
 
-    private func restartWebServer() {
+    public func restartWebServer() {
         runApacheCtl(withCommand: "restart")
     }
     
-    private func setup() {
-        setupWebServer()
+    private func attemptSetup() {
+        if fermentrackHomeURL != nil {
+            if isWebServerAlive() {
+                // Maybe kill the server to force a reload?
+                stopWebServer()
+            }
+            setupWebServer()
+        }
     }
     
-    func run() {
+    private func doProcessWork() {
+        
+        if fermentrackHomeURL == nil {
+            return // Not yet setup...
+        }
+        
         lastError = nil
         
         if (!isRedisAlive()) {

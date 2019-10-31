@@ -8,16 +8,12 @@
 
 import Foundation
 
-// TODO: How do I want to get the locations into here? User defaults?
-let defaultFermentrackBasePathKeyName = "FermentrackBasePath"
-UserDefaults.standard.register(defaults: [defaultFermentrackBasePathKeyName : "/Users/corbin/Projects/Fermentrack"])
-let fermentrackHomePath = UserDefaults.standard.string(forKey: defaultFermentrackBasePathKeyName)!
-let fermentrackHomeURL = URL(fileURLWithPath: fermentrackHomePath)
+let fermentrackManager = FermentrackProcessManager()
 
-let fermentrackManager = FermentrackProcessManager(fermentrackHomeURL)
+// The main thread here will kick off the XPC service and block on resume
+let serviceDelegate = ServiceDelegate(fermentrackManager)
+let listener = NSXPCListener.service()
+listener.delegate = serviceDelegate
+listener.resume()
 
-while (true) {
-    fermentrackManager.run()
-    Thread.sleep(forTimeInterval: 10.0)
-}
 
