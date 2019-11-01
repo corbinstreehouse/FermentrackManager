@@ -943,7 +943,7 @@
                 <customObject id="nzL-zP-CEV" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <userDefaultsController representsSharedInstance="YES" id="uKi-6I-K1R"/>
             </objects>
-            <point key="canvasLocation" x="290" y="1593"/>
+            <point key="canvasLocation" x="289.5" y="1592.5"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="tn5-1U-sUv">
@@ -1041,7 +1041,7 @@
         <!--Install View Controller-->
         <scene sceneID="KIf-tv-BuD">
             <objects>
-                <viewController storyboardIdentifier="InstallviewController" id="6Wx-lR-lzF" customClass="InstallViewController" customModule="FermentrackManager" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="InstallViewController" id="6Wx-lR-lzF" customClass="InstallViewController" customModule="FermentrackManager" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="dtZ-Xb-8FG">
                         <rect key="frame" x="0.0" y="0.0" width="725" height="307"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1053,7 +1053,7 @@
                                     <rect key="frame" x="1" y="1" width="725" height="272"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <textView ambiguous="YES" verticallyResizable="YES" usesFontPanel="YES" usesInspectorBar="YES" findStyle="bar" allowsDocumentBackgroundColorChange="YES" usesRuler="YES" spellingCorrection="YES" smartInsertDelete="YES" id="FjP-04-1C3">
+                                        <textView ambiguous="YES" editable="NO" verticallyResizable="YES" findStyle="bar" allowsDocumentBackgroundColorChange="YES" spellingCorrection="YES" smartInsertDelete="YES" id="FjP-04-1C3">
                                             <rect key="frame" x="0.0" y="0.0" width="725" height="272"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1074,7 +1074,7 @@
                                 </scroller>
                             </scrollView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j1k-XF-Fg2">
-                                <rect key="frame" x="226" y="282" width="242" height="19"/>
+                                <rect key="frame" x="320" y="281" width="85" height="19"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Installing...." id="aby-U3-7Lw">
                                     <font key="font" metaFont="systemLight" size="15"/>

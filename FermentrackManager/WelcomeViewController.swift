@@ -52,7 +52,7 @@ class WelcomeViewController: NSViewController {
     @objc dynamic var xcodeStatusColor: NSColor = NSColor.tertiaryLabelColor
     
     @objc dynamic var installButtonEnabled: Bool {
-        return xcodeStatus == .installed && pythonStatus == .installed
+        return xcodeStatus == .installed && pythonStatus == .installed && isConnectedToInternet
     }
     
     override class func keyPathsForValuesAffectingValue(forKey key: String) -> Set<String> {
@@ -101,7 +101,7 @@ class WelcomeViewController: NSViewController {
         if pythonStatus == .notChecked {
             // Just try running python3; I need a specific location. I could get it from which
             let pythonProcess = Process()
-            pythonProcess.executableURL = URL(fileURLWithPath: "/usr/local/python3")
+            pythonProcess.executableURL = URL(fileURLWithPath: "/usr/local/bin/python3")
             pythonProcess.arguments = ["--version"]
             do {
                 try pythonProcess.run()
@@ -125,7 +125,13 @@ class WelcomeViewController: NSViewController {
                 xcodeStatus = .notInstalled
             }
         }
-
+    }
+    
+    private var isConnectedToInternet: Bool {
+        get {
+            // TODO: check if we have a connection.!
+            return true
+        }
     }
     
     func checkIfInstalled(processName: String) -> Bool {

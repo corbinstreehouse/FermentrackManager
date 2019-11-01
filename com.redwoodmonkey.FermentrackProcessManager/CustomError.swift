@@ -10,7 +10,7 @@ import Foundation
 
 
 public enum CustomError: Error {
-    case withMessage(message: String)
+    case withMessage(_: String)
 }
 
 extension CustomError: LocalizedError {

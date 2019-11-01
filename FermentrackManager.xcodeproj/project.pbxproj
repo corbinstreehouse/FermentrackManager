@@ -18,6 +18,8 @@
 		9D6943F2236A0D6900AC09D9 /* FermentrackProcessManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6943F1236A0D6900AC09D9 /* FermentrackProcessManagerProtocol.swift */; };
 		9D6943F3236A0E6100AC09D9 /* FermentrackProcessManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6943F1236A0D6900AC09D9 /* FermentrackProcessManagerProtocol.swift */; };
 		9D6943F5236A86F600AC09D9 /* InstallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6943F4236A86F600AC09D9 /* InstallViewController.swift */; };
+		9D6943F7236A89C100AC09D9 /* FermentrackInstaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6943F6236A89C100AC09D9 /* FermentrackInstaller.swift */; };
+		9D6943F8236BCAF000AC09D9 /* CustomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8EA42F23672CF60027F7CA /* CustomError.swift */; };
 		9D8EA46523678D110027F7CA /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6AC1942364F52100965419 /* main.swift */; };
 		9D8EA46623678D110027F7CA /* FermentrackProcessManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8EA42D23672A820027F7CA /* FermentrackProcessManager.swift */; };
 		9D8EA46723678D110027F7CA /* CustomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8EA42F23672CF60027F7CA /* CustomError.swift */; };
@@ -73,6 +75,7 @@
 		9D6943EB2369CC3400AC09D9 /* ServiceDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceDelegate.swift; sourceTree = "<group>"; };
 		9D6943F1236A0D6900AC09D9 /* FermentrackProcessManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FermentrackProcessManagerProtocol.swift; sourceTree = "<group>"; };
 		9D6943F4236A86F600AC09D9 /* InstallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallViewController.swift; sourceTree = "<group>"; };
+		9D6943F6236A89C100AC09D9 /* FermentrackInstaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FermentrackInstaller.swift; sourceTree = "<group>"; };
 		9D6AC1942364F52100965419 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		9D6AC1FB236507DA00965419 /* redis-server */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = "redis-server"; sourceTree = "<group>"; };
 		9D6AC1FC236507DA00965419 /* redis.conf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = redis.conf; sourceTree = "<group>"; };
@@ -109,6 +112,7 @@
 				9D6943BA2367927E00AC09D9 /* Assets.xcassets */,
 				9D6943BC2367927E00AC09D9 /* Main.storyboard */,
 				9D6943F4236A86F600AC09D9 /* InstallViewController.swift */,
+				9D6943F6236A89C100AC09D9 /* FermentrackInstaller.swift */,
 				9D6943E923693AE400AC09D9 /* MainViewController.swift */,
 				9D6943BF2367927E00AC09D9 /* Info.plist */,
 				9D6943C02367927E00AC09D9 /* FermentrackManager.entitlements */,
@@ -263,8 +267,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D6943F8236BCAF000AC09D9 /* CustomError.swift in Sources */,
 				9D6943F3236A0E6100AC09D9 /* FermentrackProcessManagerProtocol.swift in Sources */,
 				9D6943E52369233F00AC09D9 /* WelcomeViewController.swift in Sources */,
+				9D6943F7236A89C100AC09D9 /* FermentrackInstaller.swift in Sources */,
 				9D6943F5236A86F600AC09D9 /* InstallViewController.swift in Sources */,
 				9D6943B72367927D00AC09D9 /* AppDelegate.swift in Sources */,
 				9D6943E8236939FE00AC09D9 /* MainWindowController.swift in Sources */,
