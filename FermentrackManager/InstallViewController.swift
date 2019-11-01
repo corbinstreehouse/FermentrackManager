@@ -33,7 +33,7 @@ class InstallViewController: NSViewController {
             self.statusTextView.textStorage?.append(s)
             self.statusTextView.scrollToEndOfDocument(nil)
         })
-        installer!.startInstall()
+        installer!.startFullAutomatedInstall()
     }
     
     override func viewWillAppear() {

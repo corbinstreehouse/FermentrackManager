@@ -8,6 +8,7 @@
 
 import Foundation
 import AppKit
+import ServiceManagement
 
 
 class FermentrackInstaller {
@@ -159,9 +160,48 @@ class FermentrackInstaller {
         printStatus(string: "Done.\n")
     }
     
-    public func startInstall() {
+    private func installLaunchDaemon(named: String) throws {
+        var authItem = AuthorizationItem(name: kSMRightBlessPrivilegedHelper, valueLength: 0, value: nil, flags: 0)
+        try withUnsafeMutablePointer(to: &authItem) { (authItemPtr) in
+            var authRights = AuthorizationRights(count: 1, items: authItemPtr)
+            try withUnsafePointer(to: &authRights) { (authRightsPtr) in
+                var authRef: AuthorizationRef? = nil
+                try withUnsafeMutablePointer(to: &authRef) { (authRefPtr) in
+                    
+                    let authFlags: AuthorizationFlags = [AuthorizationFlags.interactionAllowed, AuthorizationFlags.preAuthorize, AuthorizationFlags.extendRights]
+
+                    let status = AuthorizationCreate(authRightsPtr, nil /*kAuthorizationEmptyEnvironment*/, authFlags, nil)
+                    
+                    if status != errAuthorizationSuccess {
+                        throw CustomError.withMessage("Failed to create authorization ref, error code: \(status)")
+                    }
+                    
+
+                    var cfError: Unmanaged<CFError>? = nil
+                    try withUnsafeMutablePointer(to: &cfError, { (cfErrorPtr) in
+                        let result = SMJobBless(kSMDomainSystemLaunchd, named as CFString, authRefPtr.pointee, cfErrorPtr)
+                        if (!result) {
+                            throw cfErrorPtr.pointee!.takeUnretainedValue() // Value was already retained/autoreleased, i assume...
+                        }
+                    })
+                }
+            }
+        }
+    }
+    
+    private func installDaemon() throws {
+        statusHandler(bold("Installing Launch Daemon - requires privileges\n"))
+
+        try installLaunchDaemon(named: "com.redwoodmonkey.FermentrackProcessManager")
+
+        printStatus(string: "Done.")
+    }
+    
+    public func startFullAutomatedInstall() {
         
         do {
+            try installDaemon()
+            return
             try makeHomeDirectory()
             try cloneRepository()
             try setupPythonVenv()

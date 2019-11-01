@@ -32,5 +32,10 @@
 	<true/>
 	<key>NSSupportsSuddenTermination</key>
 	<true/>
+	<key>SMPrivilegedExecutables</key>
+	<dict>
+		<key>com.redwoodmonkey.FermentrackProcessManager</key>
+		<string></string>
+	</dict>
 </dict>
 </plist>

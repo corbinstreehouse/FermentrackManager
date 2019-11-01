@@ -20,6 +20,7 @@
 		9D6943F5236A86F600AC09D9 /* InstallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6943F4236A86F600AC09D9 /* InstallViewController.swift */; };
 		9D6943F7236A89C100AC09D9 /* FermentrackInstaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6943F6236A89C100AC09D9 /* FermentrackInstaller.swift */; };
 		9D6943F8236BCAF000AC09D9 /* CustomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8EA42F23672CF60027F7CA /* CustomError.swift */; };
+		9D6943FE236C75FD00AC09D9 /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D6943FD236C75FD00AC09D9 /* ServiceManagement.framework */; };
 		9D8EA46523678D110027F7CA /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6AC1942364F52100965419 /* main.swift */; };
 		9D8EA46623678D110027F7CA /* FermentrackProcessManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8EA42D23672A820027F7CA /* FermentrackProcessManager.swift */; };
 		9D8EA46723678D110027F7CA /* CustomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8EA42F23672CF60027F7CA /* CustomError.swift */; };
@@ -42,8 +43,8 @@
 		9D6943EF236A0D0000AC09D9 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 6;
+			dstPath = Contents/Library/LaunchServices;
+			dstSubfolderSpec = 1;
 			files = (
 				9D6943F0236A0D0B00AC09D9 /* com.redwoodmonkey.FermentrackProcessManager.xpc in CopyFiles */,
 			);
@@ -76,6 +77,7 @@
 		9D6943F1236A0D6900AC09D9 /* FermentrackProcessManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FermentrackProcessManagerProtocol.swift; sourceTree = "<group>"; };
 		9D6943F4236A86F600AC09D9 /* InstallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallViewController.swift; sourceTree = "<group>"; };
 		9D6943F6236A89C100AC09D9 /* FermentrackInstaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FermentrackInstaller.swift; sourceTree = "<group>"; };
+		9D6943FD236C75FD00AC09D9 /* ServiceManagement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ServiceManagement.framework; path = System/Library/Frameworks/ServiceManagement.framework; sourceTree = SDKROOT; };
 		9D6AC1942364F52100965419 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		9D6AC1FB236507DA00965419 /* redis-server */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = "redis-server"; sourceTree = "<group>"; };
 		9D6AC1FC236507DA00965419 /* redis.conf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = redis.conf; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D6943FE236C75FD00AC09D9 /* ServiceManagement.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -122,12 +125,21 @@
 			path = FermentrackManager;
 			sourceTree = "<group>";
 		};
+		9D6943FA236C75CF00AC09D9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9D6943FD236C75FD00AC09D9 /* ServiceManagement.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		9D6AC1882364F52100965419 = {
 			isa = PBXGroup;
 			children = (
 				9D8EA45A23678C050027F7CA /* com.redwoodmonkey.FermentrackProcessManager */,
 				9D6943B52367927D00AC09D9 /* FermentrackManager */,
 				9D6AC1922364F52100965419 /* Products */,
+				9D6943FA236C75CF00AC09D9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
