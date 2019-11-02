@@ -76,7 +76,7 @@ class FermentrackProcessManager {
     }
 
     private func isRedisAlive() -> Bool {
-        let redisCliURL = fermentrackHomeURL!.appendingPathComponent("redis/redis-cli")!
+        let redisCliURL = fermentrackHomeURL!.appendingPathComponent("redis/redis-cli")
         let cliProcess = Process()
         cliProcess.executableURL = redisCliURL
         cliProcess.arguments = ["ping"]

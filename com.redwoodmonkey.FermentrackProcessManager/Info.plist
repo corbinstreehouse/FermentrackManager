@@ -24,6 +24,10 @@
 	<string></string>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2019 Corbin Dunn. All rights reserved.</string>
+	<key>SMAuthorizedClients</key>
+	<array>
+		<string></string>
+	</array>
 	<key>XPCService</key>
 	<dict>
 		<key>ServiceType</key>

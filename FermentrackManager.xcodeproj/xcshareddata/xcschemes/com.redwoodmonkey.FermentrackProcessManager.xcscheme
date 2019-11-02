@@ -14,8 +14,8 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "9D8EA45823678C050027F7CA"
-               BuildableName = "com.redwoodmonkey.FermentrackProcessManager.xpc"
+               BlueprintIdentifier = "9D16559F236DCECF00BD1E15"
+               BuildableName = "com.redwoodmonkey.FermentrackProcessManager"
                BlueprintName = "com.redwoodmonkey.FermentrackProcessManager"
                ReferencedContainer = "container:FermentrackManager.xcodeproj">
             </BuildableReference>
@@ -55,8 +55,8 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "9D8EA45823678C050027F7CA"
-            BuildableName = "com.redwoodmonkey.FermentrackProcessManager.xpc"
+            BlueprintIdentifier = "9D16559F236DCECF00BD1E15"
+            BuildableName = "com.redwoodmonkey.FermentrackProcessManager"
             BlueprintName = "com.redwoodmonkey.FermentrackProcessManager"
             ReferencedContainer = "container:FermentrackManager.xcodeproj">
          </BuildableReference>

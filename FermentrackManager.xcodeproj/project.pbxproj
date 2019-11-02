@@ -12,53 +12,52 @@
 		9D165599236DCCC200BD1E15 /* redis.conf in Resources */ = {isa = PBXBuildFile; fileRef = 9D6AC1FC236507DA00965419 /* redis.conf */; };
 		9D16559A236DCCD900BD1E15 /* redis-server in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9D6AC1FB236507DA00965419 /* redis-server */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		9D16559B236DCCD900BD1E15 /* redis-cli in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9D8EA42523653D5F0027F7CA /* redis-cli */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		9D1655A7236DD36A00BD1E15 /* com.redwoodmonkey.FermentrackProcessManager in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9D1655A0236DCECF00BD1E15 /* com.redwoodmonkey.FermentrackProcessManager */; };
+		9D1655AA236DD3BB00BD1E15 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6AC1942364F52100965419 /* main.swift */; };
+		9D1655AB236DD3BB00BD1E15 /* FermentrackProcessManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8EA42D23672A820027F7CA /* FermentrackProcessManager.swift */; };
+		9D1655AC236DD3BB00BD1E15 /* CustomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8EA42F23672CF60027F7CA /* CustomError.swift */; };
+		9D1655AD236DD3BB00BD1E15 /* ServiceDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6943EB2369CC3400AC09D9 /* ServiceDelegate.swift */; };
+		9D1655AE236DD3BB00BD1E15 /* FermentrackProcessManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6943F1236A0D6900AC09D9 /* FermentrackProcessManagerProtocol.swift */; };
 		9D6943B72367927D00AC09D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6943B62367927D00AC09D9 /* AppDelegate.swift */; };
 		9D6943BB2367927E00AC09D9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D6943BA2367927E00AC09D9 /* Assets.xcassets */; };
 		9D6943BE2367927E00AC09D9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D6943BC2367927E00AC09D9 /* Main.storyboard */; };
 		9D6943E52369233F00AC09D9 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6943E42369233F00AC09D9 /* WelcomeViewController.swift */; };
 		9D6943E8236939FE00AC09D9 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6943E7236939FE00AC09D9 /* MainWindowController.swift */; };
 		9D6943EA23693AE400AC09D9 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6943E923693AE400AC09D9 /* MainViewController.swift */; };
-		9D6943EC2369CC3400AC09D9 /* ServiceDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6943EB2369CC3400AC09D9 /* ServiceDelegate.swift */; };
-		9D6943F2236A0D6900AC09D9 /* FermentrackProcessManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6943F1236A0D6900AC09D9 /* FermentrackProcessManagerProtocol.swift */; };
 		9D6943F3236A0E6100AC09D9 /* FermentrackProcessManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6943F1236A0D6900AC09D9 /* FermentrackProcessManagerProtocol.swift */; };
 		9D6943F5236A86F600AC09D9 /* InstallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6943F4236A86F600AC09D9 /* InstallViewController.swift */; };
 		9D6943F7236A89C100AC09D9 /* FermentrackInstaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6943F6236A89C100AC09D9 /* FermentrackInstaller.swift */; };
 		9D6943F8236BCAF000AC09D9 /* CustomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8EA42F23672CF60027F7CA /* CustomError.swift */; };
 		9D6943FE236C75FD00AC09D9 /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D6943FD236C75FD00AC09D9 /* ServiceManagement.framework */; };
-		9D694408236CDEFE00AC09D9 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D694407236CDEFE00AC09D9 /* main.swift */; };
-		9D69440D236CDF3400AC09D9 /* InstallerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D69440C236CDF3400AC09D9 /* InstallerProtocol.swift */; };
-		9D69440F236CE00200AC09D9 /* InstallServiceDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D69440E236CE00200AC09D9 /* InstallServiceDelegate.swift */; };
-		9D8EA46523678D110027F7CA /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6AC1942364F52100965419 /* main.swift */; };
-		9D8EA46623678D110027F7CA /* FermentrackProcessManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8EA42D23672A820027F7CA /* FermentrackProcessManager.swift */; };
-		9D8EA46723678D110027F7CA /* CustomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8EA42F23672CF60027F7CA /* CustomError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		9D694412236CEB9B00AC09D9 /* PBXContainerItemProxy */ = {
+		9D1655A8236DD39900BD1E15 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9D6AC1892364F52100965419 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 9D694404236CDEFE00AC09D9;
-			remoteInfo = com.redwoodmonkey.installer;
+			remoteGlobalIDString = 9D16559F236DCECF00BD1E15;
+			remoteInfo = com.redwoodmonkey.FermentrackProcessManager;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		9D16559E236DCECF00BD1E15 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 		9D6943EF236A0D0000AC09D9 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = Contents/Library/LaunchServices;
 			dstSubfolderSpec = 1;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9D694403236CDEFE00AC09D9 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 12;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
-			files = (
+				9D1655A7236DD36A00BD1E15 /* com.redwoodmonkey.FermentrackProcessManager in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -77,6 +76,7 @@
 
 /* Begin PBXFileReference section */
 		9D165593236D13E100BD1E15 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		9D1655A0236DCECF00BD1E15 /* com.redwoodmonkey.FermentrackProcessManager */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = com.redwoodmonkey.FermentrackProcessManager; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D6943B42367927D00AC09D9 /* FermentrackManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FermentrackManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D6943B62367927D00AC09D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9D6943BA2367927E00AC09D9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -91,7 +91,6 @@
 		9D6943F4236A86F600AC09D9 /* InstallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallViewController.swift; sourceTree = "<group>"; };
 		9D6943F6236A89C100AC09D9 /* FermentrackInstaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FermentrackInstaller.swift; sourceTree = "<group>"; };
 		9D6943FD236C75FD00AC09D9 /* ServiceManagement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ServiceManagement.framework; path = System/Library/Frameworks/ServiceManagement.framework; sourceTree = SDKROOT; };
-		9D694405236CDEFE00AC09D9 /* com.redwoodmonkey.installer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = com.redwoodmonkey.installer; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D694407236CDEFE00AC09D9 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		9D69440C236CDF3400AC09D9 /* InstallerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallerProtocol.swift; sourceTree = "<group>"; };
 		9D69440E236CE00200AC09D9 /* InstallServiceDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallServiceDelegate.swift; sourceTree = "<group>"; };
@@ -103,32 +102,24 @@
 		9D8EA42523653D5F0027F7CA /* redis-cli */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = "redis-cli"; sourceTree = "<group>"; };
 		9D8EA42D23672A820027F7CA /* FermentrackProcessManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FermentrackProcessManager.swift; sourceTree = "<group>"; };
 		9D8EA42F23672CF60027F7CA /* CustomError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomError.swift; sourceTree = "<group>"; };
-		9D8EA45923678C050027F7CA /* com.redwoodmonkey.FermentrackProcessManager.xpc */ = {isa = PBXFileReference; explicitFileType = "wrapper.xpc-service"; includeInIndex = 0; path = com.redwoodmonkey.FermentrackProcessManager.xpc; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D8EA46123678C050027F7CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9D8EA46F23678FFD0027F7CA /* Launchd.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Launchd.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		9D16559D236DCECF00BD1E15 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9D6943B12367927D00AC09D9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				9D165594236D13E200BD1E15 /* Security.framework in Frameworks */,
 				9D6943FE236C75FD00AC09D9 /* ServiceManagement.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9D694402236CDEFE00AC09D9 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9D8EA45623678C050027F7CA /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -188,9 +179,8 @@
 		9D6AC1922364F52100965419 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9D8EA45923678C050027F7CA /* com.redwoodmonkey.FermentrackProcessManager.xpc */,
 				9D6943B42367927D00AC09D9 /* FermentrackManager.app */,
-				9D694405236CDEFE00AC09D9 /* com.redwoodmonkey.installer */,
+				9D1655A0236DCECF00BD1E15 /* com.redwoodmonkey.FermentrackProcessManager */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -222,6 +212,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		9D16559F236DCECF00BD1E15 /* com.redwoodmonkey.FermentrackProcessManager */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9D1655A4236DCECF00BD1E15 /* Build configuration list for PBXNativeTarget "com.redwoodmonkey.FermentrackProcessManager" */;
+			buildPhases = (
+				9D16559C236DCECF00BD1E15 /* Sources */,
+				9D16559D236DCECF00BD1E15 /* Frameworks */,
+				9D16559E236DCECF00BD1E15 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = com.redwoodmonkey.FermentrackProcessManager;
+			productName = com.redwoodmonkey.FermentrackProcessManager;
+			productReference = 9D1655A0236DCECF00BD1E15 /* com.redwoodmonkey.FermentrackProcessManager */;
+			productType = "com.apple.product-type.tool";
+		};
 		9D6943B32367927D00AC09D9 /* FermentrackManager */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9D6943C32367927E00AC09D9 /* Build configuration list for PBXNativeTarget "FermentrackManager" */;
@@ -235,45 +242,12 @@
 			buildRules = (
 			);
 			dependencies = (
-				9D694413236CEB9B00AC09D9 /* PBXTargetDependency */,
+				9D1655A9236DD39900BD1E15 /* PBXTargetDependency */,
 			);
 			name = FermentrackManager;
 			productName = FermentrackManager;
 			productReference = 9D6943B42367927D00AC09D9 /* FermentrackManager.app */;
 			productType = "com.apple.product-type.application";
-		};
-		9D694404236CDEFE00AC09D9 /* com.redwoodmonkey.installer */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 9D694409236CDEFE00AC09D9 /* Build configuration list for PBXNativeTarget "com.redwoodmonkey.installer" */;
-			buildPhases = (
-				9D694401236CDEFE00AC09D9 /* Sources */,
-				9D694402236CDEFE00AC09D9 /* Frameworks */,
-				9D694403236CDEFE00AC09D9 /* CopyFiles */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = com.redwoodmonkey.installer;
-			productName = com.redwoodmonkey.installer;
-			productReference = 9D694405236CDEFE00AC09D9 /* com.redwoodmonkey.installer */;
-			productType = "com.apple.product-type.tool";
-		};
-		9D8EA45823678C050027F7CA /* com.redwoodmonkey.FermentrackProcessManager */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 9D8EA46223678C050027F7CA /* Build configuration list for PBXNativeTarget "com.redwoodmonkey.FermentrackProcessManager" */;
-			buildPhases = (
-				9D8EA45523678C050027F7CA /* Sources */,
-				9D8EA45623678C050027F7CA /* Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = com.redwoodmonkey.FermentrackProcessManager;
-			productName = com.redwoodmonkey.FermentrackProcessManager;
-			productReference = 9D8EA45923678C050027F7CA /* com.redwoodmonkey.FermentrackProcessManager.xpc */;
-			productType = "com.apple.product-type.xpc-service";
 		};
 /* End PBXNativeTarget section */
 
@@ -285,15 +259,12 @@
 				LastUpgradeCheck = 1100;
 				ORGANIZATIONNAME = "Corbin Dunn";
 				TargetAttributes = {
+					9D16559F236DCECF00BD1E15 = {
+						CreatedOnToolsVersion = 11.0;
+					};
 					9D6943B32367927D00AC09D9 = {
 						CreatedOnToolsVersion = 11.0;
 						LastSwiftMigration = 1100;
-					};
-					9D694404236CDEFE00AC09D9 = {
-						CreatedOnToolsVersion = 11.0;
-					};
-					9D8EA45823678C050027F7CA = {
-						CreatedOnToolsVersion = 11.0;
 					};
 				};
 			};
@@ -310,9 +281,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				9D8EA45823678C050027F7CA /* com.redwoodmonkey.FermentrackProcessManager */,
 				9D6943B32367927D00AC09D9 /* FermentrackManager */,
-				9D694404236CDEFE00AC09D9 /* com.redwoodmonkey.installer */,
+				9D16559F236DCECF00BD1E15 /* com.redwoodmonkey.FermentrackProcessManager */,
 			);
 		};
 /* End PBXProject section */
@@ -331,6 +301,18 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		9D16559C236DCECF00BD1E15 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9D1655AA236DD3BB00BD1E15 /* main.swift in Sources */,
+				9D1655AB236DD3BB00BD1E15 /* FermentrackProcessManager.swift in Sources */,
+				9D1655AC236DD3BB00BD1E15 /* CustomError.swift in Sources */,
+				9D1655AD236DD3BB00BD1E15 /* ServiceDelegate.swift in Sources */,
+				9D1655AE236DD3BB00BD1E15 /* FermentrackProcessManagerProtocol.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9D6943B02367927D00AC09D9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -347,35 +329,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9D694401236CDEFE00AC09D9 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9D69440D236CDF3400AC09D9 /* InstallerProtocol.swift in Sources */,
-				9D69440F236CE00200AC09D9 /* InstallServiceDelegate.swift in Sources */,
-				9D694408236CDEFE00AC09D9 /* main.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9D8EA45523678C050027F7CA /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9D6943EC2369CC3400AC09D9 /* ServiceDelegate.swift in Sources */,
-				9D8EA46523678D110027F7CA /* main.swift in Sources */,
-				9D8EA46623678D110027F7CA /* FermentrackProcessManager.swift in Sources */,
-				9D6943F2236A0D6900AC09D9 /* FermentrackProcessManagerProtocol.swift in Sources */,
-				9D8EA46723678D110027F7CA /* CustomError.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		9D694413236CEB9B00AC09D9 /* PBXTargetDependency */ = {
+		9D1655A9236DD39900BD1E15 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 9D694404236CDEFE00AC09D9 /* com.redwoodmonkey.installer */;
-			targetProxy = 9D694412236CEB9B00AC09D9 /* PBXContainerItemProxy */;
+			target = 9D16559F236DCECF00BD1E15 /* com.redwoodmonkey.FermentrackProcessManager */;
+			targetProxy = 9D1655A8236DD39900BD1E15 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -391,6 +351,52 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		9D1655A5236DCECF00BD1E15 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = L74PN67Q6R;
+				INFOPLIST_FILE = "$(SRCROOT)/com.redwoodmonkey.FermentrackProcessManager/Info.plist";
+				OTHER_LDFLAGS = (
+					"-sectcreate",
+					__TEXT,
+					__info_plist,
+					com.redwoodmonkey.FermentrackProcessManager/Info.plist,
+					"-sectcreate",
+					__TEXT,
+					__launchd_plist,
+					com.redwoodmonkey.FermentrackProcessManager/Launchd.plist,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.redwoodmonkey.FermentrackProcessManager;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		9D1655A6236DCECF00BD1E15 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = L74PN67Q6R;
+				INFOPLIST_FILE = "$(SRCROOT)/com.redwoodmonkey.FermentrackProcessManager/Info.plist";
+				OTHER_LDFLAGS = (
+					"-sectcreate",
+					__TEXT,
+					__info_plist,
+					com.redwoodmonkey.FermentrackProcessManager/Info.plist,
+					"-sectcreate",
+					__TEXT,
+					__launchd_plist,
+					com.redwoodmonkey.FermentrackProcessManager/Launchd.plist,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.redwoodmonkey.FermentrackProcessManager;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 		9D6943C12367927E00AC09D9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -432,50 +438,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.redwoodmonkey.FermentrackManager;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 5.0;
-			};
-			name = Release;
-		};
-		9D69440A236CDEFE00AC09D9 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = L74PN67Q6R;
-				INFOPLIST_FILE = "$(SRCROOT)/com.redwoodmonkey.installer/Info.plist";
-				MARKETING_VERSION = 1;
-				OTHER_LDFLAGS = (
-					"-sectcreate",
-					__TEXT,
-					__info_plist,
-					com.redwoodmonkey.installer/Info.plist,
-					"-sectcreate",
-					__TEXT,
-					__launchd_plist,
-					com.redwoodmonkey.installer/com.redwoodmonkey.installer.plist,
-				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-			};
-			name = Debug;
-		};
-		9D69440B236CDEFE00AC09D9 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = L74PN67Q6R;
-				INFOPLIST_FILE = "$(SRCROOT)/com.redwoodmonkey.installer/Info.plist";
-				MARKETING_VERSION = 1;
-				OTHER_LDFLAGS = (
-					"-sectcreate",
-					__TEXT,
-					__info_plist,
-					com.redwoodmonkey.installer/Info.plist,
-					"-sectcreate",
-					__TEXT,
-					__launchd_plist,
-					com.redwoodmonkey.installer/com.redwoodmonkey.installer.plist,
-				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
@@ -593,37 +555,18 @@
 			};
 			name = Release;
 		};
-		9D8EA46323678C050027F7CA /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = L74PN67Q6R;
-				INFOPLIST_FILE = com.redwoodmonkey.FermentrackProcessManager/Info.plist;
-				PRODUCT_BUNDLE_IDENTIFIER = com.redwoodmonkey.FermentrackProcessManager;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-			};
-			name = Debug;
-		};
-		9D8EA46423678C050027F7CA /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = L74PN67Q6R;
-				INFOPLIST_FILE = com.redwoodmonkey.FermentrackProcessManager/Info.plist;
-				PRODUCT_BUNDLE_IDENTIFIER = com.redwoodmonkey.FermentrackProcessManager;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		9D1655A4236DCECF00BD1E15 /* Build configuration list for PBXNativeTarget "com.redwoodmonkey.FermentrackProcessManager" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9D1655A5236DCECF00BD1E15 /* Debug */,
+				9D1655A6236DCECF00BD1E15 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		9D6943C32367927E00AC09D9 /* Build configuration list for PBXNativeTarget "FermentrackManager" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -633,29 +576,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9D694409236CDEFE00AC09D9 /* Build configuration list for PBXNativeTarget "com.redwoodmonkey.installer" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				9D69440A236CDEFE00AC09D9 /* Debug */,
-				9D69440B236CDEFE00AC09D9 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		9D6AC18C2364F52100965419 /* Build configuration list for PBXProject "FermentrackManager" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9D6AC1962364F52100965419 /* Debug */,
 				9D6AC1972364F52100965419 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		9D8EA46223678C050027F7CA /* Build configuration list for PBXNativeTarget "com.redwoodmonkey.FermentrackProcessManager" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				9D8EA46323678C050027F7CA /* Debug */,
-				9D8EA46423678C050027F7CA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
