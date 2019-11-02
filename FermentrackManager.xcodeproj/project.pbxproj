@@ -23,7 +23,7 @@
 		9D694408236CDEFE00AC09D9 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D694407236CDEFE00AC09D9 /* main.swift */; };
 		9D69440D236CDF3400AC09D9 /* InstallerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D69440C236CDF3400AC09D9 /* InstallerProtocol.swift */; };
 		9D69440F236CE00200AC09D9 /* InstallServiceDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D69440E236CE00200AC09D9 /* InstallServiceDelegate.swift */; };
-		9D694414236CEBA800AC09D9 /* com.redwoodmonkey.installer in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9D694405236CDEFE00AC09D9 /* com.redwoodmonkey.installer */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		9D694414236CEBA800AC09D9 /* com.redwoodmonkey.installer in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9D694405236CDEFE00AC09D9 /* com.redwoodmonkey.installer */; };
 		9D69441C236CF5FD00AC09D9 /* com.redwoodmonkey.FermentrackProcessManager.plist in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9D8EA46F23678FFD0027F7CA /* com.redwoodmonkey.FermentrackProcessManager.plist */; };
 		9D694445236D0FD200AC09D9 /* Hacky.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D694444236D0FD200AC09D9 /* Hacky.m */; };
 		9D8EA46523678D110027F7CA /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6AC1942364F52100965419 /* main.swift */; };
