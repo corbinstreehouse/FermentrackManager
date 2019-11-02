@@ -9,7 +9,7 @@
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
-	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<string>com.redwoodmonkey.FermentrackProcessManager</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -26,7 +26,7 @@
 	<string>Copyright © 2019 Corbin Dunn. All rights reserved.</string>
 	<key>SMAuthorizedClients</key>
 	<array>
-		<string></string>
+		<string>identifier "com.redwoodmonkey.FermentrackManager" and anchor apple generic and certificate leaf[subject.CN] = "Apple Development: corbinstreehouse@mac.com (4K3T94L6KW)" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
 	</array>
 	<key>XPCService</key>
 	<dict>

@@ -219,10 +219,10 @@ class FermentrackInstaller {
     public func startFullAutomatedInstall() {
         
         do {
-            try installRedis()
+            try installDaemon()
             return ;
             
-            try installDaemon()
+            try installRedis()
             try makeHomeDirectory()
             try cloneRepository()
             try setupPythonVenv()
