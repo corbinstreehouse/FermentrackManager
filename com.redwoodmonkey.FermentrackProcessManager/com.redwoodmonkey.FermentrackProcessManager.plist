@@ -9,7 +9,7 @@
 	<key>ProcessType</key>
 	<string>Background</string>
 	<key>Program</key>
-	<string>/Users/corbin/Library/Developer/Xcode/DerivedData/FermentrackManager-dosydjigduddyegnblvbapjsgxeq/Build/Products/Debug/com.redwoodmonkey.FermentrackProcessManager.xpc/Contents/MacOS/com.redwoodmonkey.FermentrackProcessManager</string>
+	<string>/Library/PrivilegedHelperTools/com.redwoodmonkey.FermentrackProcessManager.xpc/Contents/MacOS/com.redwoodmonkey.FermentrackProcessManager</string>
 	<key>RunAtLoad</key>
 	<true/>
 	<key>WaitForDebugger</key>

@@ -34,8 +34,8 @@
 	<true/>
 	<key>SMPrivilegedExecutables</key>
 	<dict>
-		<key>com.redwoodmonkey.FermentrackProcessManager</key>
-		<string></string>
+		<key>com.redwoodmonkey.installer</key>
+		<string>identifier "com.redwoodmonkey.installer" and anchor apple generic and certificate leaf[subject.CN] = "Apple Development: corbinstreehouse@mac.com (4K3T94L6KW)" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
 	</dict>
 </dict>
 </plist>

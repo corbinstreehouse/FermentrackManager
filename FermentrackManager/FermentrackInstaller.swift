@@ -171,17 +171,16 @@ class FermentrackInstaller {
                     let authFlags: AuthorizationFlags = [AuthorizationFlags.interactionAllowed, AuthorizationFlags.preAuthorize, AuthorizationFlags.extendRights]
 
                     let status = AuthorizationCreate(authRightsPtr, nil /*kAuthorizationEmptyEnvironment*/, authFlags, nil)
-                    
+
                     if status != errAuthorizationSuccess {
                         throw CustomError.withMessage("Failed to create authorization ref, error code: \(status)")
                     }
                     
-
                     var cfError: Unmanaged<CFError>? = nil
                     try withUnsafeMutablePointer(to: &cfError, { (cfErrorPtr) in
                         let result = SMJobBless(kSMDomainSystemLaunchd, named as CFString, authRefPtr.pointee, cfErrorPtr)
                         if (!result) {
-                            throw cfErrorPtr.pointee!.takeUnretainedValue() // Value was already retained/autoreleased, i assume...
+                            throw cfErrorPtr.pointee!.takeUnretainedValue() // Value was already retained/autoreleased, i assume.
                         }
                     })
                 }
@@ -192,7 +191,7 @@ class FermentrackInstaller {
     private func installDaemon() throws {
         statusHandler(bold("Installing Launch Daemon - requires privileges\n"))
 
-        try installLaunchDaemon(named: "com.redwoodmonkey.FermentrackProcessManager")
+        try installLaunchDaemon(named: "com.redwoodmonkey.installer")
 
         printStatus(string: "Done.")
     }
@@ -201,7 +200,8 @@ class FermentrackInstaller {
         
         do {
             try installDaemon()
-            return
+            return ;
+            
             try makeHomeDirectory()
             try cloneRepository()
             try setupPythonVenv()
