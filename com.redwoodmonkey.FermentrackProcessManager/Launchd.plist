@@ -8,8 +8,6 @@
 	<string>com.redwoodmonkey.FermentrackProcessManager</string>
 	<key>ProcessType</key>
 	<string>Background</string>
-	<key>Program</key>
-	<string>/Library/PrivilegedHelperTools/com.redwoodmonkey.FermentrackProcessManager.xpc/Contents/MacOS/com.redwoodmonkey.FermentrackProcessManager</string>
 	<key>RunAtLoad</key>
 	<true/>
 	<key>WaitForDebugger</key>

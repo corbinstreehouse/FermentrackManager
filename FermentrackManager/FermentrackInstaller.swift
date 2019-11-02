@@ -188,20 +188,41 @@ class FermentrackInstaller {
         }
     }
     
+    private func installRedis() throws {
+        statusHandler(bold("Installing redis...\n"))
+
+        let redisCliURL =  Bundle.main.url(forAuxiliaryExecutable: "redis-cli")!
+        let redisServerURL = Bundle.main.url(forAuxiliaryExecutable: "redis-server")!
+        let redisConfURL = Bundle.main.resourceURL!.appendingPathComponent("redis.conf")
+        
+        let redisDestURL = self.installURL.appendingPathComponent("redis")
+        let redisDestCliURL = redisDestURL.appendingPathComponent("redis-cli")
+        let redisDestServerURL = redisDestURL.appendingPathComponent("redis-server")
+        let redisDestConfURL = redisDestURL.appendingPathComponent("redis-conf")
+        
+        try FileManager.default.createDirectory(at: redisDestURL, withIntermediateDirectories: true, attributes: [:])
+        try FileManager.default.copyItem(at: redisCliURL, to: redisDestCliURL)
+        try FileManager.default.copyItem(at: redisServerURL, to: redisDestServerURL)
+        try FileManager.default.copyItem(at: redisConfURL, to: redisDestConfURL)
+        
+        printStatus(string: "Done.\n")
+    }
+    
     private func installDaemon() throws {
         statusHandler(bold("Installing Launch Daemon - requires privileges\n"))
-
-        try installLaunchDaemon(named: "com.redwoodmonkey.installer")
-
+        let name = "com.redwoodmonkey.FermentrackProcessManager"
+        try installLaunchDaemon(named: name)
+        
         printStatus(string: "Done.")
     }
     
     public func startFullAutomatedInstall() {
         
         do {
-            try installDaemon()
+            try installRedis()
             return ;
             
+            try installDaemon()
             try makeHomeDirectory()
             try cloneRepository()
             try setupPythonVenv()
