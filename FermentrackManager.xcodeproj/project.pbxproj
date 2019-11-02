@@ -25,7 +25,6 @@
 		9D69440D236CDF3400AC09D9 /* InstallerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D69440C236CDF3400AC09D9 /* InstallerProtocol.swift */; };
 		9D69440F236CE00200AC09D9 /* InstallServiceDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D69440E236CE00200AC09D9 /* InstallServiceDelegate.swift */; };
 		9D694414236CEBA800AC09D9 /* com.redwoodmonkey.installer in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9D694405236CDEFE00AC09D9 /* com.redwoodmonkey.installer */; };
-		9D694445236D0FD200AC09D9 /* Hacky.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D694444236D0FD200AC09D9 /* Hacky.m */; };
 		9D8EA46523678D110027F7CA /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6AC1942364F52100965419 /* main.swift */; };
 		9D8EA46623678D110027F7CA /* FermentrackProcessManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8EA42D23672A820027F7CA /* FermentrackProcessManager.swift */; };
 		9D8EA46723678D110027F7CA /* CustomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8EA42F23672CF60027F7CA /* CustomError.swift */; };
@@ -108,9 +107,6 @@
 		9D69440E236CE00200AC09D9 /* InstallServiceDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallServiceDelegate.swift; sourceTree = "<group>"; };
 		9D694410236CE97700AC09D9 /* com.redwoodmonkey.installer.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = com.redwoodmonkey.installer.plist; sourceTree = "<group>"; };
 		9D694411236CEA6400AC09D9 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9D694442236D0F6E00AC09D9 /* FermentrackManager-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FermentrackManager-Bridging-Header.h"; sourceTree = "<group>"; };
-		9D694443236D0F6F00AC09D9 /* Hacky.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Hacky.h; sourceTree = "<group>"; };
-		9D694444236D0FD200AC09D9 /* Hacky.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Hacky.m; sourceTree = "<group>"; };
 		9D6AC1942364F52100965419 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		9D6AC1FB236507DA00965419 /* redis-server */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = "redis-server"; sourceTree = "<group>"; };
 		9D6AC1FC236507DA00965419 /* redis.conf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = redis.conf; sourceTree = "<group>"; };
@@ -162,9 +158,6 @@
 				9D6943C02367927E00AC09D9 /* FermentrackManager.entitlements */,
 				9D6943E42369233F00AC09D9 /* WelcomeViewController.swift */,
 				9D6943E7236939FE00AC09D9 /* MainWindowController.swift */,
-				9D694443236D0F6F00AC09D9 /* Hacky.h */,
-				9D694444236D0FD200AC09D9 /* Hacky.m */,
-				9D694442236D0F6E00AC09D9 /* FermentrackManager-Bridging-Header.h */,
 			);
 			path = FermentrackManager;
 			sourceTree = "<group>";
@@ -361,7 +354,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9D694445236D0FD200AC09D9 /* Hacky.m in Sources */,
 				9D6943F8236BCAF000AC09D9 /* CustomError.swift in Sources */,
 				9D6943F3236A0E6100AC09D9 /* FermentrackProcessManagerProtocol.swift in Sources */,
 				9D6943E52369233F00AC09D9 /* WelcomeViewController.swift in Sources */,
@@ -435,7 +427,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.redwoodmonkey.FermentrackManager;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "FermentrackManager/FermentrackManager-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
@@ -459,7 +450,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.redwoodmonkey.FermentrackManager;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "FermentrackManager/FermentrackManager-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;

@@ -161,12 +161,6 @@ class FermentrackInstaller {
     }
     
     private func installLaunchDaemon(named: String) throws {
-        
-        if let e = InstallHelperWithString(named) {
-            throw e
-        }
-        return;
-        
         var authItem = AuthorizationItem(name: kSMRightBlessPrivilegedHelper, valueLength: 0, value: nil, flags: 0)
         try withUnsafeMutablePointer(to: &authItem) { (authItemPtr) in
             var authRights = AuthorizationRights(count: 1, items: authItemPtr)
@@ -176,7 +170,7 @@ class FermentrackInstaller {
                     
                     let authFlags: AuthorizationFlags = [AuthorizationFlags.interactionAllowed, AuthorizationFlags.preAuthorize, AuthorizationFlags.extendRights]
 
-                    let status = AuthorizationCreate(authRightsPtr, nil /*kAuthorizationEmptyEnvironment*/, authFlags, nil)
+                    let status = AuthorizationCreate(authRightsPtr, nil /*kAuthorizationEmptyEnvironment*/, authFlags, authRefPtr)
 
                     if status != errAuthorizationSuccess {
                         throw CustomError.withMessage("Failed to create authorization ref, error code: \(status)")
