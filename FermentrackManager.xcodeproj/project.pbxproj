@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9D165594236D13E200BD1E15 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D165593236D13E100BD1E15 /* Security.framework */; };
 		9D6943B72367927D00AC09D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6943B62367927D00AC09D9 /* AppDelegate.swift */; };
 		9D6943BB2367927E00AC09D9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D6943BA2367927E00AC09D9 /* Assets.xcassets */; };
 		9D6943BE2367927E00AC09D9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D6943BC2367927E00AC09D9 /* Main.storyboard */; };
@@ -24,7 +25,6 @@
 		9D69440D236CDF3400AC09D9 /* InstallerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D69440C236CDF3400AC09D9 /* InstallerProtocol.swift */; };
 		9D69440F236CE00200AC09D9 /* InstallServiceDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D69440E236CE00200AC09D9 /* InstallServiceDelegate.swift */; };
 		9D694414236CEBA800AC09D9 /* com.redwoodmonkey.installer in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9D694405236CDEFE00AC09D9 /* com.redwoodmonkey.installer */; };
-		9D69441C236CF5FD00AC09D9 /* com.redwoodmonkey.FermentrackProcessManager.plist in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9D8EA46F23678FFD0027F7CA /* com.redwoodmonkey.FermentrackProcessManager.plist */; };
 		9D694445236D0FD200AC09D9 /* Hacky.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D694444236D0FD200AC09D9 /* Hacky.m */; };
 		9D8EA46523678D110027F7CA /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6AC1942364F52100965419 /* main.swift */; };
 		9D8EA46623678D110027F7CA /* FermentrackProcessManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8EA42D23672A820027F7CA /* FermentrackProcessManager.swift */; };
@@ -70,7 +70,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
-				9D69441C236CF5FD00AC09D9 /* com.redwoodmonkey.FermentrackProcessManager.plist in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,6 +87,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		9D165593236D13E100BD1E15 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		9D6943B42367927D00AC09D9 /* FermentrackManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FermentrackManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D6943B62367927D00AC09D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9D6943BA2367927E00AC09D9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -127,6 +127,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D165594236D13E200BD1E15 /* Security.framework in Frameworks */,
 				9D6943FE236C75FD00AC09D9 /* ServiceManagement.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -171,6 +172,7 @@
 		9D6943FA236C75CF00AC09D9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9D165593236D13E100BD1E15 /* Security.framework */,
 				9D6943FD236C75FD00AC09D9 /* ServiceManagement.framework */,
 			);
 			name = Frameworks;
