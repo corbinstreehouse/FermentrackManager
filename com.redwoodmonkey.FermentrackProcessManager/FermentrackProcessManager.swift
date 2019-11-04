@@ -76,23 +76,27 @@ class FermentrackProcessManager {
     }
 
     private func isRedisAlive() -> Bool {
-        let redisCliURL = fermentrackHomeURL!.appendingPathComponent("redis/redis-cli")
-        let cliProcess = Process()
-        cliProcess.executableURL = redisCliURL
-        cliProcess.arguments = ["ping"]
-        let outPipe = Pipe()
-        cliProcess.standardOutput = outPipe
-        
-        try? cliProcess.run()
-        cliProcess.waitUntilExit()
-        
-        let outputHandle = outPipe.fileHandleForReading
-        let data = outputHandle.readDataToEndOfFile() // Or just 5 bytes?
-        let s = String(data: data, encoding: .ascii)
-        if let s = s {
-            if s.starts(with: "PONG") {
-                return true
+        do {
+            let redisCliURL = fermentrackHomeURL!.appendingPathComponent("redis/redis-cli")
+            let cliProcess = Process()
+            cliProcess.executableURL = redisCliURL
+            cliProcess.arguments = ["ping"]
+            let outPipe = Pipe()
+            cliProcess.standardOutput = outPipe
+            
+            try cliProcess.run()
+            cliProcess.waitUntilExit()
+            
+            let outputHandle = outPipe.fileHandleForReading
+            let data = outputHandle.readDataToEndOfFile() // Or just 5 bytes?
+            let s = String(data: data, encoding: .ascii)
+            if let s = s {
+                if s.starts(with: "PONG") {
+                    return true
+                }
             }
+        } catch {
+            print("Error checking redis: ", error)
         }
         return false
     }
@@ -227,7 +231,7 @@ class FermentrackProcessManager {
             process.executableURL = self.fermentrackHomeURL!.appendingPathComponent("venv/bin/python3")
             process.arguments = ["manage.py", "runmodwsgi",  "--server-root=" + apacheServerRootURL.path, "--user", "_www", "--group", "_www"]
             try process.run()
-            process.waitUntilExit()
+//            process.waitUntilExit()
             // todo: loook for the following info:
 //            Successfully ran command.
 //            Server URL         : http://localhost:8000/

@@ -13,6 +13,7 @@ class MainWindowController: NSWindowController {
     override func windowDidLoad() {
         super.windowDidLoad()
         window!.isMovableByWindowBackground = true
+        window!.autorecalculatesKeyViewLoop = true
     }
 
 }

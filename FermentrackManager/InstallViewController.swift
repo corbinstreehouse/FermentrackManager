@@ -10,7 +10,7 @@ import Cocoa
 
 class InstallViewController: NSViewController {
     
-    static let installViewControllerID: NSStoryboard.SceneIdentifier = "InstallViewController"
+    static let sceneID: NSStoryboard.SceneIdentifier = "InstallViewController"
     @IBOutlet var statusTextView: NSTextView!
     
     override func viewDidLoad() {
@@ -22,14 +22,10 @@ class InstallViewController: NSViewController {
     
     
     private func startInstall() {
-        // TODO: an option on where to install it...but does it matter?
-        let appSupportDir = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
-        
-        let installURL = appSupportDir.appendingPathComponent("Fermentrack")
-        // TODO: an option on what repo to start with using mine for now
-        let fermentrackRepoURL = URL(string: "https://github.com/corbinstreehouse/fermentrack.git")
+        let installURL = AppDelegate.shared.fermentrackInstallDirURL
+        let fermentrackRepoURL = AppDelegate.shared.fermentrackRepoURL
 
-        installer = FermentrackInstaller(installURL: installURL, repoURL: fermentrackRepoURL!, statusHandler: { (s: NSAttributedString) in
+        installer = FermentrackInstaller(installURL: installURL, repoURL: fermentrackRepoURL, statusHandler: { (s: NSAttributedString) in
             self.statusTextView.textStorage?.append(s)
             self.statusTextView.scrollToEndOfDocument(nil)
         })

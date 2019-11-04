@@ -144,9 +144,17 @@ class WelcomeViewController: NSViewController {
         
     }
     
-    @IBAction func beginInstall(_ button: NSButton) {
+    private var mainViewController: MainViewController {
         let mvc = self.parent as! MainViewController
-        mvc.loadContentViewController(identifier: InstallViewController.installViewControllerID)
+        return mvc
+    }
+    
+    @IBAction func beginInstall(_ button: NSButton) {
+        mainViewController.loadContentViewController(identifier: InstallViewController.sceneID)
+    }
+    
+    @IBAction func btnManualInstallClicked(_ button: NSButton) {
+        mainViewController.loadContentViewController(identifier: StatusViewController.storyboardSceneID)
     }
 
 }

@@ -12,8 +12,9 @@ let fermentrackManager = FermentrackProcessManager()
 
 // The main thread here will kick off the XPC service and block on resume
 let serviceDelegate = ServiceDelegate(fermentrackManager)
-let listener = NSXPCListener.service()
+let listener = NSXPCListener(machServiceName: "com.redwoodmonkey.FermentrackProcessManager")
 listener.delegate = serviceDelegate
 listener.resume()
+dispatchMain()
 
 

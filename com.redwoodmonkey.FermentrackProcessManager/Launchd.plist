@@ -6,11 +6,12 @@
 	<true/>
 	<key>Label</key>
 	<string>com.redwoodmonkey.FermentrackProcessManager</string>
-	<key>ProcessType</key>
-	<string>Background</string>
 	<key>RunAtLoad</key>
 	<true/>
-	<key>WaitForDebugger</key>
-	<false/>
+	<key>MachServices</key>
+	<dict>
+		<key>com.redwoodmonkey.FermentrackProcessManager</key>
+		<true/>
+	</dict>
 </dict>
 </plist>

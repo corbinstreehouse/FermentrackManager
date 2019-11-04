@@ -209,19 +209,24 @@ class FermentrackInstaller {
     }
     
     private func installDaemon() throws {
-        statusHandler(bold("Installing Launch Daemon - requires privileges\n"))
+        statusHandler(bold("Installing launch daemon - requires privileges\n"))
         let name = "com.redwoodmonkey.FermentrackProcessManager"
         try installLaunchDaemon(named: name)
+        printStatus(string: "Done.\n")
+    }
+    
+    private func setupDaemon() throws {
+        statusHandler(bold("Setting up launch deamon with installation directory\n"))
+
         
-        printStatus(string: "Done.")
+        printStatus(string: "Done.\n")
+
     }
     
     public func startFullAutomatedInstall() {
         
         do {
             try installDaemon()
-            return ;
-            
             try installRedis()
             try makeHomeDirectory()
             try cloneRepository()
@@ -230,7 +235,7 @@ class FermentrackInstaller {
             try makeSecretSettings()
             try doMigrate()
             try collectStatic()
-                    
+            try setupDaemon()
         } catch {
             printError(string: "ERROR: " + error.localizedDescription)
         }

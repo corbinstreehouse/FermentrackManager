@@ -14,24 +14,15 @@
 	<string>6.0</string>
 	<key>CFBundleName</key>
 	<string>$(PRODUCT_NAME)</string>
-	<key>CFBundlePackageType</key>
-	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
-	<key>LSApplicationCategoryType</key>
-	<string></string>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2019 Corbin Dunn. All rights reserved.</string>
 	<key>SMAuthorizedClients</key>
 	<array>
-		<string>identifier "com.redwoodmonkey.FermentrackManager" and anchor apple generic and certificate leaf[subject.CN] = "Apple Development: corbinstreehouse@mac.com (4K3T94L6KW)" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
+		<string>identifier &quot;com.redwoodmonkey.FermentrackManager&quot; and anchor apple generic and certificate leaf[subject.CN] = &quot;Apple Development: corbinstreehouse@mac.com (4K3T94L6KW)&quot; and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
 	</array>
-	<key>XPCService</key>
-	<dict>
-		<key>ServiceType</key>
-		<string>Application</string>
-	</dict>
 </dict>
 </plist>
