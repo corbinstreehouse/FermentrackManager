@@ -8,6 +8,13 @@
 
 import Cocoa
 
+extension NSViewController {
+    public var mainViewController: MainViewController {
+        let mvc = self.parent as! MainViewController
+        return mvc
+    }
+}
+
 class WelcomeViewController: NSViewController {
     public static let storyboardSceneID: NSStoryboard.SceneIdentifier = "WelcomeViewController"
     
@@ -144,17 +151,12 @@ class WelcomeViewController: NSViewController {
         
     }
     
-    private var mainViewController: MainViewController {
-        let mvc = self.parent as! MainViewController
-        return mvc
-    }
-    
     @IBAction func beginInstall(_ button: NSButton) {
         mainViewController.loadContentViewController(identifier: InstallViewController.sceneID)
     }
     
     @IBAction func btnManualInstallClicked(_ button: NSButton) {
-        mainViewController.loadContentViewController(identifier: StatusViewController.storyboardSceneID)
+        mainViewController.loadContentViewController(identifier: ManualInstallViewController.storyboardSceneID)
     }
 
 }

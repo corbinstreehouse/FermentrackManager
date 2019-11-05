@@ -25,9 +25,9 @@ class ServiceDelegate: NSObject, NSXPCListenerDelegate, FermentrackProcessManage
         return true
     }
     
-    func load(withReply reply: @escaping (_ fermentrackHomeURL: URL?) -> Void) {
+    func load(withReply reply: @escaping (_ fermentrackHomeURL: URL?, _ webServerIsRunning: Bool) -> Void) {
         // Really just to kick the tires and see if the service is running
-        reply(processManager.getFermentrackHomeURL())
+        reply(processManager.getFermentrackHomeURL(), processManager.isWebServerRunning)
     }
     
     func setFermentrackHomeURL(_ url: URL) {

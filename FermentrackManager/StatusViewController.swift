@@ -9,22 +9,34 @@
 import Cocoa
 
 class StatusViewController: NSViewController {
+    
+    @IBOutlet var appProxy: NSObjectController?
 
-    static let storyboardSceneID: NSStoryboard.SceneIdentifier = "StatusViewController"
+    class var storyboardSceneID: NSStoryboard.SceneIdentifier {
+        get {
+            return "StatusViewController"
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do view setup here.
+    }
+        
+    override func viewWillAppear() {
+        appProxy?.bind(NSBindingName.content, to: AppDelegate.shared, withKeyPath: "self", options: [:])
     }
     
-    @objc dynamic var fermentrackHomePath: String {
-        get {
-            return AppDelegate.shared.fermentrackInstallDirURL.path
-        }
-        set (value) {
-//            AppDelegate.shared.fermentrackInstallDirURL = URL(fileURLWithPath: value)
-        }
+    override func viewDidDisappear() {
+        appProxy?.unbind(NSBindingName.content)
     }
+    
+    @objc dynamic public var fermentrackInstallDirURL: URL?
 
+    @IBAction func btnManualInstallClicked(_ button: NSButton) {
+        mainViewController.loadContentViewController(identifier: ManualInstallViewController.storyboardSceneID)
+    }
     
+    @IBAction func btStatusClicked(_ button: NSButton) {
+        mainViewController.loadContentViewController(identifier: StatusViewController.storyboardSceneID, backwards: true)
+    }
 }

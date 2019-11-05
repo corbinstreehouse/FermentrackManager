@@ -182,15 +182,8 @@ class FermentrackProcessManager {
         return FileManager.default.temporaryDirectory.appendingPathComponent("fermentrack_mac_circus.ini")
     }
     
-    private var circusIniFileIsUpdated = false
     // The ini file has a hardcoded PYTHON_PATH. We open up the ini file, modify it, and write it out to a temporary location and use that as our ini file
-    private func updateCircusIniFileIfNecessary() throws {
-        if circusIniFileIsUpdated {
-            return
-        }
-        
-        circusIniFileIsUpdated = true
-        
+    private func updateCircusIniFile() throws {
         let circusIniFileTemplatePath = fermentrackHomeURL!.appendingPathComponent("fermentrack/circus.ini")
         let circusIniFileURL = self.circusIniFileURL
         let circusIniFile = try String(contentsOf: circusIniFileTemplatePath)
@@ -209,6 +202,7 @@ class FermentrackProcessManager {
         circusProcess = nil
         
         do {
+            try updateCircusIniFile()
             let process = makeAndSetupPythonProcess()
             process.executableURL = fermentrackHomeURL!.appendingPathComponent("venv/bin/circusd")
             process.arguments = [self.circusIniFileURL.path]
@@ -229,7 +223,7 @@ class FermentrackProcessManager {
         do {
             let process = makeAndSetupPythonProcess()
             process.executableURL = self.fermentrackHomeURL!.appendingPathComponent("venv/bin/python3")
-            process.arguments = ["manage.py", "runmodwsgi",  "--server-root=" + apacheServerRootURL.path, "--user", "_www", "--group", "_www"]
+            process.arguments = ["manage.py", "runmodwsgi",  "--server-root=" + apacheServerRootURL.path, "--user", "_www", "--group", "_www", "--setup-only"]
             try process.run()
 //            process.waitUntilExit()
             // todo: loook for the following info:
@@ -292,6 +286,7 @@ class FermentrackProcessManager {
                 stopWebServer()
             }
             setupWebServer()
+            // Maybe first go and kill all httpd's that are alive...otherwise we get binding issues..
         }
     }
     

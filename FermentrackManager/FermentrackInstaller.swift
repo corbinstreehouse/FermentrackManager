@@ -17,6 +17,15 @@ class FermentrackInstaller {
     private var statusHandler: ((NSAttributedString) -> Void)
     private var repoURL: URL
     
+    convenience init() {
+        self.init(installURL: AppDelegate.shared.fermentrackInstallDirURL,
+                  repoURL: AppDelegate.shared.fermentrackRepoURL,
+                  statusHandler: { (NSAttributedString) in 
+            
+        })
+        
+    }
+    
     init(installURL: URL, repoURL: URL, statusHandler: @escaping (NSAttributedString) -> Void) {
         self.statusHandler = statusHandler
         self.repoURL = repoURL
@@ -188,7 +197,7 @@ class FermentrackInstaller {
         }
     }
     
-    private func installRedis() throws {
+    public func installRedis() throws {
         statusHandler(bold("Installing redis...\n"))
 
         let redisCliURL =  Bundle.main.url(forAuxiliaryExecutable: "redis-cli")!
@@ -198,7 +207,7 @@ class FermentrackInstaller {
         let redisDestURL = self.installURL.appendingPathComponent("redis")
         let redisDestCliURL = redisDestURL.appendingPathComponent("redis-cli")
         let redisDestServerURL = redisDestURL.appendingPathComponent("redis-server")
-        let redisDestConfURL = redisDestURL.appendingPathComponent("redis-conf")
+        let redisDestConfURL = redisDestURL.appendingPathComponent("redis.conf")
         
         try FileManager.default.createDirectory(at: redisDestURL, withIntermediateDirectories: true, attributes: [:])
         try FileManager.default.copyItem(at: redisCliURL, to: redisDestCliURL)
@@ -208,7 +217,7 @@ class FermentrackInstaller {
         printStatus(string: "Done.\n")
     }
     
-    private func installDaemon() throws {
+    public func installDaemon() throws {
         statusHandler(bold("Installing launch daemon - requires privileges\n"))
         let name = "com.redwoodmonkey.FermentrackProcessManager"
         try installLaunchDaemon(named: name)

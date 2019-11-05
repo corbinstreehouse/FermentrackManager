@@ -16,9 +16,9 @@ enum ServerStatus {
 
 protocol ServerObserver {
     func didChangeStatus(_ newStatus: ServerStatus)
-    func didChangeFermentrackInstallDirURL(_ url: URL)
 }
 
+// Kind of also my model for now
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
@@ -32,20 +32,25 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     public var observer: ServerObserver?
-
-    private var _fermentrackInstallDirURL: URL
-    public var fermentrackInstallDirURL: URL {
-        get {
-            return _fermentrackInstallDirURL
-        }
-        set(newValue) {
-            if _fermentrackInstallDirURL != newValue {
+    private var ignoreProcessManager = false
+    @objc dynamic public var fermentrackInstallDirURL: URL {
+        didSet(newValue) {
+            if (!ignoreProcessManager) {
                 processManager?.setFermentrackHomeURL(newValue)
-                observer?.didChangeFermentrackInstallDirURL(newValue)
             }
+            UserDefaults.standard.set(newValue, forKey: installLocationDefaultsKey)
         }
     }
-
+    
+    @objc var fermentrackHostURL: URL {
+        // Maybe make this a little more configuraable?
+        if let host = Host.current().name {
+            return URL(string: "http://\(host):8000")!
+        } else {
+            return URL(string: "http://localhost:8000")!
+        }
+    }
+    
     public static var shared: AppDelegate {
         return NSApp.delegate as! AppDelegate
     }
@@ -53,11 +58,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private var serverConnection: NSXPCConnection?
     private var processManager: FermentrackProcessManagerProtocol?
     
+    fileprivate let installLocationDefaultsKey = "FermentrackInstallationDirectory"
     
     override init() {
-        // default install location
-        let appSupportDir = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
-        _fermentrackInstallDirURL = appSupportDir.appendingPathComponent("Fermentrack")
+        if let lastInstallLocationURL = UserDefaults.standard.url(forKey: installLocationDefaultsKey) {
+            fermentrackInstallDirURL = lastInstallLocationURL
+        } else {
+            // default install location
+            let appSupportDir = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
+            fermentrackInstallDirURL = appSupportDir.appendingPathComponent("Fermentrack")
+        }
     }
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
@@ -73,11 +83,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             oldConnection.invalidate()
         }
         serverConnection = NSXPCConnection(machServiceName: "com.redwoodmonkey.FermentrackProcessManager", options:[.privileged])
-        
-//        serverConnection?.invalidationHandler = {
-//            self.handleProcessManagerNotLoaded()
-//        }
-        
+
+//        serverConnection = NSXPCConnection(machServiceName: "com.redwoodmonkey.FermentrackProcessManager", options:[])
         serverConnection!.remoteObjectInterface = NSXPCInterface(with: FermentrackProcessManagerProtocol.self)
         serverConnection!.resume()
         requestLoad()
@@ -87,11 +94,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         serverStatus = .notInstalled
     }
     
-    private func handleProcessManagerLoaded(fermentrackHomeURL: URL?) {
+    @objc dynamic var isWebServerRunning: Bool = false
+    
+    private func handleProcessManagerLoaded(fermentrackHomeURL: URL?, isWebServerRunning: Bool) {
         if let u = fermentrackHomeURL {
-            _fermentrackInstallDirURL = u
+                ignoreProcessManager = true
+            fermentrackInstallDirURL = u
+            ignoreProcessManager = false
         }
         serverStatus = .installed
+        self.isWebServerRunning = isWebServerRunning
     }
 
     private func requestLoad() {
@@ -104,9 +116,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         } as? FermentrackProcessManagerProtocol
 
         if let processManager = processManager {
-            processManager.load(withReply: { (fermentrackHomeURL: URL?) in
+            processManager.load(withReply: { (fermentrackHomeURL: URL?, isWebServerRunning: Bool) in
                 DispatchQueue.main.async {
-                    self.handleProcessManagerLoaded(fermentrackHomeURL: fermentrackHomeURL)
+                    self.handleProcessManagerLoaded(fermentrackHomeURL: fermentrackHomeURL, isWebServerRunning: isWebServerRunning)
                 }
             })
         } else {
