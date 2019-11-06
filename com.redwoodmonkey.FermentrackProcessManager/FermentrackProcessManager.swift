@@ -37,10 +37,25 @@ class FermentrackProcessManager {
 
     // fermentrackHomeURL will be set by another thread via the XPC service; we serialize this on the queue to avoid any race conditions via a public method. Reading should be okay.
     var fermentrackHomeURL: URL? {
-        didSet {
-            UserDefaults.standard.set(fermentrackHomeURL, forKey: fermentrackHomeURLKey)
+        willSet {
+            UserDefaults.standard.set(newValue, forKey: fermentrackHomeURLKey)
         }
     }
+    
+    var webServerManuallyStopped = false {
+        willSet {
+            UserDefaults.standard.set(newValue, forKey: webServerManuallyStoppedKey)
+        }
+    }
+    
+    fileprivate var apacheUser: String? {
+        willSet {
+            UserDefaults.standard.set(newValue, forKey: apacheUserKey)
+        }
+    }
+    fileprivate let apacheGroup = "staff"
+    
+
     
     public var shouldReloadOnChanges: Bool {
         didSet {
@@ -63,6 +78,8 @@ class FermentrackProcessManager {
     
     private let fermentrackHomeURLKey = "FermentrackBasePath"
     private let fermentrackShouldReloadOnChangesKey = "FermentrackShouldReloadOnChanges"
+    private let webServerManuallyStoppedKey = "webServerManuallyStopped"
+    private let apacheUserKey = "apacheUser"
     // Explictly NOT concurrent queue so we can serialize access to work
     private var processManagerQueue = DispatchQueue(label: "com.redwoodmonkey.ProcessManager", attributes: [], autoreleaseFrequency:.inherit, target: nil)
     
@@ -72,6 +89,8 @@ class FermentrackProcessManager {
         // Use the previous fermentrack home location; it might not exist yet
         fermentrackHomeURL = UserDefaults.standard.url(forKey: fermentrackHomeURLKey)
         shouldReloadOnChanges = UserDefaults.standard.bool(forKey: fermentrackShouldReloadOnChangesKey)
+        webServerManuallyStopped = UserDefaults.standard.bool(forKey: webServerManuallyStoppedKey)
+        apacheUser = UserDefaults.standard.string(forKey: apacheUserKey)
         
         // watch for sigterm to kill our processes
         termDispatchSourceSignal = DispatchSource.makeSignalSource(signal: SIGTERM, queue: processManagerQueue)
@@ -102,7 +121,8 @@ class FermentrackProcessManager {
     
     private func syncSetFermentrackHomeURL(url: URL, userName: String) {
         // stop the old process(es) first
-        if isWebServerAlive() {
+        updateIsWebServerRunning()
+        if isWebServerRunning {
             try? _stopWebServer()
         }
         
@@ -120,10 +140,6 @@ class FermentrackProcessManager {
             self.syncSetFermentrackHomeURL(url: url, userName: userName)
         }
     }
-    
-//    public func getFermentrackHomeURL() -> URL? {
-//        return self.fermentrackHomeURL
-//    }
     
     private func makeRedisProcess() -> Process {
         let redisServerURL = fermentrackHomeURL!.appendingPathComponent("redis/redis-server")
@@ -270,22 +286,25 @@ class FermentrackProcessManager {
     }
     
     
-    private var aliveCachedValue: Bool = false
-    private func isWebServerAlive() -> Bool {
-        var newValue = false
-        // Basically, we are alive if the httpd.pid exists. we could check to make sure the process exists too, but it seems to go away even if i kill httpd
-        if let apacheServerRootURL = apacheServerRootURL {
-            newValue = FileManager.default.fileExists(atPath: apacheServerRootURL.appendingPathComponent("httpd.pid").path)
+    var isWebServerRunning: Bool = false {
+        didSet (oldValue) {
+            if (oldValue != isWebServerRunning) {
+                notifyClients()
+            }
         }
-        if newValue != aliveCachedValue {
-            aliveCachedValue = newValue
-            notifyClients()
-        }
-        return newValue
     }
     
-    fileprivate var apacheUser = "_www" // will be changed!
-    fileprivate let apacheGroup = "staff"
+    private func updateIsWebServerRunning() {
+        isWebServerRunning = getIsWebServerAlive()
+    }
+    
+    private func getIsWebServerAlive() -> Bool {
+        // Basically, we are alive if the httpd.pid exists. we could check to make sure the process exists too, but it seems to go away even if i kill httpd
+        if let apacheServerRootURL = apacheServerRootURL {
+            return FileManager.default.fileExists(atPath: apacheServerRootURL.appendingPathComponent("httpd.pid").path)
+        }
+        return false
+    }
     
     private func setupWebServer() throws {
         let attributes = [FileAttributeKey.groupOwnerAccountName: apacheGroup, FileAttributeKey.ownerAccountName: apacheUser]
@@ -296,7 +315,7 @@ class FermentrackProcessManager {
                     
         let process = makeAndSetupPythonProcess()
         process.executableURL = self.fermentrackHomeURL!.appendingPathComponent("venv/bin/python3")
-        process.arguments = ["manage.py", "runmodwsgi",  "--server-root=" + apacheServerRootURL!.path, "--user", apacheUser, "--group", apacheGroup, "--setup-only"]
+        process.arguments = ["manage.py", "runmodwsgi",  "--server-root=" + apacheServerRootURL!.path, "--user", apacheUser!, "--group", apacheGroup, "--setup-only"]
         if shouldReloadOnChanges {
             process.arguments!.append(" --reload-on-changes")
         }
@@ -333,23 +352,53 @@ class FermentrackProcessManager {
             Thread.sleep(forTimeInterval: TimeInterval(0.5))
         }
     }
-    
-    public var isWebServerRunning: Bool {
-        get {
-            return self.isWebServerAlive()
+        
+    private func asyncStartWebServer() {
+        do {
+            try _startWebServer()
+            webServerManuallyStopped = false
+            updateIsWebServerRunning()
+        } catch {
+            handleError(error)
+            
         }
     }
-        
+    
     func startWebServer() {
-        do { try runApacheCtl(withCommand: "start") } catch { handleError(error) }
+        processManagerQueue.async {
+            self.asyncStartWebServer()
+        }
+    }
+    
+    private func asyncStopWebServer() {
+        do {
+            try _stopWebServer()
+            webServerManuallyStopped = true
+            updateIsWebServerRunning()
+        } catch {
+            handleError(error)
+        }
     }
     
     func stopWebServer()  {
-        do { try runApacheCtl(withCommand: "stop") } catch { handleError(error) }
+        processManagerQueue.async {
+            self.asyncStopWebServer()
+        }
     }
     
     func restartWebServer()  {
-        do { try runApacheCtl(withCommand: "restart") } catch { handleError(error) }
+        do {
+            try _restartWebServer()
+
+        } catch {
+            handleError(error)
+        }
+    }
+    
+    private func startWebServerIfNotManuallyStopped() throws {
+        if !webServerManuallyStopped {
+            try _startWebServer()
+        }
     }
     
     private func _startWebServer() throws {
@@ -365,20 +414,27 @@ class FermentrackProcessManager {
     }
     
     private func attemptSetup() {
-        if fermentrackHomeURL != nil {
+        if isSetupProperly() {
             do {
                 try setupWebServer()
-                try _startWebServer()
+                try startWebServerIfNotManuallyStopped()
             } catch {
                 handleError(error)
             }
         }
     }
     
+    private func isSetupProperly() -> Bool {
+        if fermentrackHomeURL != nil && apacheUser != nil {
+            return true
+        }
+        return false
+    }
+    
     private func doProcessWork() {
         
-        if fermentrackHomeURL == nil {
-            return // Not yet setup...
+        if !isSetupProperly() {
+            return
         }
         
         do {
@@ -394,7 +450,8 @@ class FermentrackProcessManager {
             }
             
             // Now start the server, if no errors
-            if (!isWebServerAlive()) {
+            updateIsWebServerRunning()
+            if (!webServerManuallyStopped && !isWebServerRunning) {
                 try _startWebServer()
             }
             //

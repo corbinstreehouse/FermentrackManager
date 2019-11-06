@@ -21,7 +21,9 @@ extension NSViewController {
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate, FermentrackProcessManagerClientProtocol {
     func handleError(_ error: Error) {
-        print("Server error:" + error.localizedDescription)
+        DispatchQueue.main.async {
+            print("Server error:" + error.localizedDescription)
+        }
     }
 
     // TODO: an option on what repo to start with using mine for now
@@ -89,7 +91,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, FermentrackProcessManagerCli
     }
     
     func webServerRunningChanged(_ newValue: Bool) {
-        isWebServerRunning = newValue
+        DispatchQueue.main.async {
+            self.isWebServerRunning = newValue
+        }
+        
     }
     
     private func handleProcessManagerNotLoaded() {
