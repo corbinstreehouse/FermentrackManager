@@ -270,13 +270,14 @@ class FermentrackProcessManager {
         return newValue
     }
     
-    fileprivate let apacheUser = "corbin"
-    fileprivate let apacheGroup = "staff" // assuming user is an admin user! otherwise staff?
+    fileprivate var apacheUser: String = NSUserName()
+    fileprivate let apacheGroup = "staff"
     
     private func setupWebServer() throws {
         let attributes = [FileAttributeKey.groupOwnerAccountName: apacheGroup, FileAttributeKey.ownerAccountName: apacheUser]
         
         try FileManager.default.createDirectory(at: apacheServerRootURL!, withIntermediateDirectories: true, attributes: attributes)
+        // Not sure we need this; I was originally trying to run as the _www user/group and had permission issues when installing into areas that the current user can read/write
         try FileManager.default.setAttributes(attributes, ofItemAtPath: self.fermentrackHomeURL!.path)
                     
         let process = makeAndSetupPythonProcess()

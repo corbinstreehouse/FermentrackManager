@@ -16,7 +16,6 @@ extension NSViewController {
 }
 
 class WelcomeViewController: NSViewController {
-    public static let storyboardSceneID: NSStoryboard.SceneIdentifier = "WelcomeViewController"
     
     override func viewDidLoad() {
         super.viewDidLoad()

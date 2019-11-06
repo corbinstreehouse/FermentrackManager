@@ -9,13 +9,6 @@
 import Cocoa
 
 class ManualInstallViewController: StatusViewController {
-
-    class override var storyboardSceneID: NSStoryboard.SceneIdentifier {
-        get {
-            return "ManualInstallViewController"
-        }
-    }
-
     
     private func runInInstaller(code: (_ installer: FermentrackInstaller) throws -> Void) {
         let installer = FermentrackInstaller()
@@ -39,4 +32,7 @@ class ManualInstallViewController: StatusViewController {
         }
     }
 
+    @IBAction func changeHomeDirectory(_ sender: NSButton) {
+        
+    }
 }

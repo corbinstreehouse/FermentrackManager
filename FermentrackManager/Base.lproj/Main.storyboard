@@ -1186,10 +1186,10 @@
             </objects>
             <point key="canvasLocation" x="289.5" y="1994.5"/>
         </scene>
-        <!--Manual-->
+        <!--Manual Install View Controller-->
         <scene sceneID="qpg-fy-bT8">
             <objects>
-                <viewController title="Manual" storyboardIdentifier="ManualInstallViewController" id="XXD-Kt-uLx" customClass="ManualInstallViewController" customModule="FermentrackManager" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ManualInstallViewController" id="XXD-Kt-uLx" customClass="ManualInstallViewController" customModule="FermentrackManager" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="oMm-bv-Fnb">
                         <rect key="frame" x="0.0" y="0.0" width="696" height="440"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1255,18 +1255,10 @@
                                     <action selector="installLauncDaemon:" target="XXD-Kt-uLx" id="4ox-mZ-AIA"/>
                                 </connections>
                             </button>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="R1z-xQ-3LJ">
-                                <rect key="frame" x="229" y="91" width="173" height="32"/>
+                            <button hidden="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uiv-vX-Cay">
+                                <rect key="frame" x="224" y="234" width="195" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="push" title="Uninstall Fermentrack" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ugr-T1-qKK">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                            </button>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uiv-vX-Cay">
-                                <rect key="frame" x="229" y="124" width="195" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="push" title="Uninstall Launch Daemon" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="XDp-MH-tre">
+                                <buttonCell key="cell" type="push" title="Uninstall Launch Daemon" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="XDp-MH-tre">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -1280,7 +1272,7 @@
                                 </buttonCell>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hGD-o3-3ao">
-                                <rect key="frame" x="230" y="336" width="282" height="48"/>
+                                <rect key="frame" x="230" y="336" width="293" height="48"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" selectable="YES" title="The main &quot;home&quot; directory for fermentrack containing the fermentrack source and a Python virtual environment" id="zwJ-Hw-1d1">
                                     <font key="font" metaFont="system"/>
@@ -1307,7 +1299,7 @@
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GKn-go-Xxi">
-                                <rect key="frame" x="84" y="179" width="128" height="32"/>
+                                <rect key="frame" x="14" y="13" width="128" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="Back to Status" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ApF-a4-Fmq">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1317,6 +1309,14 @@
                                     <action selector="btStatusClicked:" target="XXD-Kt-uLx" id="M52-le-oaA"/>
                                     <binding destination="hxQ-qd-pcC" name="enabled" keyPath="self.installButtonEnabled" id="1gJ-k4-4H0"/>
                                 </connections>
+                            </button>
+                            <button hidden="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="R1z-xQ-3LJ">
+                                <rect key="frame" x="224" y="201" width="173" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" title="Uninstall Fermentrack" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ugr-T1-qKK">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
                             </button>
                         </subviews>
                     </view>

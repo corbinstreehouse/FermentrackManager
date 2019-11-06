@@ -32,6 +32,7 @@
 		9D6943FE236C75FD00AC09D9 /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D6943FD236C75FD00AC09D9 /* ServiceManagement.framework */; };
 		9D7B16342370BF7100F3593A /* ManualInstallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7B16332370BF7100F3593A /* ManualInstallViewController.swift */; };
 		9D7B16372371367700F3593A /* LinkTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7B16362371367700F3593A /* LinkTextField.swift */; };
+		9D7B163D237333E300F3593A /* NSViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7B163C237333E300F3593A /* NSViewController+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,6 +104,7 @@
 		9D7B16362371367700F3593A /* LinkTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkTextField.swift; sourceTree = "<group>"; };
 		9D7B16392371397600F3593A /* FermentrackManager-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FermentrackManager-Bridging-Header.h"; sourceTree = "<group>"; };
 		9D7B163A2371397700F3593A /* NSTextFieldCell+Hacks.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSTextFieldCell+Hacks.h"; sourceTree = "<group>"; };
+		9D7B163C237333E300F3593A /* NSViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSViewController+Extensions.swift"; sourceTree = "<group>"; };
 		9D8EA42523653D5F0027F7CA /* redis-cli */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = "redis-cli"; sourceTree = "<group>"; };
 		9D8EA42D23672A820027F7CA /* FermentrackProcessManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FermentrackProcessManager.swift; sourceTree = "<group>"; };
 		9D8EA42F23672CF60027F7CA /* CustomError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomError.swift; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 				9D6943BF2367927E00AC09D9 /* Info.plist */,
 				9D7B16362371367700F3593A /* LinkTextField.swift */,
 				9D6943C02367927E00AC09D9 /* FermentrackManager.entitlements */,
+				9D7B163C237333E300F3593A /* NSViewController+Extensions.swift */,
 			);
 			path = FermentrackManager;
 			sourceTree = "<group>";
@@ -315,6 +318,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9D6943F8236BCAF000AC09D9 /* CustomError.swift in Sources */,
+				9D7B163D237333E300F3593A /* NSViewController+Extensions.swift in Sources */,
 				9D6943F3236A0E6100AC09D9 /* FermentrackProcessManagerProtocol.swift in Sources */,
 				9D7B16342370BF7100F3593A /* ManualInstallViewController.swift in Sources */,
 				9D6943E52369233F00AC09D9 /* WelcomeViewController.swift in Sources */,

@@ -10,11 +10,11 @@ import Cocoa
 
 class StatusViewController: NSViewController {
     
-    class var storyboardSceneID: NSStoryboard.SceneIdentifier {
-        get {
-            return "StatusViewController"
-        }
-    }
+//    class var storyboardSceneID: NSStoryboard.SceneIdentifier {
+//        get {
+//            return "StatusViewController"
+//        }
+//    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
