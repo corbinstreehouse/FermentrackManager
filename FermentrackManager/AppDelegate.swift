@@ -18,6 +18,17 @@ protocol ServerObserver {
     func didChangeStatus(_ newStatus: ServerStatus)
 }
 
+
+
+extension NSViewController {
+    // for bindings
+    @objc dynamic var appDelegate: AppDelegate {
+        get {
+            return AppDelegate.shared
+        }
+    }
+}
+
 // Kind of also my model for now
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate, FermentrackProcessManagerClientProtocol {

@@ -20,19 +20,28 @@ class ManualInstallViewController: StatusViewController {
         }
     }
     
-    @IBAction func installRedisBtnClicked(_ sender: NSButton) {
+    @IBAction func btnInstallRedisClicked(_ sender: NSButton) {
         runInInstaller { (installer) in
             try installer.installRedis()
         }
     }
     
-    @IBAction func installLauncDaemon(_ sender: NSButton) {
+    @IBAction func btnInstallLaunchDaemonClicked(_ sender: NSButton) {
         runInInstaller { (installer) in
             try installer.installDaemon()
         }
     }
 
-    @IBAction func changeHomeDirectory(_ sender: NSButton) {
+    @IBAction func btnChangeHomeDirectoryClicked(_ sender: NSButton) {
+        let openPanel = NSOpenPanel.init()
+        openPanel.directoryURL = appDelegate.fermentrackInstallDirURL
+        openPanel.canChooseFiles = false
+        openPanel.canChooseDirectories = true
+        openPanel.begin { (response) in
+            if response == .OK {
+                self.appDelegate.fermentrackInstallDirURL = openPanel.url!
+            }
+        }
         
     }
 }

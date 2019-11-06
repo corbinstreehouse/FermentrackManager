@@ -1241,7 +1241,7 @@
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <action selector="installRedisBtnClicked:" target="XXD-Kt-uLx" id="tCO-2Z-KEM"/>
+                                    <action selector="btnInstallRedisClicked:" target="XXD-Kt-uLx" id="tCO-2Z-KEM"/>
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y0U-Vf-kN8">
@@ -1252,7 +1252,7 @@
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <action selector="installLauncDaemon:" target="XXD-Kt-uLx" id="4ox-mZ-AIA"/>
+                                    <action selector="btnInstallLaunchDaemonClicked:" target="XXD-Kt-uLx" id="4ox-mZ-AIA"/>
                                 </connections>
                             </button>
                             <button hidden="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uiv-vX-Cay">
@@ -1270,6 +1270,9 @@
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="btnChangeHomeDirectoryClicked:" target="XXD-Kt-uLx" id="9BZ-0n-wd6"/>
+                                </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hGD-o3-3ao">
                                 <rect key="frame" x="230" y="336" width="293" height="48"/>

@@ -34,12 +34,6 @@ class StatusViewController: NSViewController {
         mainViewController.loadContentViewController(identifier: StatusViewController.storyboardSceneID, backwards: true)
     }
     
-    @objc dynamic var appDelegate: AppDelegate {
-        get {
-            return AppDelegate.shared
-        }
-    }
-    
     override class func keyPathsForValuesAffectingValue(forKey key: String) -> Set<String> {
         if key == "webServerStatus" {
             return ["appDelegate.isWebServerRunning"]

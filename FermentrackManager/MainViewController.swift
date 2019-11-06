@@ -60,4 +60,11 @@ public class MainViewController: NSViewController, ServerObserver {
     }
     
 }
-//
+
+extension NSViewController {
+    public var mainViewController: MainViewController {
+        let mvc = self.parent as! MainViewController
+        return mvc
+    }
+
+}
