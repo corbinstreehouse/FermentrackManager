@@ -191,6 +191,7 @@ class FermentrackInstaller {
                         if (!result) {
                             throw cfErrorPtr.pointee!.takeUnretainedValue() // Value was already retained/autoreleased, i assume.
                         }
+            
                     })
                 }
             }
@@ -225,11 +226,9 @@ class FermentrackInstaller {
     }
     
     private func setupDaemon() throws {
-        statusHandler(bold("Setting up launch deamon with installation directory\n"))
-
-        
+        statusHandler(bold("Setting up launch deamon with installation directory and user name\n"))
+        AppDelegate.shared.fermentrackInstallDirURL = self.installURL
         printStatus(string: "Done.\n")
-
     }
     
     public func startFullAutomatedInstall() {

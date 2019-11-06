@@ -8,18 +8,6 @@
 
 import Cocoa
 
-enum ServerStatus {
-    case checking
-    case installed
-    case notInstalled
-}
-
-protocol ServerObserver {
-    func didChangeStatus(_ newStatus: ServerStatus)
-}
-
-
-
 extension NSViewController {
     // for bindings
     @objc dynamic var appDelegate: AppDelegate {
@@ -39,18 +27,14 @@ class AppDelegate: NSObject, NSApplicationDelegate, FermentrackProcessManagerCli
     // TODO: an option on what repo to start with using mine for now
     public var fermentrackRepoURL: URL = URL(string: "https://github.com/corbinstreehouse/fermentrack.git")!
 
-    public var serverStatus: ServerStatus = .checking {
-        didSet {
-            observer?.didChangeStatus(serverStatus)
-        }
-    }
+    @objc var isLaunchDaemonInstalled = false
+    weak var mainViewController: MainViewController!
     
-    public var observer: ServerObserver?
     private var ignoreProcessManager = false
     @objc dynamic public var fermentrackInstallDirURL: URL {
         didSet(newValue) {
             if (!ignoreProcessManager) {
-                processManager?.setFermentrackHomeURL(newValue)
+                processManager?.setFermentrackHomeURL(newValue, userName: NSUserName())
             }
             UserDefaults.standard.set(newValue, forKey: installLocationDefaultsKey)
         }
@@ -92,7 +76,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, FermentrackProcessManagerCli
         // Insert code here to tear down your application
     }
     
-    private func startServerConnection() {
+    public func startServerConnection() {
         if let oldConnection = serverConnection {
             oldConnection.invalidate()
         }
@@ -109,19 +93,38 @@ class AppDelegate: NSObject, NSApplicationDelegate, FermentrackProcessManagerCli
     }
     
     private func handleProcessManagerNotLoaded() {
-        serverStatus = .notInstalled
+        isLaunchDaemonInstalled = false
+        mainViewController.handleProcessManagerNotLoaded()
+    }
+    
+    func startWebServer() {
+        processManager?.startWebServer()
+    }
+    
+    func stopWebServer() {
+        processManager?.stopWebServer()
     }
     
     @objc dynamic var isWebServerRunning: Bool = false
-    
-    private func handleProcessManagerLoaded(fermentrackHomeURL: URL?, isWebServerRunning: Bool) {
-        if let u = fermentrackHomeURL {
-            ignoreProcessManager = true
-            fermentrackInstallDirURL = u
-            ignoreProcessManager = false
+    @objc dynamic var shouldReloadOnChanges: Bool = true {
+        didSet {
+            if !ignoreProcessManager {
+                processManager?.setShouldReloadOnChanges(shouldReloadOnChanges)
+            }
         }
-        serverStatus = .installed
+    }
+    
+    private func handleProcessManagerLoaded(fermentrackHomeURL: URL?, isWebServerRunning: Bool, shouldReloadOnChanges: Bool) {
+        ignoreProcessManager = true
+        if let u = fermentrackHomeURL {
+            fermentrackInstallDirURL = u
+        }
+        isLaunchDaemonInstalled = true
         self.isWebServerRunning = isWebServerRunning
+        self.shouldReloadOnChanges = shouldReloadOnChanges
+        ignoreProcessManager = false
+        
+        mainViewController.handleProcessManagerIsLoaded()
     }
 
     private func requestLoad() {
@@ -134,9 +137,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, FermentrackProcessManagerCli
         } as? FermentrackProcessManagerProtocol
 
         if let processManager = processManager {
-            processManager.load(withReply: { (fermentrackHomeURL: URL?, isWebServerRunning: Bool) in
+            processManager.load(withReply: { (fermentrackHomeURL: URL?, isWebServerRunning: Bool, shouldReloadOnChanges: Bool) in
                 DispatchQueue.main.async {
-                    self.handleProcessManagerLoaded(fermentrackHomeURL: fermentrackHomeURL, isWebServerRunning: isWebServerRunning)
+                    self.handleProcessManagerLoaded(fermentrackHomeURL: fermentrackHomeURL, isWebServerRunning: isWebServerRunning, shouldReloadOnChanges: shouldReloadOnChanges)
                 }
             })
         } else {

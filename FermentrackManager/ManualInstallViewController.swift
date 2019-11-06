@@ -28,7 +28,11 @@ class ManualInstallViewController: StatusViewController {
     
     @IBAction func btnInstallLaunchDaemonClicked(_ sender: NSButton) {
         runInInstaller { (installer) in
+            appDelegate.stopWebServer()
+            
             try installer.installDaemon()
+            // Reload after
+            appDelegate.startServerConnection()
         }
     }
 

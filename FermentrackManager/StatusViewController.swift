@@ -9,23 +9,7 @@
 import Cocoa
 
 class StatusViewController: NSViewController {
-    
-//    class var storyboardSceneID: NSStoryboard.SceneIdentifier {
-//        get {
-//            return "StatusViewController"
-//        }
-//    }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-        
-    override func viewWillAppear() {
-    }
-    
-    override func viewDidDisappear() {
-    }
-    
     @IBAction func btnManualInstallClicked(_ button: NSButton) {
         mainViewController.loadContentViewController(identifier: ManualInstallViewController.storyboardSceneID)
     }
@@ -51,4 +35,14 @@ class StatusViewController: NSViewController {
             }
         }
     }
+    
+    @IBAction @objc func btnStartOrStopWebServerClicked(_ button: NSButton) {
+        if button.tag == 0 {
+            appDelegate.stopWebServer()
+        } else {
+            appDelegate.startWebServer()
+        }
+        
+    }
+    
 }

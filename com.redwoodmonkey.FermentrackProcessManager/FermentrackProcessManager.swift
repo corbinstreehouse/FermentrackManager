@@ -35,11 +35,20 @@ class FermentrackProcessManager {
         }
     }
 
-    // fermentrackHomeURL will be set by another thread via the XPC service; we serialize this on the queue to avoid any race conditions via a public method
-    private var fermentrackHomeURL: URL? {
+    // fermentrackHomeURL will be set by another thread via the XPC service; we serialize this on the queue to avoid any race conditions via a public method. Reading should be okay.
+    var fermentrackHomeURL: URL? {
         didSet {
-            // Save the value
             UserDefaults.standard.set(fermentrackHomeURL, forKey: fermentrackHomeURLKey)
+        }
+    }
+    
+    public var shouldReloadOnChanges: Bool {
+        didSet {
+            UserDefaults.standard.set(shouldReloadOnChanges, forKey: fermentrackShouldReloadOnChangesKey)
+            if isWebServerRunning {
+                try? _stopWebServer()
+                attemptSetup()
+            }
         }
     }
     
@@ -53,6 +62,7 @@ class FermentrackProcessManager {
     }
     
     private let fermentrackHomeURLKey = "FermentrackBasePath"
+    private let fermentrackShouldReloadOnChangesKey = "FermentrackShouldReloadOnChanges"
     // Explictly NOT concurrent queue so we can serialize access to work
     private var processManagerQueue = DispatchQueue(label: "com.redwoodmonkey.ProcessManager", attributes: [], autoreleaseFrequency:.inherit, target: nil)
     
@@ -61,6 +71,7 @@ class FermentrackProcessManager {
     init() {
         // Use the previous fermentrack home location; it might not exist yet
         fermentrackHomeURL = UserDefaults.standard.url(forKey: fermentrackHomeURLKey)
+        shouldReloadOnChanges = UserDefaults.standard.bool(forKey: fermentrackShouldReloadOnChangesKey)
         
         // watch for sigterm to kill our processes
         termDispatchSourceSignal = DispatchSource.makeSignalSource(signal: SIGTERM, queue: processManagerQueue)
@@ -89,27 +100,30 @@ class FermentrackProcessManager {
         }
     }
     
-    private func syncSetFermentrackHomeURL(url: URL) {
+    private func syncSetFermentrackHomeURL(url: URL, userName: String) {
         // stop the old process(es) first
         if isWebServerAlive() {
             try? _stopWebServer()
         }
+        
         killExistingCircus()
 
-        fermentrackHomeURL = url
+        // update our state that the setup is based on
+        self.apacheUser = userName
+        self.fermentrackHomeURL = url
         
         attemptSetup()
     }
     
-    public func setFermentrackHomeURL(url: URL) {
+    public func setFermentrackHomeURL(url: URL, userName: String) {
         processManagerQueue.async(flags: .barrier) {
-            self.syncSetFermentrackHomeURL(url: url)
+            self.syncSetFermentrackHomeURL(url: url, userName: userName)
         }
     }
     
-    public func getFermentrackHomeURL() -> URL? {
-        return self.fermentrackHomeURL
-    }
+//    public func getFermentrackHomeURL() -> URL? {
+//        return self.fermentrackHomeURL
+//    }
     
     private func makeRedisProcess() -> Process {
         let redisServerURL = fermentrackHomeURL!.appendingPathComponent("redis/redis-server")
@@ -270,7 +284,7 @@ class FermentrackProcessManager {
         return newValue
     }
     
-    fileprivate var apacheUser: String = NSUserName()
+    fileprivate var apacheUser = "_www" // will be changed!
     fileprivate let apacheGroup = "staff"
     
     private func setupWebServer() throws {
@@ -283,6 +297,9 @@ class FermentrackProcessManager {
         let process = makeAndSetupPythonProcess()
         process.executableURL = self.fermentrackHomeURL!.appendingPathComponent("venv/bin/python3")
         process.arguments = ["manage.py", "runmodwsgi",  "--server-root=" + apacheServerRootURL!.path, "--user", apacheUser, "--group", apacheGroup, "--setup-only"]
+        if shouldReloadOnChanges {
+            process.arguments!.append(" --reload-on-changes")
+        }
         try process.run()
         process.waitUntilExit() // wait for the setup to finish and return
         // todo: loook for the following info:
