@@ -16,3 +16,8 @@ import Foundation
     func stopWebServer()
     func startWebServer()
 }
+
+@objc public protocol FermentrackProcessManagerClientProtocol {
+    func webServerRunningChanged(_ newValue: Bool)
+    func handleError(_ error: Error)
+}

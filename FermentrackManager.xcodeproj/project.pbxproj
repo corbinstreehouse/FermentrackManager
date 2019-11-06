@@ -15,7 +15,7 @@
 		9D1655AA236DD3BB00BD1E15 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6AC1942364F52100965419 /* main.swift */; };
 		9D1655AB236DD3BB00BD1E15 /* FermentrackProcessManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8EA42D23672A820027F7CA /* FermentrackProcessManager.swift */; };
 		9D1655AC236DD3BB00BD1E15 /* CustomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8EA42F23672CF60027F7CA /* CustomError.swift */; };
-		9D1655AD236DD3BB00BD1E15 /* ServiceDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6943EB2369CC3400AC09D9 /* ServiceDelegate.swift */; };
+		9D1655AD236DD3BB00BD1E15 /* ListenerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6943EB2369CC3400AC09D9 /* ListenerDelegate.swift */; };
 		9D1655AE236DD3BB00BD1E15 /* FermentrackProcessManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6943F1236A0D6900AC09D9 /* FermentrackProcessManagerProtocol.swift */; };
 		9D1655B0236E56EB00BD1E15 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1655AF236E56EB00BD1E15 /* LoadingViewController.swift */; };
 		9D654133237062A100AFE813 /* StatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D654132237062A100AFE813 /* StatusViewController.swift */; };
@@ -91,7 +91,7 @@
 		9D6943E42369233F00AC09D9 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		9D6943E7236939FE00AC09D9 /* MainWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
 		9D6943E923693AE400AC09D9 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		9D6943EB2369CC3400AC09D9 /* ServiceDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceDelegate.swift; sourceTree = "<group>"; };
+		9D6943EB2369CC3400AC09D9 /* ListenerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListenerDelegate.swift; sourceTree = "<group>"; };
 		9D6943F1236A0D6900AC09D9 /* FermentrackProcessManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FermentrackProcessManagerProtocol.swift; sourceTree = "<group>"; };
 		9D6943F4236A86F600AC09D9 /* InstallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallViewController.swift; sourceTree = "<group>"; };
 		9D6943F6236A89C100AC09D9 /* FermentrackInstaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FermentrackInstaller.swift; sourceTree = "<group>"; };
@@ -200,7 +200,7 @@
 				9D8EA42F23672CF60027F7CA /* CustomError.swift */,
 				9D8EA46123678C050027F7CA /* Info.plist */,
 				9D8EA46F23678FFD0027F7CA /* Launchd.plist */,
-				9D6943EB2369CC3400AC09D9 /* ServiceDelegate.swift */,
+				9D6943EB2369CC3400AC09D9 /* ListenerDelegate.swift */,
 				9D6943F1236A0D6900AC09D9 /* FermentrackProcessManagerProtocol.swift */,
 			);
 			path = com.redwoodmonkey.FermentrackProcessManager;
@@ -305,7 +305,7 @@
 				9D1655AA236DD3BB00BD1E15 /* main.swift in Sources */,
 				9D1655AB236DD3BB00BD1E15 /* FermentrackProcessManager.swift in Sources */,
 				9D1655AC236DD3BB00BD1E15 /* CustomError.swift in Sources */,
-				9D1655AD236DD3BB00BD1E15 /* ServiceDelegate.swift in Sources */,
+				9D1655AD236DD3BB00BD1E15 /* ListenerDelegate.swift in Sources */,
 				9D1655AE236DD3BB00BD1E15 /* FermentrackProcessManagerProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

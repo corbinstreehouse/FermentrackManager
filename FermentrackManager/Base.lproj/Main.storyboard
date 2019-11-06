@@ -1001,6 +1001,13 @@
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <binding destination="DsT-eK-t6D" name="enabled" keyPath="appDelegate.isWebServerRunning" id="A62-wI-d9y">
+                                        <dictionary key="options">
+                                            <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                        </dictionary>
+                                    </binding>
+                                </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="b2P-zG-byh">
                                 <rect key="frame" x="143" y="401" width="122" height="19"/>
@@ -1029,7 +1036,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <binding destination="UiY-Pc-9Qr" name="value" keyPath="selection.fermentrackHostURL" id="2RV-g8-pXD"/>
+                                    <binding destination="DsT-eK-t6D" name="value" keyPath="appDelegate.fermentrackHostURL" id="Nt4-W7-gKR"/>
                                 </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9MA-vx-sHf">
@@ -1037,11 +1044,11 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Running / Stopped / Setup" id="d9Z-zT-0Ja">
                                     <font key="font" metaFont="systemLight" size="15"/>
-                                    <color key="textColor" name="linkColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <binding destination="UiY-Pc-9Qr" name="value" keyPath="selection.isWebServerRunning" id="Pg9-r0-Qmq"/>
+                                    <binding destination="DsT-eK-t6D" name="value" keyPath="webServerStatus" id="BBr-pe-9cE"/>
                                 </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TSF-s1-n8P" customClass="LinkTextField" customModule="FermentrackManager" customModuleProvider="target">
@@ -1053,7 +1060,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <binding destination="UiY-Pc-9Qr" name="value" keyPath="selection.fermentrackInstallDirURL" id="vSW-ZK-v6l"/>
+                                    <binding destination="DsT-eK-t6D" name="value" keyPath="appDelegate.fermentrackInstallDirURL" id="iTb-77-7zd"/>
                                 </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ced-kJ-7LE">
@@ -1072,6 +1079,9 @@
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <binding destination="DsT-eK-t6D" name="enabled" keyPath="appDelegate.isWebServerRunning" id="418-wH-5be"/>
+                                </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ahe-eI-cQz">
                                 <rect key="frame" x="152" y="286" width="112" height="19"/>
@@ -1104,13 +1114,9 @@
                             </button>
                         </subviews>
                     </view>
-                    <connections>
-                        <outlet property="appProxy" destination="UiY-Pc-9Qr" id="3PN-eM-Qjz"/>
-                    </connections>
                 </viewController>
                 <customObject id="T8v-nV-np3" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <userDefaultsController id="Hog-Wm-fyG"/>
-                <objectController editable="NO" id="UiY-Pc-9Qr"/>
             </objects>
             <point key="canvasLocation" x="1037" y="1190"/>
         </scene>
@@ -1197,7 +1203,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <binding destination="80A-0c-hmV" name="value" keyPath="selection.fermentrackInstallDirURL" id="l7h-iR-D3b"/>
+                                    <binding destination="XXD-Kt-uLx" name="value" keyPath="appDelegate.fermentrackInstallDirURL" id="MBv-i0-Cbi"/>
                                 </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3bJ-iw-XsZ">
@@ -1314,13 +1320,9 @@
                             </button>
                         </subviews>
                     </view>
-                    <connections>
-                        <outlet property="appProxy" destination="80A-0c-hmV" id="09g-yJ-huQ"/>
-                    </connections>
                 </viewController>
                 <customObject id="Zu3-QR-T7j" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <userDefaultsController id="h5T-ID-rR4"/>
-                <objectController editable="NO" id="80A-0c-hmV"/>
             </objects>
             <point key="canvasLocation" x="1037" y="1701"/>
         </scene>

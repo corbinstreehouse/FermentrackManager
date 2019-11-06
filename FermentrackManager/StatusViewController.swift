@@ -10,8 +10,6 @@ import Cocoa
 
 class StatusViewController: NSViewController {
     
-    @IBOutlet var appProxy: NSObjectController?
-
     class var storyboardSceneID: NSStoryboard.SceneIdentifier {
         get {
             return "StatusViewController"
@@ -23,20 +21,40 @@ class StatusViewController: NSViewController {
     }
         
     override func viewWillAppear() {
-        appProxy?.bind(NSBindingName.content, to: AppDelegate.shared, withKeyPath: "self", options: [:])
     }
     
     override func viewDidDisappear() {
-        appProxy?.unbind(NSBindingName.content)
     }
     
-    @objc dynamic public var fermentrackInstallDirURL: URL?
-
     @IBAction func btnManualInstallClicked(_ button: NSButton) {
         mainViewController.loadContentViewController(identifier: ManualInstallViewController.storyboardSceneID)
     }
     
     @IBAction func btStatusClicked(_ button: NSButton) {
         mainViewController.loadContentViewController(identifier: StatusViewController.storyboardSceneID, backwards: true)
+    }
+    
+    @objc dynamic var appDelegate: AppDelegate {
+        get {
+            return AppDelegate.shared
+        }
+    }
+    
+    override class func keyPathsForValuesAffectingValue(forKey key: String) -> Set<String> {
+        if key == "webServerStatus" {
+            return ["appDelegate.isWebServerRunning"]
+        } else {
+            return super.keyPathsForValuesAffectingValue(forKey: key)
+        }
+    }
+    
+    @objc dynamic var webServerStatus: NSAttributedString {
+        get {
+            if AppDelegate.shared.isWebServerRunning {
+                return NSAttributedString(string: "Running", attributes: [NSAttributedString.Key.foregroundColor : NSColor.systemGreen])
+            } else {
+                return NSAttributedString(string: "Stopped", attributes: [NSAttributedString.Key.foregroundColor : NSColor.systemRed])
+            }
+        }
     }
 }

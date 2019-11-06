@@ -20,7 +20,10 @@ protocol ServerObserver {
 
 // Kind of also my model for now
 @NSApplicationMain
-class AppDelegate: NSObject, NSApplicationDelegate {
+class AppDelegate: NSObject, NSApplicationDelegate, FermentrackProcessManagerClientProtocol {
+    func handleError(_ error: Error) {
+        print("Server error:" + error.localizedDescription)
+    }
 
     // TODO: an option on what repo to start with using mine for now
     public var fermentrackRepoURL: URL = URL(string: "https://github.com/corbinstreehouse/fermentrack.git")!
@@ -83,11 +86,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             oldConnection.invalidate()
         }
         serverConnection = NSXPCConnection(machServiceName: "com.redwoodmonkey.FermentrackProcessManager", options:[.privileged])
-
-//        serverConnection = NSXPCConnection(machServiceName: "com.redwoodmonkey.FermentrackProcessManager", options:[])
         serverConnection!.remoteObjectInterface = NSXPCInterface(with: FermentrackProcessManagerProtocol.self)
+        serverConnection!.exportedInterface = NSXPCInterface(with: FermentrackProcessManagerClientProtocol.self)
+        serverConnection!.exportedObject = self
         serverConnection!.resume()
         requestLoad()
+    }
+    
+    func webServerRunningChanged(_ newValue: Bool) {
+        isWebServerRunning = newValue
     }
     
     private func handleProcessManagerNotLoaded() {
@@ -98,7 +105,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     private func handleProcessManagerLoaded(fermentrackHomeURL: URL?, isWebServerRunning: Bool) {
         if let u = fermentrackHomeURL {
-                ignoreProcessManager = true
+            ignoreProcessManager = true
             fermentrackInstallDirURL = u
             ignoreProcessManager = false
         }
