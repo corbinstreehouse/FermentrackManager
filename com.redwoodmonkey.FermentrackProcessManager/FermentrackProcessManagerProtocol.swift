@@ -9,7 +9,8 @@
 import Foundation
 
 @objc public protocol FermentrackProcessManagerProtocol {
-    func load(withReply reply: @escaping (_ fermentrackHomeURL: URL?, _ isWebServerRunning: Bool, _ shouldReloadOnChanges: Bool) -> Void)
+    func load(withReply reply: @escaping (_ isSetup: Bool, _ fermentrackHomeURL: URL?, _ isWebServerRunning: Bool, _ shouldReloadOnChanges: Bool) -> Void)
+    func markSetupComplete(isSetupComplete: Bool, withReply reply: @escaping () -> Void)
     func setFermentrackHomeURL(_ url: URL, userName: String)
     func isWebServerRunning(withReply reply: @escaping (Bool) -> Void)
     func setShouldReloadOnChanges(_ value: Bool)

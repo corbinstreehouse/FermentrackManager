@@ -11,11 +11,7 @@ import Cocoa
 class StatusViewController: NSViewController {
 
     @IBAction func btnManualInstallClicked(_ button: NSButton) {
-        mainViewController.loadContentViewController(identifier: ManualInstallViewController.storyboardSceneID)
-    }
-    
-    @IBAction func btStatusClicked(_ button: NSButton) {
-        mainViewController.loadContentViewController(identifier: StatusViewController.storyboardSceneID, backwards: true)
+        mainViewController.loadManualInstallViewController()
     }
     
     override class func keyPathsForValuesAffectingValue(forKey key: String) -> Set<String> {

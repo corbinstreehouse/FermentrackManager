@@ -18,6 +18,8 @@ class LocalProcessManagerClient : NSObject, FermentrackProcessManagerClientProto
 }
 
 class FermentrackProcessManager {
+    
+    // MARK: Client notification list
     private var clients = Set<LocalProcessManagerClient>()
     
     public func addClient(_ client: LocalProcessManagerClient) {
@@ -34,7 +36,16 @@ class FermentrackProcessManager {
             client.webServerRunningChanged(value)
         }
     }
+    
+    // MARK: User default keys
+    private let fermentrackHomeURLKey = "FermentrackBasePath"
+    private let fermentrackShouldReloadOnChangesKey = "FermentrackShouldReloadOnChanges"
+    private let webServerManuallyStoppedKey = "webServerManuallyStopped"
+    private let apacheUserKey = "apacheUser"
+    private let fermentrackIsSetupCompleteKey = "isSetupComplete"
 
+    // MARK: Properties
+    
     // fermentrackHomeURL will be set by another thread via the XPC service; we serialize this on the queue to avoid any race conditions via a public method. Reading should be okay.
     var fermentrackHomeURL: URL? {
         willSet {
@@ -54,19 +65,7 @@ class FermentrackProcessManager {
         }
     }
     fileprivate let apacheGroup = "staff"
-    
 
-    
-    public var shouldReloadOnChanges: Bool {
-        didSet {
-            UserDefaults.standard.set(shouldReloadOnChanges, forKey: fermentrackShouldReloadOnChangesKey)
-            if isWebServerRunning {
-                try? _stopWebServer()
-                attemptSetup()
-            }
-        }
-    }
-    
     private var apacheServerRootURL: URL? {
         get {
             // This would be ideal, however, I found that mod_wsgi does not handle paths with spaces in the names, and causes failures that stumped me for a bit.
@@ -76,22 +75,57 @@ class FermentrackProcessManager {
         }
     }
     
-    private let fermentrackHomeURLKey = "FermentrackBasePath"
-    private let fermentrackShouldReloadOnChangesKey = "FermentrackShouldReloadOnChanges"
-    private let webServerManuallyStoppedKey = "webServerManuallyStopped"
-    private let apacheUserKey = "apacheUser"
+    public var shouldReloadOnChanges: Bool {
+        didSet {
+            UserDefaults.standard.set(shouldReloadOnChanges, forKey: fermentrackShouldReloadOnChangesKey)
+            processManagerQueue.async {
+                self.asyncUpdateShouldReloadOnChanges()
+            }
+        }
+    }
+    
+    public var isSetupComplete: Bool = false {
+        didSet {
+            UserDefaults.standard.set(isSetupComplete, forKey: fermentrackIsSetupCompleteKey)
+        }
+    }
+    
+    public func mark(isSetupComplete: Bool) {
+        processManagerQueue.async {
+            // Setting this to false may leave stuff running, so we attempt some cleanup
+            if !self.isSetupComplete {
+                if self.isWebServerRunning {
+                    try? self._stopWebServer()
+                }
+                self.isWebServerSetup = false
+            }
+            self.isSetupComplete = isSetupComplete
+            self.doProcessWork()
+        }
+    }
+        
+    private func asyncUpdateShouldReloadOnChanges() {
+        if isWebServerRunning {
+            try? _stopWebServer()
+        }
+        isWebServerSetup = false
+        doProcessWork()
+    }
+    
     // Explictly NOT concurrent queue so we can serialize access to work
     private var processManagerQueue = DispatchQueue(label: "com.redwoodmonkey.ProcessManager", attributes: [], autoreleaseFrequency:.inherit, target: nil)
     
     var termDispatchSourceSignal: DispatchSourceSignal
     
+    // MARK: Init
+
     init() {
-        // Use the previous fermentrack home location; it might not exist yet
         fermentrackHomeURL = UserDefaults.standard.url(forKey: fermentrackHomeURLKey)
         shouldReloadOnChanges = UserDefaults.standard.bool(forKey: fermentrackShouldReloadOnChangesKey)
         webServerManuallyStopped = UserDefaults.standard.bool(forKey: webServerManuallyStoppedKey)
         apacheUser = UserDefaults.standard.string(forKey: apacheUserKey)
-        
+        isSetupComplete = UserDefaults.standard.bool(forKey: fermentrackIsSetupCompleteKey)
+
         // watch for sigterm to kill our processes
         termDispatchSourceSignal = DispatchSource.makeSignalSource(signal: SIGTERM, queue: processManagerQueue)
         termDispatchSourceSignal.setEventHandler {
@@ -99,9 +133,8 @@ class FermentrackProcessManager {
         }
         termDispatchSourceSignal.activate()
         
-        // The first pass will synchronously start stuff up, if we are properly setup
-        attemptSetup()
-        doAsyncProcessWork()
+        // The first pass will synchronously start stuff up right now, if we are properly setup
+        doProcessWorkAndRepeat()
     }
     
     private func cleanupAndExit() {
@@ -111,11 +144,14 @@ class FermentrackProcessManager {
         exit(123)
     }
     
-    private func doAsyncProcessWork() {
-        // Do the work and then async check again one second later
+    private func doProcessWorkAndRepeat() {
+        // Do the work and then check again; how soon depends on if we are fully setup or not
         doProcessWork()
-        processManagerQueue.asyncAfter(deadline: .now() + 1) {
-            self.doAsyncProcessWork()
+        
+        // Check every second when not setup and every 30 seconds when we are setup
+        let checkTime: DispatchTime = DispatchTime.now() + (isSetupProperly() ? 1 : 30)
+        processManagerQueue.asyncAfter(deadline: checkTime) {
+            self.doProcessWorkAndRepeat()
         }
     }
     
@@ -128,11 +164,12 @@ class FermentrackProcessManager {
         
         killExistingCircus()
 
-        // update our state that the setup is based on
+        // update our state that the setup is based on and mark that we aren't setup again
         self.apacheUser = userName
         self.fermentrackHomeURL = url
+        isWebServerSetup = false
         
-        attemptSetup()
+        doProcessWork()
     }
     
     public func setFermentrackHomeURL(url: URL, userName: String) {
@@ -285,7 +322,6 @@ class FermentrackProcessManager {
         circusProcess = process;
     }
     
-    
     var isWebServerRunning: Bool = false {
         didSet (oldValue) {
             if (oldValue != isWebServerRunning) {
@@ -306,21 +342,47 @@ class FermentrackProcessManager {
         return false
     }
     
+    private func errorFromString(_ s: String) -> NSError {
+        return NSError(domain: "com.redwoodmonkey", code: 0, userInfo: [NSLocalizedDescriptionKey: s])
+    }
+    
     private func setupWebServer() throws {
-        let attributes = [FileAttributeKey.groupOwnerAccountName: apacheGroup, FileAttributeKey.ownerAccountName: apacheUser]
+        let attributes: [FileAttributeKey:Any] = [FileAttributeKey.groupOwnerAccountName: apacheGroup, FileAttributeKey.ownerAccountName: apacheUser!]
         
         try FileManager.default.createDirectory(at: apacheServerRootURL!, withIntermediateDirectories: true, attributes: attributes)
         // Not sure we need this; I was originally trying to run as the _www user/group and had permission issues when installing into areas that the current user can read/write
-        try FileManager.default.setAttributes(attributes, ofItemAtPath: self.fermentrackHomeURL!.path)
+//        try FileManager.default.setAttributes(attributes, ofItemAtPath: self.fermentrackHomeURL!.path)
                     
         let process = makeAndSetupPythonProcess()
         process.executableURL = self.fermentrackHomeURL!.appendingPathComponent("venv/bin/python3")
         process.arguments = ["manage.py", "runmodwsgi",  "--server-root=" + apacheServerRootURL!.path, "--user", apacheUser!, "--group", apacheGroup, "--setup-only"]
         if shouldReloadOnChanges {
-            process.arguments!.append(" --reload-on-changes")
+            process.arguments!.append("--reload-on-changes")
         }
+//        let stdOutPipe = Pipe()
+//        p.standardOutput = stdOutPipe
+        let stdErrPipe = Pipe()
+        process.standardError = stdErrPipe
+        
+        let printDataFromFile = { (fileHandle: FileHandle) in
+            if let string = String(data: fileHandle.availableData, encoding: .utf8) {
+                if string.count > 0 {
+                    self.processManagerQueue.async {
+                        self.isWebServerSetup = false
+                        self.handleError(self.errorFromString(string))
+                    }
+                }
+            }
+        }
+        
+//        stdOutPipe.fileHandleForReading.readabilityHandler = printDataFromFile
+        stdErrPipe.fileHandleForReading.readabilityHandler = printDataFromFile
+        
         try process.run()
+        isWebServerSetup = true // will get set to false on a background thread..
         process.waitUntilExit() // wait for the setup to finish and return
+        stdErrPipe.fileHandleForReading.readabilityHandler = nil
+        
         // todo: loook for the following info:
         //            Successfully ran command.
         //            Server URL         : http://localhost:8000/
@@ -354,14 +416,9 @@ class FermentrackProcessManager {
     }
         
     private func asyncStartWebServer() {
-        do {
-            try _startWebServer()
-            webServerManuallyStopped = false
-            updateIsWebServerRunning()
-        } catch {
-            handleError(error)
-            
-        }
+        webServerManuallyStopped = false
+        isWebServerSetup = false
+        doProcessWork()
     }
     
     func startWebServer() {
@@ -403,6 +460,7 @@ class FermentrackProcessManager {
     
     private func _startWebServer() throws {
         try runApacheCtl(withCommand: "start")
+        updateIsWebServerRunning()
     }
     
     private func _stopWebServer() throws {
@@ -413,32 +471,34 @@ class FermentrackProcessManager {
         try runApacheCtl(withCommand: "restart")
     }
     
-    private func attemptSetup() {
-        if isSetupProperly() {
+    private func attemptToSetupWebServer() {
+        if isSetupProperly() && !isWebServerSetup {
             do {
                 try setupWebServer()
-                try startWebServerIfNotManuallyStopped()
             } catch {
                 handleError(error)
             }
         }
     }
     
+    private var isWebServerSetup = false
     private func isSetupProperly() -> Bool {
-        if fermentrackHomeURL != nil && apacheUser != nil {
+        if fermentrackHomeURL != nil && apacheUser != nil && isSetupComplete {
             return true
         }
         return false
     }
     
     private func doProcessWork() {
-        
-        if !isSetupProperly() {
-            return
-        }
-        
         do {
+            if !isSetupProperly() {
+                throw errorFromString("Not setup!, url:\(fermentrackHomeURL?.path ?? "nil"), apacheUser:\(apacheUser ?? "nil")")
+            }
             
+            if (!isWebServerSetup) {
+                attemptToSetupWebServer()
+            }
+
             if (!isRedisAlive()) {
                 killLastRedis()
                 try launchRedis()

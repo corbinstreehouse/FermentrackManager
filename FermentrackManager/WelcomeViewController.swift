@@ -12,36 +12,49 @@ class WelcomeViewController: NSViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do view setup here.
+        if appDelegate.fermentrackHomeURL == nil {
+            appDelegate.fermentrackHomeURL = appDelegate.defaultFermentrackInstallDir()
+        }
     }
     
     private var observerNote: NSObjectProtocol? = nil
     override func viewDidAppear() {
         super.viewDidAppear()
-        weak var weakSelf   = self;
-
-        observerNote = NotificationCenter.default.addObserver(forName: NSWindow.didBecomeKeyNotification, object: self.view.window, queue: nil) { (note) in
-            weakSelf?.resetStatusChecksIfNeeded()
-        }
+        addKeyObserver()
         checkStatus()
     }
     
-    override func viewDidDisappear() {
+    private func addKeyObserver() {
+        weak var weakSelf   = self;
+        observerNote = NotificationCenter.default.addObserver(forName: NSWindow.didBecomeKeyNotification, object: self.view.window, queue: nil) { (note) in
+            weakSelf?.resetStatusChecksIfNeeded()
+        }
+    }
+    
+    private func removeKeyObserver() {
         if let o = observerNote {
             NotificationCenter.default.removeObserver(o)
             observerNote = nil
         }
     }
     
+    override func viewDidDisappear() {
+        removeKeyObserver()
+    }
+    
     private func resetStatusChecksIfNeeded() {
-        // check again when we become key
-        if pythonStatus == .notInstalled {
-            pythonStatus = .notChecked
+        // check again when we become key till we don't need to
+        if pythonStatus == .installed && xcodeStatus == .installed {
+            removeKeyObserver()
+        } else {
+            if pythonStatus == .notInstalled {
+                pythonStatus = .notChecked
+            }
+            if xcodeStatus == .notInstalled {
+                xcodeStatus = .notChecked
+            }
+            checkStatus()
         }
-        if xcodeStatus == .notInstalled {
-            xcodeStatus = .notChecked
-        }
-        checkStatus()
     }
     
     @objc dynamic var pythonStatusMsg: String = "Checking..."
@@ -144,11 +157,11 @@ class WelcomeViewController: NSViewController {
     }
     
     @IBAction func beginInstall(_ button: NSButton) {
-        mainViewController.loadContentViewController(identifier: InstallViewController.sceneID)
+        mainViewController.loadInstallViewController()
     }
     
     @IBAction func btnManualInstallClicked(_ button: NSButton) {
-        mainViewController.loadContentViewController(identifier: ManualInstallViewController.storyboardSceneID)
+        mainViewController.loadManualInstallViewController()
     }
 
 }

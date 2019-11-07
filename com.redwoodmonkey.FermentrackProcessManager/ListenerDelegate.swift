@@ -67,15 +67,20 @@ class ExportedProcessManager: LocalProcessManagerClient, FermentrackProcessManag
         processManager.shouldReloadOnChanges = value
     }
     
-    func load(withReply reply: @escaping (_ fermentrackHomeURL: URL?, _ webServerIsRunning: Bool, _ shouldReloadOnChanges: Bool) -> Void) {
+    func load(withReply reply: @escaping (_ isSetup: Bool, _ fermentrackHomeURL: URL?, _ webServerIsRunning: Bool, _ shouldReloadOnChanges: Bool) -> Void) {
         // Really just to kick the tires and see if the service is running
-        reply(processManager.fermentrackHomeURL, processManager.isWebServerRunning, processManager.shouldReloadOnChanges)
+        reply(processManager.isSetupComplete, processManager.fermentrackHomeURL, processManager.isWebServerRunning, processManager.shouldReloadOnChanges)
     }
     
     func setFermentrackHomeURL(_ url: URL, userName: String) {
         processManager.setFermentrackHomeURL(url: url, userName: userName)
     }
     
+    func markSetupComplete(isSetupComplete: Bool, withReply reply: @escaping () -> Void) {
+        processManager.mark(isSetupComplete: isSetupComplete)
+        reply()
+    }
+
 //    func getFermentrackHomeURL(withReply reply: @escaping (URL?) -> Void) {
 //        reply(self.processManager.getFermentrackHomeURL())
 //    }

@@ -18,26 +18,38 @@ class InstallViewController: NSViewController {
         // Do view setup here.
     }
     
-    private var installer: FermentrackInstaller?
-    
-    
+    @objc dynamic var isInstalling = false
+    @objc dynamic var didSuccessfulInstall = false
+
     private func startInstall() {
-        let installURL = AppDelegate.shared.fermentrackInstallDirURL
+        isInstalling = true
+        let fermentrackHomeURL = AppDelegate.shared.fermentrackHomeURL!
         let fermentrackRepoURL = AppDelegate.shared.fermentrackRepoURL
 
-        installer = FermentrackInstaller(installURL: installURL, repoURL: fermentrackRepoURL, statusHandler: { (s: NSAttributedString) in
+        let installer = FermentrackInstaller(installURL: fermentrackHomeURL, repoURL: fermentrackRepoURL, statusHandler: { (s: NSAttributedString) in
             self.statusTextView.textStorage?.append(s)
             self.statusTextView.scrollToEndOfDocument(nil)
         })
-        installer!.startFullAutomatedInstall()
-    }
-    
-    override func viewWillAppear() {
-        if installer == nil {
-            DispatchQueue.main.async {
-                self.startInstall()
-            }
+        didSuccessfulInstall = installer.doFullAutomatedInstall()
+        isInstalling = false
+        
+        if didSuccessfulInstall {
+            // Open the URL to show the user if it worked..
+            
         }
     }
     
+    override func viewWillAppear() {
+        DispatchQueue.main.async {
+            self.startInstall()
+        }
+    }
+    
+    @IBAction func backBtnClicked(_ sender: NSButton) {
+        mainViewController.loadWelcomeViewController(backwards: true)
+    }
+    
+    @IBAction func doneBtnClicked(_ sender: NSButton) {
+        mainViewController.loadStatusViewController()
+    }
 }

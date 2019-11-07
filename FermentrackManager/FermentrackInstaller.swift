@@ -18,12 +18,11 @@ class FermentrackInstaller {
     private var repoURL: URL
     
     convenience init() {
-        self.init(installURL: AppDelegate.shared.fermentrackInstallDirURL,
+        self.init(installURL: AppDelegate.shared.fermentrackHomeURL!,
                   repoURL: AppDelegate.shared.fermentrackRepoURL,
                   statusHandler: { (NSAttributedString) in 
             
         })
-        
     }
     
     init(installURL: URL, repoURL: URL, statusHandler: @escaping (NSAttributedString) -> Void) {
@@ -227,11 +226,12 @@ class FermentrackInstaller {
     
     private func setupDaemon() throws {
         statusHandler(bold("Setting up launch deamon with installation directory and user name\n"))
-        AppDelegate.shared.fermentrackInstallDirURL = self.installURL
+        AppDelegate.shared.fermentrackHomeURL = self.installURL
+        AppDelegate.shared.isProcessManagerSetup = true
         printStatus(string: "Done.\n")
     }
     
-    public func startFullAutomatedInstall() {
+    public func doFullAutomatedInstall() -> Bool {
         
         do {
             try installDaemon()
@@ -244,10 +244,11 @@ class FermentrackInstaller {
             try doMigrate()
             try collectStatic()
             try setupDaemon()
+            return true
         } catch {
             printError(string: "ERROR: " + error.localizedDescription)
+            return false
         }
-        
         
     }
     

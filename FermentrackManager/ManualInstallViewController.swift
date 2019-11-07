@@ -36,16 +36,41 @@ class ManualInstallViewController: StatusViewController {
         }
     }
 
+    @objc dynamic var processManagerStatus: NSAttributedString {
+        get {
+            if appDelegate.isProcessManagerInstalled {
+                return NSAttributedString(string: "Installed", attributes: [NSAttributedString.Key.foregroundColor: NSColor.systemGreen])
+            } else {
+                return NSAttributedString(string: "Not installed", attributes: [NSAttributedString.Key.foregroundColor: NSColor.systemRed])
+            }
+        }
+    }
+    
+    override class func keyPathsForValuesAffectingValue(forKey key: String) -> Set<String> {
+        if key == "processManagerStatus" {
+            return ["appDelegate.isProcessManagerInstalled"]
+        } else {
+            return super.keyPathsForValuesAffectingValue(forKey: key)
+        }
+    }
+    
     @IBAction func btnChangeHomeDirectoryClicked(_ sender: NSButton) {
         let openPanel = NSOpenPanel.init()
-        openPanel.directoryURL = appDelegate.fermentrackInstallDirURL
+        openPanel.directoryURL = appDelegate.fermentrackHomeURL
         openPanel.canChooseFiles = false
         openPanel.canChooseDirectories = true
         openPanel.begin { (response) in
             if response == .OK {
-                self.appDelegate.fermentrackInstallDirURL = openPanel.url!
+                self.appDelegate.fermentrackHomeURL = openPanel.url!
             }
         }
-        
+    }
+    
+    @IBAction func btnBackClicked(_ button: NSButton) {
+        if appDelegate.isProcessManagerSetup {
+            mainViewController.loadStatusViewController(backwards: true)
+        } else {
+            mainViewController.loadWelcomeViewController(backwards: true)
+        }
     }
 }
