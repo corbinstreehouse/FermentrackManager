@@ -10,6 +10,17 @@ import Foundation
 import AppKit
 import ServiceManagement
 
+extension NSApplication {
+    func processEvents() {
+        repeat {
+            if let event = NSApp.nextEvent(matching: NSEvent.EventTypeMask.any, until: NSDate.distantPast, inMode: .default, dequeue: true) {
+                NSApp.sendEvent(event)
+            } else {
+                break;
+            }
+        } while true
+    }
+}
 
 class FermentrackInstaller {
     
@@ -20,7 +31,7 @@ class FermentrackInstaller {
     convenience init() {
         self.init(installURL: AppDelegate.shared.fermentrackHomeURL!,
                   repoURL: AppDelegate.shared.fermentrackRepoURL,
-                  statusHandler: { (NSAttributedString) in 
+                  statusHandler: { (NSAttributedString) in
             
         })
     }
@@ -73,13 +84,7 @@ class FermentrackInstaller {
         try p.run()
         
         repeat {
-            repeat {
-                if let event = NSApp.nextEvent(matching: NSEvent.EventTypeMask.any, until: NSDate.distantPast, inMode: .default, dequeue: true) {
-                    NSApp.sendEvent(event)
-                } else {
-                    break;
-                }
-            } while true
+            NSApp.processEvents()
         } while p.isRunning
         
         stdOutPipe.fileHandleForReading.readabilityHandler = nil
@@ -94,6 +99,7 @@ class FermentrackInstaller {
         statusHandler(bold("Creating Fermentrack home directory\n"))
         printStatus(string: installURL.path)
         printStatus(string: "\n")
+        NSApp.processEvents()
         try FileManager.default.createDirectory(at: installURL, withIntermediateDirectories: true, attributes: [:])
     }
     
@@ -128,7 +134,7 @@ class FermentrackInstaller {
     }
 
     private func setupPythonVenv() throws {
-        statusHandler(bold("Setting up Python virtual environment directory\n"))
+        statusHandler(bold("Setting up the python virtual environment directory\n"))
         let pythonURL = URL(fileURLWithPath: "/usr/local/bin/python3")
         try runCommand(executableURL: pythonURL, arguments: ["-m", "venv", virtualEnvURL.path])
         printStatus(string: "Done.\n")
@@ -218,23 +224,27 @@ class FermentrackInstaller {
     }
     
     public func installDaemon() throws {
-        statusHandler(bold("Installing launch daemon - requires privileges\n"))
+        statusHandler(bold("Installing Process Manager (a system launch daemon which requires privileges)\n"))
+        NSApp.processEvents()
         let name = "com.redwoodmonkey.FermentrackProcessManager"
         try installLaunchDaemon(named: name)
         printStatus(string: "Done.\n")
     }
     
-    private func setupDaemon() throws {
-        statusHandler(bold("Setting up launch deamon with installation directory and user name\n"))
+    private func setupProcessManager() throws {
+        statusHandler(bold("Setting up the Process Manager with the installation directory and user name\n"))
         AppDelegate.shared.fermentrackHomeURL = self.installURL
         AppDelegate.shared.isProcessManagerSetup = true
         printStatus(string: "Done.\n")
     }
     
-    public func doFullAutomatedInstall() -> Bool {
+    public func doFullAutomatedInstall(withProcessManager: Bool) -> Bool {
         
         do {
-            try installDaemon()
+            /*
+            if withProcessManager {
+                try installDaemon()
+            }
             try installRedis()
             try makeHomeDirectory()
             try cloneRepository()
@@ -243,7 +253,8 @@ class FermentrackInstaller {
             try makeSecretSettings()
             try doMigrate()
             try collectStatic()
-            try setupDaemon()
+ */
+            try setupProcessManager()
             return true
         } catch {
             printError(string: "ERROR: " + error.localizedDescription)

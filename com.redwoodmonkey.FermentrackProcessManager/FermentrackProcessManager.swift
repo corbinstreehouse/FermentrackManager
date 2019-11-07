@@ -93,12 +93,12 @@ class FermentrackProcessManager {
     public func mark(isSetupComplete: Bool) {
         processManagerQueue.async {
             // Setting this to false may leave stuff running, so we attempt some cleanup
-            if !self.isSetupComplete {
+            if self.isSetupComplete {
                 if self.isWebServerRunning {
                     try? self._stopWebServer()
                 }
-                self.isWebServerSetup = false
             }
+            self.isWebServerSetup = false // Always reset this
             self.isSetupComplete = isSetupComplete
             self.doProcessWork()
         }
@@ -252,6 +252,7 @@ class FermentrackProcessManager {
     }
     
     private func killExistingCircus() {
+        guard fermentrackHomeURL != nil else { return }
         // Just in case..
         // python3 -m circus.circusctl --json --timeout 1 quit
         // This will error/log, which is expected.
@@ -404,6 +405,7 @@ class FermentrackProcessManager {
     }
     
     private func runApacheCtl(withCommand command: String) throws {
+        guard fermentrackHomeURL != nil else { return }
         if let rootURL = apacheServerRootURL {
             let process = makeAndSetupPythonProcess()
             process.executableURL = rootURL.appendingPathComponent("apachectl")

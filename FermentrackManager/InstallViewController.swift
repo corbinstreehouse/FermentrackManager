@@ -18,7 +18,11 @@ class InstallViewController: NSViewController {
         // Do view setup here.
     }
     
-    @objc dynamic var isInstalling = false
+    @objc dynamic var isInstalling = false {
+        didSet {
+            appDelegate.isInstalling = isInstalling
+        }
+    }
     @objc dynamic var didSuccessfulInstall = false
 
     private func startInstall() {
@@ -27,10 +31,13 @@ class InstallViewController: NSViewController {
         let fermentrackRepoURL = AppDelegate.shared.fermentrackRepoURL
 
         let installer = FermentrackInstaller(installURL: fermentrackHomeURL, repoURL: fermentrackRepoURL, statusHandler: { (s: NSAttributedString) in
+            let shouldScroll = self.statusTextView.visibleRect.maxY == self.statusTextView.bounds.maxY
             self.statusTextView.textStorage?.append(s)
-            self.statusTextView.scrollToEndOfDocument(nil)
+            if shouldScroll {
+                self.statusTextView.scrollToEndOfDocument(nil)
+            }
         })
-        didSuccessfulInstall = installer.doFullAutomatedInstall()
+        didSuccessfulInstall = installer.doFullAutomatedInstall(withProcessManager: !appDelegate.isProcessManagerInstalled)
         isInstalling = false
         
         if didSuccessfulInstall {
@@ -39,7 +46,7 @@ class InstallViewController: NSViewController {
         }
     }
     
-    override func viewWillAppear() {
+    override func viewDidAppear() {
         DispatchQueue.main.async {
             self.startInstall()
         }

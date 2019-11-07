@@ -18,12 +18,14 @@ public class MainViewController: NSViewController {
     }
     
     func handleProcessManagerNotLoaded() {
-        loadWelcomeViewController()
+        if !appDelegate.isInstalling {
+            loadWelcomeViewController()
+        }
     }
     
     func handleProcessManagerIsLoaded() {
-        // Don't do anything if we are on the manual setup view controller
-        if self.children.first as? ManualInstallViewController? != nil {
+        // Don't do anything if we are on the manual setup view controller or installing.
+        if appDelegate.isInstalling || self.children.first as? ManualInstallViewController? != nil {
             return
         }
         if !appDelegate.isProcessManagerSetup {

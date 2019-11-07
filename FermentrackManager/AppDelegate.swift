@@ -17,6 +17,8 @@ extension NSViewController {
     }
 }
 
+let useLocalManager = false // for debugging set to true
+
 // Kind of also my model for now
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate, FermentrackProcessManagerClientProtocol {
@@ -29,14 +31,14 @@ class AppDelegate: NSObject, NSApplicationDelegate, FermentrackProcessManagerCli
     // TODO: an option on what repo to start with using mine for now
     public var fermentrackRepoURL: URL = URL(string: "https://github.com/corbinstreehouse/fermentrack.git")!
 
-    @objc var isProcessManagerInstalled = false
+    @objc dynamic var isProcessManagerInstalled = false
     
     weak var mainViewController: MainViewController!
     
     private var ignoreProcessManager = false
     @objc dynamic public var fermentrackHomeURL: URL? {
         didSet {
-            if (!ignoreProcessManager && fermentrackHomeURL != nil) {
+            if (!ignoreProcessManager && isProcessManagerInstalled && fermentrackHomeURL != nil) {
                 processManager?.setFermentrackHomeURL(fermentrackHomeURL!, userName: NSUserName())
             }
         }
@@ -71,11 +73,20 @@ class AppDelegate: NSObject, NSApplicationDelegate, FermentrackProcessManagerCli
         // Insert code here to tear down your application
     }
     
+    func applicationShouldTerminate(_ sender: NSApplication) -> NSApplication.TerminateReply {
+        if isInstalling {
+            return .terminateCancel
+        } else {
+            return .terminateNow
+        }
+    }
+    
     public func startServerConnection() {
         if let oldConnection = serverConnection {
             oldConnection.invalidate()
+            processManager = nil
         }
-        serverConnection = NSXPCConnection(machServiceName: "com.redwoodmonkey.FermentrackProcessManager", options:[.privileged])
+        serverConnection = NSXPCConnection(machServiceName: "com.redwoodmonkey.FermentrackProcessManager", options:useLocalManager ? [] : [.privileged])
         serverConnection!.remoteObjectInterface = NSXPCInterface(with: FermentrackProcessManagerProtocol.self)
         serverConnection!.exportedInterface = NSXPCInterface(with: FermentrackProcessManagerClientProtocol.self)
         serverConnection!.exportedObject = self
@@ -110,12 +121,25 @@ class AppDelegate: NSObject, NSApplicationDelegate, FermentrackProcessManagerCli
             }
         }
     }
+
+    var isInstalling = false {
+        didSet {
+            if oldValue != isInstalling {
+                if isInstalling {
+                    ProcessInfo.processInfo.disableSuddenTermination()
+                } else {
+                    ProcessInfo.processInfo.enableSuddenTermination()
+                }
+            }
+        }
+    }
     
     @objc dynamic var isProcessManagerSetup: Bool = false {
         didSet {
             if !ignoreProcessManager {
                 self.processManager?.markSetupComplete(isSetupComplete: isProcessManagerSetup) {
                     // done!
+                    print("mark complete DONE")
                 }
             }
         }
@@ -127,7 +151,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, FermentrackProcessManagerCli
         isProcessManagerInstalled = true
         self.isWebServerRunning = isWebServerRunning
         self.shouldReloadOnChanges = shouldReloadOnChanges
-        self.fermentrackHomeURL = fermentrackHomeURL
+        self.fermentrackHomeURL = fermentrackHomeURL ?? self.defaultFermentrackInstallDir()
         self.isProcessManagerSetup = isSetup
         
         ignoreProcessManager = false

@@ -1115,7 +1115,7 @@
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RrK-sC-Rp6" customClass="LinkTextField" customModule="FermentrackManager" customModuleProvider="target">
                                 <rect key="frame" x="272" y="275" width="390" height="19"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="file://var/tmp/fermentrack_apache" id="EFp-YA-Ewr">
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="file:///var/tmp/fermentrack_apache" id="EFp-YA-Ewr">
                                     <font key="font" metaFont="systemLight" size="15"/>
                                     <color key="textColor" name="linkColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
