@@ -241,7 +241,6 @@ class FermentrackInstaller {
     public func doFullAutomatedInstall(withProcessManager: Bool) -> Bool {
         
         do {
-            /*
             if withProcessManager {
                 try installDaemon()
             }
@@ -253,7 +252,6 @@ class FermentrackInstaller {
             try makeSecretSettings()
             try doMigrate()
             try collectStatic()
- */
             try setupProcessManager()
             return true
         } catch {
