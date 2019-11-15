@@ -18,6 +18,7 @@ extension NSViewController {
 }
 
 let useLocalManager = false // for debugging set to true
+let repoDefaultAbsolutePath = "https://github.com/corbinstreehouse/fermentrack.git"
 
 // Kind of also my model for now
 @NSApplicationMain
@@ -28,8 +29,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, FermentrackProcessManagerCli
         }
     }
 
-    // TODO: an option on what repo to start with using mine for now
-    public var fermentrackRepoURL: URL = URL(string: "https://github.com/corbinstreehouse/fermentrack.git")!
+    public var fermentrackRepoURL: URL = URL(string: repoDefaultAbsolutePath)!
 
     @objc dynamic var isProcessManagerInstalled = false
     

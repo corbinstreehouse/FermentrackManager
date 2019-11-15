@@ -30,7 +30,7 @@ class ManualInstallViewController: StatusViewController {
         runInInstaller { (installer) in
             appDelegate.stopWebServer()
             
-            try installer.installDaemon()
+            try installer.installProcessManagerDaemon()
             // Reload after
             appDelegate.startServerConnection()
         }
@@ -67,10 +67,32 @@ class ManualInstallViewController: StatusViewController {
     }
     
     @IBAction func btnBackClicked(_ button: NSButton) {
+        // commmit editing first..
+        if self.view.window?.fieldEditor(false, for: nil) != nil {
+            self.view.window?.makeFirstResponder(self.view.window!.contentView!) // will go to something else soon..
+        }
+
+        // save the URL before hitting back
+        if let customPath = customRepositoryPath {
+            if let customURL = URL(string: customPath) {
+                appDelegate.fermentrackRepoURL = customURL
+            }
+        } else {
+            appDelegate.fermentrackRepoURL = URL(string: repoDefaultAbsolutePath)!
+        }
+        
         if appDelegate.isProcessManagerSetup {
             mainViewController.loadStatusViewController(backwards: true)
         } else {
             mainViewController.loadWelcomeViewController(backwards: true)
         }
     }
+    
+    override func viewWillAppear() {
+        if appDelegate.fermentrackRepoURL.absoluteString != repoDefaultAbsolutePath {
+            customRepositoryPath = appDelegate.fermentrackRepoURL.absoluteString
+        }
+    }
+        
+    @objc dynamic var customRepositoryPath: String?
 }

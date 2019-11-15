@@ -42,6 +42,20 @@ class FermentrackInstaller {
         self.installURL = installURL
     }
     
+    public func checkIfInstallDirectoryEmpty() -> Bool {
+        if let contents = try? FileManager.default.contentsOfDirectory(at: self.installURL, includingPropertiesForKeys: [], options: []) {
+            // Ignore hidden files
+            for fileNameURL in contents {
+                if fileNameURL.lastPathComponent.starts(with: ".") {
+                    // Ignore
+                } else {
+                    return false;
+                }
+            }
+        }
+        return true
+    }
+    
     private func bold(_ s: String) -> NSAttributedString {
         let boldFont = NSFont.boldSystemFont(ofSize: 14)
         return NSAttributedString(string: s, attributes: [NSAttributedString.Key.font: boldFont])
@@ -216,14 +230,30 @@ class FermentrackInstaller {
         let redisDestConfURL = redisDestURL.appendingPathComponent("redis.conf")
         
         try FileManager.default.createDirectory(at: redisDestURL, withIntermediateDirectories: true, attributes: [:])
-        try FileManager.default.copyItem(at: redisCliURL, to: redisDestCliURL)
-        try FileManager.default.copyItem(at: redisServerURL, to: redisDestServerURL)
-        try FileManager.default.copyItem(at: redisConfURL, to: redisDestConfURL)
+        
+        if !FileManager.default.fileExists(atPath: redisDestCliURL.path) {
+            try FileManager.default.copyItem(at: redisCliURL, to: redisDestCliURL)
+        } else {
+            printStatus(string: "redis-cli seems to exist; not copying.\n")
+        }
+        if !FileManager.default.fileExists(atPath: redisDestServerURL.path) {
+            try FileManager.default.copyItem(at: redisServerURL, to: redisDestServerURL)
+        } else {
+            printStatus(string: "redis-server seems to exist; not copying.\n")
+
+        }
+        if FileManager.default.fileExists(atPath: redisDestConfURL.path) {
+            printStatus(string: "redis.conf exists, but overwriting it!\n")
+            try FileManager.default.removeItem(at: redisDestConfURL)
+            try FileManager.default.copyItem(at: redisConfURL, to: redisDestConfURL)
+        } else {
+            try FileManager.default.copyItem(at: redisConfURL, to: redisDestConfURL)
+        }
         
         printStatus(string: "Done.\n")
     }
     
-    public func installDaemon() throws {
+    public func installProcessManagerDaemon() throws {
         statusHandler(bold("Installing Process Manager (a system launch daemon which requires privileges)\n"))
         NSApp.processEvents()
         let name = "com.redwoodmonkey.FermentrackProcessManager"
@@ -242,10 +272,12 @@ class FermentrackInstaller {
         
         do {
             if withProcessManager {
-                try installDaemon()
+                try installProcessManagerDaemon()
+            } else {
+                statusHandler(bold("Process Manager already installed.\n"))
             }
-            try installRedis()
             try makeHomeDirectory()
+            try installRedis()
             try cloneRepository()
             try setupPythonVenv()
             try setupPipRequirements()
@@ -253,9 +285,12 @@ class FermentrackInstaller {
             try doMigrate()
             try collectStatic()
             try setupProcessManager()
+
+            statusHandler(bold("Full automated install succeeded!\n"))
             return true
         } catch {
             printError(string: "ERROR: " + error.localizedDescription)
+            printError(string: "\nTry deleting the contents of the installation directory and trying again, or customizing the install directory and attempting another full automated install.\n\nThe current install directory is: \(installURL.path)\n")
             return false
         }
         

@@ -1285,7 +1285,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0bg-uD-2DK">
-                                <rect key="frame" x="82" y="222" width="141" height="19"/>
+                                <rect key="frame" x="81" y="180" width="141" height="19"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Development:" id="yRe-ap-YQr">
                                     <font key="font" metaFont="systemLight" size="15"/>
@@ -1294,7 +1294,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="U3g-13-FlM">
-                                <rect key="frame" x="82" y="316" width="141" height="19"/>
+                                <rect key="frame" x="82" y="320" width="141" height="19"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Redis:" id="3w9-R7-wCx">
                                     <font key="font" metaFont="systemLight" size="15"/>
@@ -1303,7 +1303,7 @@
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1v1-bh-Bre">
-                                <rect key="frame" x="223" y="308" width="113" height="32"/>
+                                <rect key="frame" x="223" y="312" width="113" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="Install Redis" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ylt-5V-RvX">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1334,7 +1334,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VAM-fK-xFn">
-                                <rect key="frame" x="227" y="153" width="371" height="64"/>
+                                <rect key="frame" x="226" y="111" width="371" height="64"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" selectable="YES" id="GJ1-hQ-pCx">
                                     <font key="font" metaFont="system"/>
@@ -1344,7 +1344,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ed9-ts-U59">
-                                <rect key="frame" x="338" y="318" width="248" height="16"/>
+                                <rect key="frame" x="338" y="322" width="248" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" selectable="YES" title="Redis needs to be in the above directory" id="6Tv-wE-NPF">
                                     <font key="font" metaFont="system"/>
@@ -1364,7 +1364,7 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fvi-2F-Eo8">
-                                <rect key="frame" x="229" y="223" width="138" height="18"/>
+                                <rect key="frame" x="228" y="181" width="138" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="check" title="Reload on changes" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="tXb-TO-ZIa">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -1376,7 +1376,7 @@
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="U1A-Xw-beP">
-                                <rect key="frame" x="97" y="276" width="126" height="19"/>
+                                <rect key="frame" x="97" y="288" width="126" height="19"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Process manager:" id="WdD-gD-g2W">
                                     <font key="font" metaFont="systemLight" size="15"/>
@@ -1384,8 +1384,17 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="79b-4i-Zre">
+                                <rect key="frame" x="56" y="238" width="166" height="19"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Fermentrack repository:" id="05Y-RT-zqt">
+                                    <font key="font" metaFont="systemLight" size="15"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y0U-Vf-kN8">
-                                <rect key="frame" x="223" y="267" width="178" height="32"/>
+                                <rect key="frame" x="223" y="279" width="178" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="Install Launch Daemon" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="A9c-bs-uXy">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1396,7 +1405,7 @@
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eJ8-PI-txa">
-                                <rect key="frame" x="401" y="277" width="185" height="16"/>
+                                <rect key="frame" x="401" y="289" width="185" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" selectable="YES" title="into /System/LaunchDaemons" id="1mt-GV-WOz">
                                     <font key="font" metaFont="system"/>
@@ -1405,7 +1414,7 @@
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="P1X-Ps-cd9">
-                                <rect key="frame" x="231" y="120" width="134" height="18"/>
+                                <rect key="frame" x="230" y="78" width="134" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="check" title="Setup is complete" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="WB4-Zf-JDm">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -1417,7 +1426,7 @@
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Usg-Cu-DX9">
-                                <rect key="frame" x="231" y="82" width="367" height="32"/>
+                                <rect key="frame" x="230" y="40" width="367" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" selectable="YES" title="A process manager flag telling it that all setup is done and it can start running." id="ogC-J0-VoN">
                                     <font key="font" metaFont="system"/>
@@ -1426,7 +1435,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YDm-UH-R7Y">
-                                <rect key="frame" x="228" y="255" width="126" height="16"/>
+                                <rect key="frame" x="228" y="267" width="126" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" selectable="YES" title="Installed" id="arh-Ry-WQ5">
                                     <font key="font" metaFont="system"/>
@@ -1436,6 +1445,31 @@
                                 <connections>
                                     <binding destination="XXD-Kt-uLx" name="value" keyPath="processManagerStatus" id="9DE-u2-EXh"/>
                                 </connections>
+                            </textField>
+                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hYr-8R-fd5">
+                                <rect key="frame" x="229" y="237" width="397" height="21"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="KZ7-33-DaU">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <connections>
+                                    <binding destination="XXD-Kt-uLx" name="value" keyPath="customRepositoryPath" id="RXW-6C-ahh">
+                                        <dictionary key="options">
+                                            <string key="NSNullPlaceholder">https://github.com/corbinstreehouse/fermentrack.git</string>
+                                        </dictionary>
+                                    </binding>
+                                </connections>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="l0Z-Uo-cD6">
+                                <rect key="frame" x="228" y="216" width="261" height="16"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" selectable="YES" title="Change before doing an automated install." id="Rse-LO-YEH">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
                             </textField>
                         </subviews>
                     </view>

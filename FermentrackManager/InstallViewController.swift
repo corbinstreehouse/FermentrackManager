@@ -24,9 +24,22 @@ class InstallViewController: NSViewController {
         }
     }
     @objc dynamic var didSuccessfulInstall = false
+    
+    private func doInstall(withInstaller installer: FermentrackInstaller) {
+        isInstalling = true
+        didSuccessfulInstall = installer.doFullAutomatedInstall(withProcessManager: !appDelegate.isProcessManagerInstalled)
+        isInstalling = false
+        
+        if didSuccessfulInstall {
+            appDelegate.startWebServer()
+            // maybe delay a second???..
+            
+            // Open the URL to show the user if it worked..
+            NSWorkspace.shared.open(appDelegate.fermentrackHostURL)
+        }
+    }
 
     private func startInstall() {
-        isInstalling = true
         let fermentrackHomeURL = AppDelegate.shared.fermentrackHomeURL!
         let fermentrackRepoURL = AppDelegate.shared.fermentrackRepoURL
 
@@ -37,12 +50,24 @@ class InstallViewController: NSViewController {
                 self.statusTextView.scrollToEndOfDocument(nil)
             }
         })
-        didSuccessfulInstall = installer.doFullAutomatedInstall(withProcessManager: !appDelegate.isProcessManagerInstalled)
-        isInstalling = false
-        
-        if didSuccessfulInstall {
-            // Open the URL to show the user if it worked..
-            
+
+        if !installer.checkIfInstallDirectoryEmpty() {
+            let a = NSAlert()
+            a.messageText = "Install directory is not empty and the install will likely fail. Do you wish to continue?"
+            a.addButton(withTitle: "Continue")
+            a.addButton(withTitle: "Cancel")
+            a.beginSheetModal(for: self.view.window!) { (modalResponse) in
+                // Let the sheet close and do this on the next tick
+                DispatchQueue.main.async {
+                    if modalResponse == NSApplication.ModalResponse.alertFirstButtonReturn {
+                        self.doInstall(withInstaller: installer)
+                    } else {
+                        self.mainViewController.loadWelcomeViewController(backwards: true)
+                    }
+                }
+            }
+        } else {
+            doInstall(withInstaller: installer)
         }
     }
     
