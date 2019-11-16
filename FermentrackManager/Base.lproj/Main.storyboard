@@ -976,7 +976,7 @@
                             <constraint firstItem="KBl-nm-CXn" firstAttribute="leading" secondItem="nYe-BJ-1Gr" secondAttribute="leading" id="R49-fJ-KYs"/>
                             <constraint firstItem="Bgz-Qc-Y9l" firstAttribute="leading" secondItem="het-zv-YeM" secondAttribute="leading" id="U4q-w7-gh9"/>
                             <constraint firstItem="het-zv-YeM" firstAttribute="leading" secondItem="4pr-uE-M9C" secondAttribute="leading" id="UXo-qR-YmH"/>
-                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="307" id="Uc5-yc-EnM"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="354" id="Uc5-yc-EnM"/>
                             <constraint firstItem="bhy-5l-N7b" firstAttribute="top" secondItem="4pr-uE-M9C" secondAttribute="bottom" constant="8" id="XhD-1x-G1O"/>
                             <constraint firstItem="4pr-uE-M9C" firstAttribute="top" secondItem="Evt-LZ-Nyh" secondAttribute="bottom" constant="12" id="bFW-xQ-esU"/>
                             <constraint firstItem="Evt-LZ-Nyh" firstAttribute="centerX" secondItem="86g-rO-A1q" secondAttribute="centerX" id="cec-tw-pdd"/>
@@ -1259,14 +1259,13 @@
         <scene sceneID="qpg-fy-bT8">
             <objects>
                 <viewController storyboardIdentifier="ManualInstallViewController" id="XXD-Kt-uLx" customClass="ManualInstallViewController" customModule="FermentrackManager" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="oMm-bv-Fnb">
-                        <rect key="frame" x="0.0" y="0.0" width="696" height="440"/>
-                        <autoresizingMask key="autoresizingMask"/>
+                    <view key="view" translatesAutoresizingMaskIntoConstraints="NO" id="oMm-bv-Fnb">
+                        <rect key="frame" x="0.0" y="0.0" width="659" height="440"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SIg-43-15H" customClass="LinkTextField" customModule="FermentrackManager" customModuleProvider="target">
-                                <rect key="frame" x="230" y="389" width="293" height="19"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="~/Library/Application Support/Fermentrack" id="hEx-Qi-8lk">
+                                <rect key="frame" x="230" y="389" width="303" height="19"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" lineBreakMode="truncatingMiddle" sendsActionOnEndEditing="YES" alignment="left" title="~/Library/Application Support/Fermentrack" id="hEx-Qi-8lk">
                                     <font key="font" metaFont="systemLight" size="15"/>
                                     <color key="textColor" name="linkColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1315,7 +1314,7 @@
                             </button>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BZp-57-SIp">
                                 <rect key="frame" x="533" y="381" width="99" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="Change..." bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="kQq-8v-WpZ">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -1385,7 +1384,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="79b-4i-Zre">
-                                <rect key="frame" x="56" y="238" width="166" height="19"/>
+                                <rect key="frame" x="56" y="239" width="166" height="19"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Fermentrack repository:" id="05Y-RT-zqt">
                                     <font key="font" metaFont="systemLight" size="15"/>
@@ -1472,12 +1471,16 @@
                                 </textFieldCell>
                             </textField>
                         </subviews>
+                        <constraints>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="440" id="1dK-tL-Qw7"/>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="659" id="Paj-JS-Cau"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <customObject id="Zu3-QR-T7j" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <userDefaultsController id="h5T-ID-rR4"/>
             </objects>
-            <point key="canvasLocation" x="1037" y="1701"/>
+            <point key="canvasLocation" x="1018.5" y="1701"/>
         </scene>
     </scenes>
     <resources>
