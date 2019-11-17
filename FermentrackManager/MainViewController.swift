@@ -38,6 +38,7 @@ public class MainViewController: NSViewController {
     fileprivate func loadContentViewController(identifier: NSStoryboard.SceneIdentifier, backwards: Bool = false) {
         let viewController = NSStoryboard.main!.instantiateController(withIdentifier: identifier) as! NSViewController
         let oldChildViewController = self.children.first!
+        assert(self.children.count == 1, "expecting one child!") // sometimes, something is causing 2.
         self.addChild(viewController)
         
         // stupid work arounds for autolayout issues
