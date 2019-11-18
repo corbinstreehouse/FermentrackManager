@@ -362,31 +362,7 @@
 		9D1655A5236DCECF00BD1E15 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = L74PN67Q6R;
-				INFOPLIST_FILE = "$(SRCROOT)/com.redwoodmonkey.FermentrackProcessManager/Info.plist";
-				OTHER_LDFLAGS = (
-					"-sectcreate",
-					__TEXT,
-					__info_plist,
-					com.redwoodmonkey.FermentrackProcessManager/Info.plist,
-					"-sectcreate",
-					__TEXT,
-					__launchd_plist,
-					com.redwoodmonkey.FermentrackProcessManager/Launchd.plist,
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.redwoodmonkey.FermentrackProcessManager;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-			};
-			name = Debug;
-		};
-		9D1655A6236DCECF00BD1E15 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = com.redwoodmonkey.FermentrackProcessManager/com.redwoodmonkey.FermentrackProcessManagerRelease.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "Developer ID Application: Corbin Dunn (L74PN67Q6R)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = L74PN67Q6R;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -403,6 +379,34 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.redwoodmonkey.FermentrackProcessManager;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		9D1655A6236DCECF00BD1E15 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = com.redwoodmonkey.FermentrackProcessManager/com.redwoodmonkey.FermentrackProcessManagerRelease.entitlements;
+				CODE_SIGN_IDENTITY = "Developer ID Application: Corbin Dunn (L74PN67Q6R)";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = L74PN67Q6R;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = "$(SRCROOT)/com.redwoodmonkey.FermentrackProcessManager/Info.plist";
+				OTHER_LDFLAGS = (
+					"-sectcreate",
+					__TEXT,
+					__info_plist,
+					com.redwoodmonkey.FermentrackProcessManager/Info.plist,
+					"-sectcreate",
+					__TEXT,
+					__launchd_plist,
+					com.redwoodmonkey.FermentrackProcessManager/Launchd.plist,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.redwoodmonkey.FermentrackProcessManager;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
@@ -413,10 +417,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = FermentrackManager/FermentrackManager.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "Developer ID Application: Corbin Dunn (L74PN67Q6R)";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = L74PN67Q6R;
+				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = FermentrackManager/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -437,8 +442,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = FermentrackManager/FermentrackManagerRelease.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "Developer ID Application: Corbin Dunn (L74PN67Q6R)";
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = L74PN67Q6R;
 				ENABLE_HARDENED_RUNTIME = YES;
