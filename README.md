@@ -5,6 +5,9 @@ Fermentrack is a web application designed to manage and log fermentation tempera
 
 Fermentrack's homepage: [http://www.fermentrack.com]()
 
+## Requirements
+
+macOS 10.15 (Catalina) or later
 
 ## Installation
 
