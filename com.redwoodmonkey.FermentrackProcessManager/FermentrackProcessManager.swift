@@ -163,6 +163,7 @@ class FermentrackProcessManager {
         }
         
         killExistingCircus()
+        killLastRedis() // We want to run redis from the new home dir!
 
         // update our state that the setup is based on and mark that we aren't setup again
         self.apacheUser = userName
@@ -179,13 +180,20 @@ class FermentrackProcessManager {
     }
     
     private func makeRedisProcess() -> Process {
-        let redisServerURL = fermentrackHomeURL!.appendingPathComponent("redis/redis-server")
-        let redisConfURL = fermentrackHomeURL!.appendingPathComponent("redis/redis.conf")
+        let redisHomeURL = fermentrackHomeURL!.appendingPathComponent("redis")
+        let redisServerURL = redisHomeURL.appendingPathComponent("redis-server")
+        let redisConfURL = redisHomeURL.appendingPathComponent("redis.conf")
         
         let redisProcess = Process()
         redisProcess.executableURL = redisServerURL
         redisProcess.arguments = [redisConfURL.path]
-        
+        redisProcess.currentDirectoryURL = redisHomeURL
+        redisProcess.environment = [
+                               "HOME": redisHomeURL.path,
+                               "PWD": redisHomeURL.path,
+                               "LC_ALL": "en_US.UTF-8",
+                               "LANG": "en_US.UTF-8",]
+
         // maybe capture stderror/stdout?
         
         return redisProcess
@@ -226,6 +234,7 @@ class FermentrackProcessManager {
             if p.isRunning {
                 p.terminate()
             }
+            redisProcess = nil
         }
     }
     
@@ -297,7 +306,10 @@ class FermentrackProcessManager {
     }
     
     private var circusIniFileURL: URL {
-        return FileManager.default.temporaryDirectory.appendingPathComponent("fermentrack_mac_circus.ini")
+        get {
+            // temporaryDirectory under root/daemon will return a path we can't access..
+            return fermentrackHomeURL!.appendingPathComponent("fermentrack_mac_circus.ini")
+        }
     }
     
     // The ini file has a hardcoded PYTHON_PATH. We open up the ini file, modify it, and write it out to a temporary location and use that as our ini file
