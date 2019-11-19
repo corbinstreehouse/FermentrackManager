@@ -11,7 +11,7 @@ macOS 10.15 (Catalina) or later
 
 ## Installation
 
-1. **[Download](https://linkdbtd)**
+1. Download the **[Latest Release](https://github.com/corbinstreehouse/FermentrackManager/releases/latest)**
 1. **Run.** It detects if you have the requirements to do the install, which are:
 	* **Python 3.x**: [https://www.python.org/downloads/mac-osx/]()
 	* **Xcode**: [https://apps.apple.com/us/app/xcode/id497799835]()
