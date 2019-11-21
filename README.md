@@ -56,12 +56,12 @@ If you have issues, copy the install log and email me. (corbin at corbinstreehou
 Currently, this is a manual process, and the order is somewhat important, and will require admin rights:
 
 1. Unload the launch agent from Terminal with:  `sudo launchctl unload /Library/LaunchDaemons/com.redwoodmonkey.FermentrackProcessManager.plist`
-1. Delete the launch daemon plist: `/Library/LaunchDaemons/com.redwoodmonkey.FermentrackProcessManager.plist`
-1. Delete the launch daemon application: `/Library/PrivilegedHelperTools/com.redwoodmonkey.FermentrackProcessManager`
+1. Delete the launch daemon plist: `sudo rm /Library/LaunchDaemons/com.redwoodmonkey.FermentrackProcessManager.plist`
+1. Delete the launch daemon application: `sudo rm /Library/PrivilegedHelperTools/com.redwoodmonkey.FermentrackProcessManager`
+1. Stop the web server: `/var/tmp/fermentrack_apache/apachectl stop`
 1. Delete the Fermentrack installation; the default location is: `~/Library/Application Support/Fermentrack`
 1. (Optionally) Delete the Apache configuration: `/var/tmp/fermentrack_apache'
 1. Delete Fermentrack Manager.app
-
 
 
 
