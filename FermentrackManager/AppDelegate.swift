@@ -137,6 +137,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, FermentrackProcessManagerCli
     @objc dynamic var isProcessManagerSetup: Bool = false {
         didSet {
             if !ignoreProcessManager {
+                if self.isProcessManagerSetup && fermentrackHomeURL != nil {
+                    // Also, re-send our URL, in case it wasn't ever sent..
+                    processManager?.setFermentrackHomeURL(fermentrackHomeURL!, userName: NSUserName())
+                }
+                
                 self.processManager?.markSetupComplete(isSetupComplete: isProcessManagerSetup) {
                     // done!
                     print("mark complete DONE")

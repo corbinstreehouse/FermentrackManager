@@ -48,6 +48,8 @@ The automated install does this:
 
 ## Issues
 
+If the automated install seemed to work, but the web page did not come up, then the Launch Daemon may not have been installed right. Click on "Manual Setup and Customization" and hit Install Launch Daemon (if it is not installed). Then check "Setup is Complete", which will only be enabled when the daemon is installed.
+
 If you have issues, copy the install log and email me. (corbin at corbinstreehouse dot com) or start a discussion on the Home Brew forums.
 
 
