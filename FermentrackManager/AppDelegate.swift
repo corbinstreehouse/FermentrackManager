@@ -24,9 +24,9 @@ let repoDefaultAbsolutePath = "https://github.com/corbinstreehouse/fermentrack.g
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate, FermentrackProcessManagerClientProtocol {
     func handleError(_ error: Error) {
-        DispatchQueue.main.async {
+        RunLoop.main.perform(inModes: [.default, .modalPanel], block: {
             print("Server error:" + error.localizedDescription)
-        }
+        })
     }
 
     public var fermentrackRepoURL: URL = URL(string: repoDefaultAbsolutePath)!
@@ -95,9 +95,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, FermentrackProcessManagerCli
     }
     
     func webServerRunningChanged(_ newValue: Bool) {
-        DispatchQueue.main.async {
+        RunLoop.main.perform(inModes: [.default, .modalPanel], block: {
             self.isWebServerRunning = newValue
-        }
+        })
     }
     
     private func handleProcessManagerNotLoaded() {
@@ -105,9 +105,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, FermentrackProcessManagerCli
         mainViewController.handleProcessManagerNotLoaded()
     }
     
-    func startWebServer() {
-        processManager?.startWebServer()
+    func startWebServer(withReply reply: @escaping () -> Void) {
+        processManager?.startWebServer(withReply: reply)
     }
+
     
     func stopWebServer() {
         processManager?.stopWebServer()
@@ -157,27 +158,37 @@ class AppDelegate: NSObject, NSApplicationDelegate, FermentrackProcessManagerCli
         self.isWebServerRunning = isWebServerRunning
         self.shouldReloadOnChanges = shouldReloadOnChanges
         self.fermentrackHomeURL = fermentrackHomeURL ?? self.defaultFermentrackInstallDir()
-        self.isProcessManagerSetup = isSetup
+        if isInstalling {
+            // if we are doing an install, make sure it isn't setup, otherwise we try to start loading things constantly
+            self.isProcessManagerSetup = false
+            if isSetup {
+                self.processManager?.markSetupComplete(isSetupComplete: false)  {
+                }
+            }
+        } else {
+            self.isProcessManagerSetup = isSetup
+        }
         
         ignoreProcessManager = false
-        
         mainViewController.handleProcessManagerIsLoaded()
     }
 
     private func requestLoad() {
         processManager = serverConnection!.remoteObjectProxyWithErrorHandler { error in
             // This means the service isn't installed yet, so we go to the setup panel
-            DispatchQueue.main.async {
+            RunLoop.main.perform(inModes: [.default, .modalPanel], block: {
                 self.handleProcessManagerNotLoaded()
-            }
+            })
             print("Mach service probably not installed, received error:", error)
         } as? FermentrackProcessManagerProtocol
 
         if let processManager = processManager {
             processManager.load(withReply: { (isSetup: Bool, fermentrackHomeURL: URL?, isWebServerRunning: Bool, shouldReloadOnChanges: Bool) in
-                DispatchQueue.main.async {
+                // ah gawd, this (DispatchQueue.main.async) causes me grief when doing my 0wn runloop stuff
+                // it was called after my run of process events...messing up the setup..
+                RunLoop.main.perform(inModes: [.default, .modalPanel], block: {
                     self.handleProcessManagerLoaded(isSetup: isSetup, fermentrackHomeURL: fermentrackHomeURL, isWebServerRunning: isWebServerRunning, shouldReloadOnChanges: shouldReloadOnChanges)
-                }
+                })
             })
         } else {
             self.handleProcessManagerNotLoaded()

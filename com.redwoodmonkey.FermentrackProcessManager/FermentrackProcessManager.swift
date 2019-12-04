@@ -179,10 +179,13 @@ class FermentrackProcessManager {
         }
     }
     
-    private func makeRedisProcess() -> Process {
+    private func makeRedisProcess() throws -> Process {
         let redisHomeURL = fermentrackHomeURL!.appendingPathComponent("redis")
         let redisServerURL = redisHomeURL.appendingPathComponent("redis-server")
         let redisConfURL = redisHomeURL.appendingPathComponent("redis.conf")
+        if !FileManager.default.fileExists(atPath: redisConfURL.path) {
+            throw errorFromString("Redis server not found at:" + redisConfURL.path)
+        }
         
         let redisProcess = Process()
         redisProcess.executableURL = redisServerURL
@@ -239,7 +242,7 @@ class FermentrackProcessManager {
     }
     
     private func launchRedis() throws {
-        redisProcess = makeRedisProcess()
+        try redisProcess = makeRedisProcess()
         try redisProcess!.run()
     }
     
@@ -315,6 +318,9 @@ class FermentrackProcessManager {
     // The ini file has a hardcoded PYTHON_PATH. We open up the ini file, modify it, and write it out to a temporary location and use that as our ini file
     private func updateCircusIniFile() throws {
         let circusIniFileTemplatePath = fermentrackHomeURL!.appendingPathComponent("fermentrack/circus.ini")
+        if !FileManager.default.fileExists(atPath: circusIniFileTemplatePath.path) {
+            throw errorFromString("File doesn't exist: " + circusIniFileTemplatePath.path)
+        }
         let circusIniFileURL = self.circusIniFileURL
         let circusIniFile = try String(contentsOf: circusIniFileTemplatePath)
         
@@ -435,9 +441,10 @@ class FermentrackProcessManager {
         doProcessWork()
     }
     
-    func startWebServer() {
+    func startWebServer(withReply reply: @escaping () -> Void) {
         processManagerQueue.async {
             self.asyncStartWebServer()
+            reply()
         }
     }
     

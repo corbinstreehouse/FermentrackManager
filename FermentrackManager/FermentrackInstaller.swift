@@ -173,6 +173,9 @@ class FermentrackInstaller {
     
     private func runPython(arguments: [String]?) throws {
         let pythonURL = virtualEnvURL.appendingPathComponent("bin/python3")
+        if !FileManager.default.fileExists(atPath: pythonURL.path) {
+            throw CustomError.withMessage("No virtual env python setup at:" + pythonURL.path)
+        }
         try runCommand(executableURL: pythonURL, arguments: arguments, environment: getPythonVirtualEnvironment(), currentDirectoryURL: fermentrackSourceURL)
     }
     
@@ -273,6 +276,7 @@ class FermentrackInstaller {
         do {
             if withProcessManager {
                 try installProcessManagerDaemon()
+                AppDelegate.shared.startServerConnection()
             } else {
                 statusHandler(bold("Process Manager already installed.\n"))
             }

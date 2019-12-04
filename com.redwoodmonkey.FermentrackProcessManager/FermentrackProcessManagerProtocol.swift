@@ -15,7 +15,7 @@ import Foundation
     func isWebServerRunning(withReply reply: @escaping (Bool) -> Void)
     func setShouldReloadOnChanges(_ value: Bool)
     func stopWebServer()
-    func startWebServer()
+    func startWebServer(withReply reply: @escaping () -> Void)
 }
 
 @objc public protocol FermentrackProcessManagerClientProtocol {

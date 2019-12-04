@@ -63,6 +63,8 @@ class ExportedProcessManager: LocalProcessManagerClient, FermentrackProcessManag
         self.remoteClient?.handleError(error)
     }
     
+    
+    
     func setShouldReloadOnChanges(_ value: Bool) {
         processManager.shouldReloadOnChanges = value
     }
@@ -93,8 +95,8 @@ class ExportedProcessManager: LocalProcessManagerClient, FermentrackProcessManag
         processManager.stopWebServer()
     }
     
-    func startWebServer() {
-        processManager.startWebServer()
+    func startWebServer(withReply reply: @escaping () -> Void) {
+        processManager.startWebServer(withReply: reply)
     }
     
 }

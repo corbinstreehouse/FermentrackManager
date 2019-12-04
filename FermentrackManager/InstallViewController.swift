@@ -28,15 +28,12 @@ class InstallViewController: NSViewController {
     private func doInstall(withInstaller installer: FermentrackInstaller) {
         isInstalling = true
         didSuccessfulInstall = installer.doFullAutomatedInstall(withProcessManager: !appDelegate.isProcessManagerInstalled)
-        isInstalling = false
-        
         if didSuccessfulInstall {
-            appDelegate.startWebServer()
-            // maybe delay a second???..
-            
-            // Open the URL to show the user if it worked..
-            NSWorkspace.shared.open(appDelegate.fermentrackHostURL)
+            appDelegate.startWebServer() {
+                NSWorkspace.shared.open(self.appDelegate.fermentrackHostURL)
+            }
         }
+        isInstalling = false
     }
 
     private func startInstall() {

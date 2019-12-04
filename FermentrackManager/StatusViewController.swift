@@ -36,7 +36,9 @@ class StatusViewController: NSViewController {
         if button.tag == 0 {
             appDelegate.stopWebServer()
         } else {
-            appDelegate.startWebServer()
+            appDelegate.startWebServer() {
+                
+            }
         }
         
     }
