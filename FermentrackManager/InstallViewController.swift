@@ -29,8 +29,9 @@ class InstallViewController: NSViewController {
         isInstalling = true
         didSuccessfulInstall = installer.doFullAutomatedInstall(withProcessManager: !appDelegate.isProcessManagerInstalled)
         if didSuccessfulInstall {
+            let url = self.appDelegate.fermentrackHostURL
             appDelegate.startWebServer() {
-                NSWorkspace.shared.open(self.appDelegate.fermentrackHostURL)
+                NSWorkspace.shared.open(url)
             }
         }
         isInstalling = false
